@@ -1,36 +1,72 @@
-* {
-    font-family: 'Roboto', sans-serif;
-}
-
 header {
     width: 100%;
 }
 
 .header_block {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    box-shadow: 0 0 16px rgba(38, 38, 38, 0.16);
+}
+
+.title-block {
+    width: 80%;
     display: flex;
     justify-content: center;
-    box-shadow: 0 0 16px rgba(38, 38, 38, 0.16);
+}
+
+.icon-block {
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .navigation-block {
     width: 100%;
     position: sticky;
+    top: 0;
+    background: #ffffff;
 }
 
 .gallery-block {
-    width: 100%;
+    margin: 0 50px;
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
 }
 
+.footer-block {
+    color: white;
+    padding: 23px 40px 20px 81px;
+    background: #242424;
+}
+
+.social-media-block {
+    display: flex;
+    align-items: center;
+}
+
+
 .product-card {
-    width: 300px;
+    flex-basis: 300px;
+}
+
+.product-name {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 18px;
+}
+
+.product-price {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 18px;
 }
 
 .product-card img {
-    width: 100%;
-
+    width: 300px;
+    max-width: 100%;
+    object-fit: cover;
+    height: auto;
 }
 
 .navigation-list {
@@ -53,4 +89,28 @@ header {
     margin-bottom: 24px;
     font-family: 'Raleway', sans-serif;
     font-size: 46px;
+}
+
+.social-media-block h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    padding-inline-end: 16px;
+}
+
+.copyright_block a {
+    background-color: transparent;
+    text-decoration: none;
+}
+
+.copyright_block a h3{
+    color: white;
+}
+
+.copyright_block h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+}
+
+footer {
+    margin-top: 40px;
 }

@@ -1,0 +1,57 @@
+* {
+    font-family: 'Raleway', sans-serif;
+}
+
+.log-in-block {
+    display: block;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 70px;
+    box-shadow: 0 0 16px rgba(38, 38, 38, 0.16);
+    align-self: center;
+    padding: 48px;
+}
+
+.email-label-block {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.email-label {
+
+}
+
+label {
+    display: inline-block;
+    text-align: right;
+}
+
+
+input{
+    width: 70%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    width: 100%;
+}

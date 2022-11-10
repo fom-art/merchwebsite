@@ -3,15 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Account</title>
+    <link rel="stylesheet" href="signInStyles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500;700&family=Roboto:wght@500&display=swap"
+          rel="stylesheet">
 </head>
 <body>
-<form>
-    <label for="email_input">Email:</label>
-    <input type="email" id="email_input" name="email"><br>
-    <label for="password_input">Password:</label>
-    <input type="email" id="password_input" name="password"><br>
-    <input type="submit">
-    <p>Don't have an account yet? <span><a href="signUpGallery.html">Create</a></span></p>
-</form>
+<div>
+    <a href="galleryPage.html">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+        <path d="M0 0h48v48h-48z" fill="none"/>
+        <path d="M40 22h-24.34l11.17-11.17-2.83-2.83-16 16 16 16 2.83-2.83-11.17-11.17h24.34v-4z"/>
+    </svg>
+    </a>
+</div>
+<div class="log-in-block">
+    <h1>Log in</h1>
+    <div class="form-block">
+        <form>
+            <div class="email-label-block">
+                <label for="email_input">Email:</label>
+                <p class="email-label">Don't have an account yet? <span><a href="signUpGallery.html">Create</a></span></p>
+            </div>
+            <input type="email" id="email_input" name="email"><br>
+            <label for="password_input">Password:</label>
+            <input type="password" id="password_input" name="password"><br>
+            <input type="submit">
+        </form>
+    </div>
+</div>
 </body>
 </html>
