@@ -6,7 +6,7 @@ header {
     width: 100%;
     display: flex;
     justify-content: flex-end;
-    box-shadow: 0 0 16px rgba(38, 38, 38, 0.16);
+    border: black solid 1px;
 }
 
 .title-block {
@@ -31,16 +31,16 @@ header {
 
 .gallery-block {
     margin: 0 50px;
-    gap: 60px;
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
 }
 
 .footer-block {
-    color: white;
+    color: black;
+    border: black solid 1px;
     padding: 23px 40px 20px 81px;
-    background: #242424;
+    background: white;
 }
 
 .social-media-block {
@@ -68,6 +68,8 @@ header {
     max-width: 100%;
     object-fit: cover;
     height: auto;
+    background-color: white;
+    border: 1px;
 }
 
 .navigation-list {
@@ -108,7 +110,7 @@ a {
 }
 
 .copyright_block a h3{
-    color: white;
+    color: black;
 }
 
 .copyright_block h3 {
@@ -118,4 +120,8 @@ a {
 
 footer {
     margin-top: 40px;
+}
+
+g{
+    fill: black;
 }

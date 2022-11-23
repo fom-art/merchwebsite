@@ -4,24 +4,66 @@
 
 .log-in-block {
     display: block;
-    width: 60%;
+    width: 500px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 70px;
     box-shadow: 0 0 16px rgba(38, 38, 38, 0.16);
     align-self: center;
-    padding: 48px;
+    padding: 48px 48px 8px;
 }
 
-.email-label-block {
+.input_block {
+    margin: 32px 0;
+    box-sizing: border-box;
+}
+
+.label-block {
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-end;
+    margin-bottom: 8px;
 }
 
-.email-label {
+.label-block p {
+    margin: 0 0;
+}
 
+.forgot-password-block {
+    margin: 32px 0;
+}
+
+.two-inputs-in-one-row-block{
+    display: flex;
+    justify-content: space-between;
+    gap: 32px;
+}
+
+
+.empty-block {
+    height: 200px; !important;
+}
+
+form {
+    box-sizing: border-box;
+    margin-bottom: 32px;
+}
+
+input[type=submit] {
+    margin-top: 32px;
+    width: 50%;
+    border-radius: 16px;
+    border: solid black 2px;
+    background-color: white;
+}
+
+input[type=submit]:hover {
+    width: 50%;
+    border-radius: 16px;
+    background-color: black;
+    color: white;
 }
 
 label {
@@ -29,29 +71,20 @@ label {
     text-align: right;
 }
 
-
-input{
-    width: 70%;
+input {
+    width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
 }
 
+.forgot-password-block > a {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    width: 100%;
+.forgot-password-block > a:hover {
+    text-decoration: underline;
+    color: #661f8b;
 }
