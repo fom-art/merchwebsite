@@ -10,7 +10,7 @@
 </head>
 <body>
 <div>
-    <a href="galleryPage.html">
+    <a href="galleryPage.php">
         <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
             <path d="M0 0h48v48h-48z" fill="none"/>
             <path d="M40 22h-24.34l11.17-11.17-2.83-2.83-16 16 16 16 2.83-2.83-11.17-11.17h24.34v-4z"/>
@@ -25,7 +25,7 @@
                 <div class="label-block">
                     <label for="email_input">Email:</label>
                     <p class="email-label">Don't have an account yet? <span><a
-                            href="signUpPage.html">Create</a></span></p>
+                            href="signUpPage.php">Create</a></span></p>
                 </div>
                 <input type="email" id="email_input" name="email" required>
             </div>
@@ -36,7 +36,7 @@
                 <input type="password" id="password_input" name="password" minlength="8" required>
             </div>
             <div class="forgot-password-block">
-                <a href="forgotPasswordPage.html">
+                <a href="forgotPasswordPage.php">
                     Forgot password?</a>
             </div>
             <input class="submit_button" type="submit" onclick="validateSignInForm()">

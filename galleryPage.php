@@ -23,7 +23,7 @@
             <h1 class="title">ANFO</h1>
         </div>
         <div class="icon-block">
-            <a href="signInPage.html">
+            <a href="signInPage.php">
                 <svg width="30" height="30" fill="white">
                     <title>Log in</title>
                     <defs>
