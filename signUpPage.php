@@ -20,72 +20,102 @@
 <div class="log-in-block">
     <h1>Sign up</h1>
     <div class="form-block">
-        <form name="form" action="" onsubmit="return validateSignUpForm()" method="post">
-            <div class="input_block">
+        <form name="form" action="" method="post">
+            <div class="input-block" id="email-input-block">
                 <div class="label-block">
-                    <label for="email_input">Email:</label>
+                    <label for="email-input">Email:</label>
                 </div>
-                <input type="email" id="email_input" name="email" required>
+                <input type="email" id="email-input" name="email" required>
+                <div class="validation-error-block">
+                    <p>Invalid Email</p>
+                </div>
             </div>
             <div class="two-inputs-in-one-row-block">
-                <div class="input-block">
+                <div class="input-block" id="name-input-block">
                     <div class="label-block">
                         <label for="name-input">Name:</label>
                     </div>
                     <input type="text" id="name-input" name="name" required>
-                </div>
-                <div class="input-block">
-                    <div class="label-block">
-                        <label for="surname">Surname:</label>
+                    <div class="validation-error-block">
+                        <p>Invalid Name</p>
                     </div>
-                    <input type="text" id="surname" name="surname" required>
+                </div>
+                <div class="input-block" id="surname-input-block">
+                    <div class="label-block">
+                        <label for="surname-input">Surname:</label>
+                    </div>
+                    <input type="text" id="surname-input" name="surname" required>
+                    <div class="validation-error-block">
+                        <p>Invalid Surname</p>
+                    </div>
                 </div>
             </div>
-            <div class="input_block">
+            <div class="input-block" id="password-input-block">
                 <div class="label-block">
-                    <label for="password_input">Password:</label>
+                    <label for="password-input">Password:</label>
                 </div>
-                <input type="password" id="password_input" name="password" minlength="8" required>
+                <input type="password" id="password-input" name="password" minlength="8" required>
+                <div class="validation-error-block">
+                    <p>Invalid Password</p>
+                </div>
             </div>
-            <div class="input_block">
+            <div class="input-block" id="repeat-password-input-block">
                 <div class="label-block">
                     <label for="repeat-password-input">Repeat the password:</label>
                 </div>
-                <input type="password" id="repeat-password-input" name="password_repeatx`" minlength="8" required>
+                <input type="password" id="repeat-password-input" name="password-repeat`" minlength="8" required>
+                <div class="validation-error-block">
+                    <p>Passwords don't match</p>
+                </div>
             </div>
-            <div class="input_block">
+            <div class="input-block" id="address-input-block">
                 <div class="label-block">
                     <label for="address-input">Address:</label>
                 </div>
                 <input type="text" id="address-input" name="address" required>
-            </div>
-            <div class="input_block">
-                <div class="label-block">
-                    <label for="country_input">Country:</label>
+                <div class="validation-error-block">
+                    <p>Invalid Address</p>
                 </div>
-                <input type="password" id="country_input" name="country" required>
             </div>
-            <div class="input_block">
+            <div class="input-block" id="country-input-block">
                 <div class="label-block">
-                    <label for="city_input">City:</label>
+                    <label for="country-input">Country:</label>
                 </div>
-                <input type="password" id="city_input" name="city" required>
+                <input type="password" id="country-input" name="country" required>
+                <div class="validation-error-block">
+                    <p>Invalid Country</p>
+                </div>
+            </div>
+            <div class="input-block" id="city-input-block">
+                <div class="label-block">
+                    <label for="city-input">City:</label>
+                </div>
+                <input type="password" id="city-input" name="city" required>
+                <div class="validation-error-block">
+                    <p>Invalid City</p>
+                </div>
             </div>
             <div class="two-inputs-in-one-row-block">
-                <div class="input-block">
+                <div class="input-block" id="post-code-input-block">
                     <div class="label-block">
                         <label for="post-code-input">Post Code:</label>
                     </div>
                     <input type="text" id="post-code-input" name="post-code" required>
+                    <div class="validation-error-block">
+                        <p>Invalid Post Code</p>
+                    </div>
                 </div>
-                <div class="input-block">
+                <div class="input-block" id="phone-number-input-block">
                     <div class="label-block">
                         <label for="phone-number-input">Phone Number:</label>
                     </div>
-                    <input type="text" id="phone-number-input" name="phone-number" required>
+                    <input type="text" id="phone-number-input" name="phone-number" required/>
+                    <div class="validation-error-block">
+                        <p>Invalid Phone Number</p>
+                    </div>
                 </div>
             </div>
-            <input class="submit_button" type="submit">
+            <button class="submit-button" type="button" onclick="validateSignUpForm()">Submit</button>
         </form>
     </div>
 </div>
@@ -97,8 +127,6 @@
     &nbsp;
     &nbsp;
 </div>
-
 <script src="formValidation.js"></script>
-
 </body>
 </html>

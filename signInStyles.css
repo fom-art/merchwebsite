@@ -13,9 +13,22 @@
     padding: 48px 48px 8px;
 }
 
-.input_block {
+.input-block {
     margin: 32px 0;
     box-sizing: border-box;
+}
+
+input:invalid {
+    border: 2px solid red;
+}
+
+input:invalid:required {
+    border: 2px solid red;
+}
+
+.validation-error-block {
+    color: red;
+    display: none;
 }
 
 .label-block {
@@ -51,16 +64,15 @@ form {
     margin-bottom: 32px;
 }
 
-input[type=submit] {
+.submit-button {
     margin-top: 32px;
-    width: 50%;
+    padding: 8px 64px;
     border-radius: 16px;
     border: solid black 2px;
     background-color: white;
 }
 
-input[type=submit]:hover {
-    width: 50%;
+.submit-button:hover {
     border-radius: 16px;
     background-color: black;
     color: white;

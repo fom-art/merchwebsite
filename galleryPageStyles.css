@@ -2,7 +2,7 @@ header {
     width: 100%;
 }
 
-.header_block {
+.header-block {
     width: 100%;
     display: flex;
     justify-content: flex-end;
@@ -107,11 +107,11 @@ a {
     color: black;
 }
 
-.copyright_block a h3{
+.copyright-block a h3{
     color: white;
 }
 
-.copyright_block h3 {
+.copyright-block h3 {
     font-family: 'Montserrat', sans-serif;
     font-size: 12px;
 }

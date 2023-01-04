@@ -21,25 +21,32 @@
     <h1>Log in</h1>
     <div class="form-block">
         <form name="form" action="signInPage.html" onsubmit="return validateSignInForm()" method="get">
-            <div class="input_block">
+            <div class="input-block" id="email-input-block">
                 <div class="label-block">
-                    <label for="email_input">Email:</label>
+                    <label for="email-input">Email:</label>
                     <p class="email-label">Don't have an account yet? <span><a
                             href="signUpPage.php">Create</a></span></p>
+
                 </div>
-                <input type="email" id="email_input" name="email" required>
+                <input type="email" id="email-input" name="email" required>
+                <div class="validation-error-block">
+                    <p>Invalid Email</p>
+                </div>
             </div>
-            <div class="input_block">
+            <div class="input-block" id="password-input-block">
                 <div class="label-block">
-                    <label for="password_input">Password:</label>
+                    <label for="password-input">Password:</label>
                 </div>
-                <input type="password" id="password_input" name="password" minlength="8" required>
+                <input type="password" id="password-input" name="password" minlength="8" required>
+                <div class="validation-error-block">
+                    <p>Invalid Password</p>
+                </div>
             </div>
             <div class="forgot-password-block">
                 <a href="forgotPasswordPage.php">
                     Forgot password?</a>
             </div>
-            <input class="submit_button" type="submit" onclick="validateSignInForm()">
+            <input class="submit-button" type="submit" onclick="validateSignInForm()">
 
         </form>
     </div>

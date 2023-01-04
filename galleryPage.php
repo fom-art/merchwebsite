@@ -18,7 +18,7 @@
 
 <body>
 <header>
-    <div class="header_block">
+    <div class="header-block">
         <div class="title-block">
             <h1 class="title">ANFO</h1>
         </div>
@@ -129,7 +129,7 @@
                 </svg>
             </a>
         </div>
-        <div class="copyright_block">
+        <div class="copyright-block">
             <a href="galleryPage.html" target="_blank">
                 <h3>©ANFO</h3>
             </a>

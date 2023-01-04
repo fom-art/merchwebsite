@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500;700&family=Roboto:wght@500&display=swap"
           rel="stylesheet">
+    <script src="formValidation.js"></script>
 </head>
 <body>
 <div>
@@ -21,13 +22,16 @@
     <h1>Forgot password</h1>
     <div class="form-block">
         <form>
-            <div class="input_block">
+            <div class="input-block" id="email-input-block">
                 <div class="label-block">
-                    <label for="email_input">Email:</label>
+                    <label for="email-input">Email:</label>
                 </div>
-                <input type="email" id="email_input" name="email" required>
+                <input type="email" id="email-input" name="email" required>
+                <div class="validation-error-block">
+                    <p>Invalid Email :(</p>
+                </div>
             </div>
-            <input class="submit_button" type="submit">
+            <button class="submit-button" type="button" onclick="validateForgotPasswordForm()">Submit</button>
         </form>
     </div>
 </div>
