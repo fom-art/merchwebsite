@@ -8,6 +8,9 @@ const COUNTRY_INPUT_ID = 7
 const CITY_INPUT_ID = 8
 const POST_CODE_INPUT_ID = 9
 const PHONE_NUMBER_INPUT_ID = 10
+const PRODUCT_NAME_INPUT_ID = 11
+const PRICE_INPUT_ID = 12
+const PHOTO_INPUT_ID = 13
 
 function validateSignInForm() {
     validateEmail();
@@ -29,6 +32,12 @@ function validateSignUpForm() {
 
 function validateForgotPasswordForm() {
     validateEmail();
+}
+
+function validateAddProductForm() {
+    validateProductName();
+    validatePrice();
+    validatePhoto();
 }
 
 
@@ -77,6 +86,18 @@ function validatePhoneNumber() {
     runValidation(PHONE_NUMBER_INPUT_ID)
 }
 
+function validateProductName() {
+    runValidation(PRODUCT_NAME_INPUT_ID)
+}
+
+function validatePrice() {
+    runValidation(PRICE_INPUT_ID)
+}
+
+function validatePhoto() {
+    runValidation(PHOTO_INPUT_ID)
+}
+
 function runValidation(inputCode) {
     let inputBlockToValidate = getInputBlockFromCode(inputCode);
     if (isInputValid(inputBlockToValidate, inputCode)) {
@@ -108,13 +129,20 @@ function getInputBlockFromCode(inputCode) {
             return document.getElementById("post-code-input-block");
         case PHONE_NUMBER_INPUT_ID:
             return document.getElementById("phone-number-input-block");
+        case PRODUCT_NAME_INPUT_ID:
+            return document.getElementById("product-name-input-block");
+        case PRICE_INPUT_ID:
+            return document.getElementById("product-price-input-block");
+        case PHOTO_INPUT_ID:
+            return document.getElementById("photo-input-block");
+
     }
 }
 
 function isInputValid(inputBlockToValidate, inputCode) {
     let input = inputBlockToValidate.getElementsByTagName("input").item(0)
     let input_value = input.value
-    if (input_value === "") {
+    if (inputCode !== PHONE_NUMBER_INPUT_ID && input_value === "") {
         return false
     }
     switch (inputCode) {
@@ -138,6 +166,12 @@ function isInputValid(inputBlockToValidate, inputCode) {
             return isPostCodeInputValid(input_value);
         case PHONE_NUMBER_INPUT_ID:
             return isPhoneInputValid(input_value);
+        case PRODUCT_NAME_INPUT_ID:
+            return isProductNameValid(input_value);
+        case PRICE_INPUT_ID:
+            return isPriceValid(input_value);
+        case PHOTO_INPUT_ID:
+            return isPhotoValid(input_value);
     }
 }
 
@@ -145,6 +179,7 @@ function isNameValid(input_value) {
     let validRegex = /^[a-zA-Z ]+$/;
     return validRegex.test(input_value)
 }
+
 function isAddressValid(input_value) {
     let validRegex = /^[#.0-9a-zA-Z\s,-/]+$/;
     return validRegex.test(input_value)
@@ -154,6 +189,7 @@ function isEmailInputValid(input_value) {
     let validRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return validRegex.test(input_value)
 }
+
 function isPasswordInputValid(input_value) {
     return input_value.length >= 8
 }
@@ -164,21 +200,38 @@ function isRepeatPasswordInputValid(input_value) {
 }
 
 function isNameInputValid(input_value) {
-    let nameRegex = /^[a-zA-Z]+$/;
-    return  nameRegex.test(input_value)
+    let nameRegex = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/;
+    return nameRegex.test(input_value)
 }
 
 function isPostCodeInputValid(input_value) {
     let postCodeRegex = /^\d{5}(-\d{4})?$/
-    return input_value.test(postCodeRegex);
+    return postCodeRegex.test(input_value);
 }
 
 function isPhoneInputValid(input_value) {
-    let phoneNumberRegex = /^\+?(\d{15})\)$/
-    return input_value.test(phoneNumberRegex)
+    let phoneNumberRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
+    result = phoneNumberRegex.test(input_value)
+    return result
 }
 
-function getPasswordInputValue(){
+function isProductNameValid(input_value) {
+    let productNameRegex = /[a-zA-Z0-9\s]+?$/;
+    result = productNameRegex.test(input_value)
+    return result
+}
+
+function isPriceValid(input_value) {
+    let priceRegex = /^-?\d+\.?\d*$/;
+    result = priceRegex.test(input_value)
+    return result
+}
+
+function isPhotoValid(input_value) {
+    return true
+}
+
+function getPasswordInputValue() {
     return document.getElementById("password-input").value;
 }
 

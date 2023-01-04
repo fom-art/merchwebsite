@@ -1,0 +1,92 @@
+* {
+    font-family: 'Raleway', sans-serif;
+}
+
+.title-block {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.form-block {
+    display: block;
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 70px;
+    box-shadow: 0 0 16px rgba(38, 38, 38, 0.16);
+    align-self: center;
+    padding: 48px 48px 8px;
+}
+
+.input-block {
+    margin: 32px 0;
+    box-sizing: border-box;
+}
+
+input:invalid {
+    border: 2px solid red;
+}
+
+input:invalid:required {
+    border: 2px solid red;
+}
+
+.validation-error-block {
+    color: red;
+    display: none;
+}
+
+.label-block {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 8px;
+}
+
+.label-block p {
+    margin: 0 0;
+}
+
+.forgot-password-block {
+    margin: 32px 0;
+}
+
+.two-inputs-in-one-row-block{
+    display: flex;
+    justify-content: space-between;
+    gap: 32px;
+}
+
+form {
+    box-sizing: border-box;
+    margin-bottom: 32px;
+}
+
+.submit-button {
+    margin-top: 32px;
+    padding: 8px 64px;
+    border-radius: 16px;
+    border: solid black 2px;
+    background-color: white;
+}
+
+.submit-button:hover {
+    border-radius: 16px;
+    background-color: black;
+    color: white;
+}
+
+label {
+    display: inline-block;
+    text-align: right;
+}
+
+input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
