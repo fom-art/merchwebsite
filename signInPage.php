@@ -20,7 +20,7 @@
 <div class="log-in-block">
     <h1>Log in</h1>
     <div class="form-block">
-        <form name="form" action="signInPage.html" onsubmit="return validateSignInForm()" method="get">
+        <form name="form" action="signInPage.php" method="post">
             <div class="input-block" id="email-input-block">
                 <div class="label-block">
                     <label for="email-input">Email:</label>
@@ -46,7 +46,7 @@
                 <a href="forgotPasswordPage.php">
                     Forgot password?</a>
             </div>
-            <input class="submit-button" type="submit" onclick="validateSignInForm()">
+            <button class="submit-button" type="button" onclick="validateSignInForm()">Submit</button>
 
         </form>
     </div>

@@ -11,6 +11,7 @@ const PHONE_NUMBER_INPUT_ID = 10
 const PRODUCT_NAME_INPUT_ID = 11
 const PRICE_INPUT_ID = 12
 const PHOTO_INPUT_ID = 13
+const PURCHASE_DESCRIPTION_INPUT_ID = 14
 
 function validateSignInForm() {
     validateEmail();
@@ -28,6 +29,20 @@ function validateSignUpForm() {
     validateCity();
     validatePostCode();
     validatePhoneNumber();
+}
+
+function validatePurchaseForm() {
+    validateEmail();
+    validateName();
+    validateSurname();
+    validatePassword();
+    validateRepeatPassword();
+    validateAddress();
+    validateCountry();
+    validateCity();
+    validatePostCode();
+    validatePhoneNumber();
+    validatePurchaseDescription();
 }
 
 function validateForgotPasswordForm() {
@@ -98,6 +113,10 @@ function validatePhoto() {
     runValidation(PHOTO_INPUT_ID)
 }
 
+function validatePurchaseDescription() {
+    runValidation(PURCHASE_DESCRIPTION_INPUT_ID)
+}
+
 function runValidation(inputCode) {
     let inputBlockToValidate = getInputBlockFromCode(inputCode);
     if (isInputValid(inputBlockToValidate, inputCode)) {
@@ -135,6 +154,8 @@ function getInputBlockFromCode(inputCode) {
             return document.getElementById("product-price-input-block");
         case PHOTO_INPUT_ID:
             return document.getElementById("photo-input-block");
+        case PURCHASE_DESCRIPTION_INPUT_ID:
+            return document.getElementById("purchase-description-input-block");
 
     }
 }
@@ -172,6 +193,8 @@ function isInputValid(inputBlockToValidate, inputCode) {
             return isPriceValid(input_value);
         case PHOTO_INPUT_ID:
             return isPhotoValid(input_value);
+        case PURCHASE_DESCRIPTION_INPUT_ID:
+            return isPurchaseDescriptionValid(input_value);
     }
 }
 
@@ -210,25 +233,27 @@ function isPostCodeInputValid(input_value) {
 }
 
 function isPhoneInputValid(input_value) {
-    let phoneNumberRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
-    result = phoneNumberRegex.test(input_value)
-    return result
+    let phoneNumberRegex = /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/;
+    return phoneNumberRegex.test(input_value)
 }
 
 function isProductNameValid(input_value) {
     let productNameRegex = /[a-zA-Z0-9\s]+?$/;
-    result = productNameRegex.test(input_value)
-    return result
+    return productNameRegex.test(input_value)
 }
 
 function isPriceValid(input_value) {
     let priceRegex = /^-?\d+\.?\d*$/;
-    result = priceRegex.test(input_value)
-    return result
+    return priceRegex.test(input_value)
 }
 
 function isPhotoValid(input_value) {
     return true
+}
+
+function isPurchaseDescriptionValid(input_value) {
+    let purchaseDescriptionRegex = /[a-zA-Z0-9,.;:'"#$%()/@\s]+$/;
+    return purchaseDescriptionRegex.test(input_value)
 }
 
 function getPasswordInputValue() {
