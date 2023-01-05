@@ -214,7 +214,8 @@ function isEmailInputValid(input_value) {
 }
 
 function isPasswordInputValid(input_value) {
-    return input_value.length >= 8
+    let passwordRegex = /^[a-zA-Z0-9\s]+?$/;
+    return input_value.length >= 8 && passwordRegex.test(input_value)
 }
 
 function isRepeatPasswordInputValid(input_value) {
@@ -233,17 +234,17 @@ function isPostCodeInputValid(input_value) {
 }
 
 function isPhoneInputValid(input_value) {
-    let phoneNumberRegex = /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/;
+    let phoneNumberRegex = /^[+]?[a-zA-Z0-9\s]+?$/;
     return phoneNumberRegex.test(input_value)
 }
 
 function isProductNameValid(input_value) {
-    let productNameRegex = /[a-zA-Z0-9\s]+?$/;
+    let productNameRegex = /^[a-zA-Z0-9\s]+?$/;
     return productNameRegex.test(input_value)
 }
 
 function isPriceValid(input_value) {
-    let priceRegex = /^-?\d+\.?\d*$/;
+    let priceRegex = /^\d+\.?\d*$/;
     return priceRegex.test(input_value)
 }
 

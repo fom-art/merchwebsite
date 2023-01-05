@@ -28,6 +28,13 @@
                 <input type="email" id="email-input" name="email" required>
                 <div class="validation-error-block">
                     <p>Invalid Email</p>
+                    <?php
+                    $email = $_POST["email"];
+                    $emailRegex = "^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^";
+                    if ()
+                    if (@email )
+                    if
+                    ?>
                 </div>
             </div>
             <div class="two-inputs-in-one-row-block">
