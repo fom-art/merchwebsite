@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Forgot password</title>
-    <link rel="stylesheet" href="signInStyles.css">
+    <link rel="stylesheet" href="../styles/signInStyles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500;700&family=Roboto:wght@500&display=swap"
           rel="stylesheet">
-    <script src="formValidation.js"></script>
+    <script src="../javaScript/formValidation.js"></script>
 </head>
 <body>
 <div>

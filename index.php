@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>ANFO</title>
-    <link rel="stylesheet" href="galleryPageStyles.css">
-    <link rel="stylesheet" media="print" href="galleryPageStylesPrint.css">
+    <link rel="stylesheet" href="../merchWebSiteProject/styles/galleryPageStyles.css">
+    <link rel="stylesheet" media="print" href="../merchWebSiteProject/styles/galleryPageStylesPrint.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500;700&family=Roboto:wght@500&display=swap"
           rel="stylesheet">
@@ -23,7 +23,7 @@
             <h1 class="title">ANFO</h1>
         </div>
         <div class="icon-block">
-            <a href="signInPage.php" class="header-icon">
+            <a href="../merchWebSiteProject/phpFiles/signInPage.php" class="header-icon">
                 <svg width="30" height="30" fill="white">
                     <title>Log in</title>
                     <defs>
@@ -39,7 +39,7 @@
                     <circle cx="15" cy="28" r="10"/>
                 </svg>
             </a>
-            <a href="purchasePage.php" class="header-icon">
+            <a href="../merchWebSiteProject/phpFiles/purchasePage.php" class="header-icon">
                 <svg fill="#000000" height="30" width="30" version="1.1" id="Capa_1"
                      xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                      viewBox="0 0 485.6 485.6" xml:space="preserve">
@@ -67,59 +67,59 @@
 <main>
     <div id="products-gallery" class="gallery-block">
         <div class="product-card">
-            <img src="images/stickerpack1.png" alt="Stickerpack first">
+            <img src="../merchWebSiteProject/images/stickerpack1.png" alt="Stickerpack first">
             <h2 class="product-name">Mobile Legends Stickerpack</h2>
             <h2 class="product-price">3$</h2>
         </div>
         <div class="product-card">
-            <img src="images/stickerpack1.png" alt="Stickerpack first">
+            <img src="../merchWebSiteProject/images/stickerpack1.png" alt="Stickerpack first">
             <h2 class="product-name">Mobile Legends Stickerpack</h2>
             <h2 class="product-price">3$</h2>
         </div>
         <div class="product-card">
-            <img src="images/stickerpack1.png" alt="Stickerpack first">
+            <img src="../merchWebSiteProject/images/stickerpack1.png" alt="Stickerpack first">
             <h2 class="product-name">Mobile Legends Stickerpack</h2>
             <h2 class="product-price">3$</h2>
         </div>
         <div class="product-card">
-            <img src="images/stickerpack1.png" alt="Stickerpack first">
+            <img src="../merchWebSiteProject/images/stickerpack1.png" alt="Stickerpack first">
             <h2 class="product-name">Mobile Legends Stickerpack</h2>
             <h2 class="product-price">3$</h2>
         </div>
         <div class="product-card">
-            <img src="images/stickerpack1.png" alt="Stickerpack first">
+            <img src="../merchWebSiteProject/images/stickerpack1.png" alt="Stickerpack first">
             <h2 class="product-name">Mobile Legends Stickerpack</h2>
             <h2 class="product-price">3$</h2>
         </div>
         <div class="product-card">
-            <img src="images/stickerpack1.png" alt="Stickerpack first">
+            <img src="../merchWebSiteProject/images/stickerpack1.png" alt="Stickerpack first">
             <h2 class="product-name">Mobile Legends Stickerpack</h2>
             <h2 class="product-price">3$</h2>
         </div>
         <div class="product-card">
             <div class="product-card">
-                <img src="images/stickerpack1.png" alt="Stickerpack first">
+                <img src="../merchWebSiteProject/images/stickerpack1.png" alt="Stickerpack first">
                 <h2 class="product-name">Mobile Legends Stickerpack</h2>
                 <h2 class="product-price">3$</h2>
             </div>
         </div>
         <div class="product-card">
             <div class="product-card">
-                <img src="images/stickerpack1.png" alt="Stickerpack first">
+                <img src="../merchWebSiteProject/images/stickerpack1.png" alt="Stickerpack first">
                 <h2 class="product-name">Mobile Legends Stickerpack</h2>
                 <h2 class="product-price">3$</h2>
             </div>
         </div>
         <div class="product-card">
             <div class="product-card">
-                <img src="images/stickerpack1.png" alt="Stickerpack first">
+                <img src="../merchWebSiteProject/images/stickerpack1.png" alt="Stickerpack first">
                 <h2 class="product-name">Mobile Legends Stickerpack</h2>
                 <h2 class="product-price">3$</h2>
             </div>
         </div>
         <div class="product-card">
             <div class="product-card">
-                <img src="images/stickerpack1.png" alt="Stickerpack first">
+                <img src="../merchWebSiteProject/images/stickerpack1.png" alt="Stickerpack first">
                 <h2 class="product-name">Mobile Legends Stickerpack</h2>
                 <h2 class="product-price">3$</h2>
             </div>
@@ -143,7 +143,7 @@
             </a>
         </div>
         <div class="copyright-block">
-            <a href="galleryPage.html" target="_blank">
+            <a href="../index.php" target="_blank">
                 <h3>©ANFO</h3>
             </a>
         </div>

@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Create an account</title>
-    <link rel="stylesheet" href="adminPageStyles.css">
+    <link rel="stylesheet" href="../styles/adminPageStyles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500;700&family=Roboto:wght@500&display=swap"
           rel="stylesheet">
 </head>
 <body>
 <div>
-    <a href="galleryPage.php">
+    <a href="../index.php">
         <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
             <path d="M0 0h48v48h-48z" fill="none"/>
             <path d="M40 22h-24.34l11.17-11.17-2.83-2.83-16 16 16 16 2.83-2.83-11.17-11.17h24.34v-4z"/>
@@ -56,6 +56,6 @@
         <button class="submit-button" type="button" onclick="validateAddProductForm()">Submit</button>
     </form>
 </div>
-<script src="formValidation.js"></script>
+<script src="../javaScript/formValidation.js"></script>
 </body>
 </html>
