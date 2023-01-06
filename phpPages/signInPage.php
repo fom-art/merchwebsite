@@ -20,12 +20,12 @@
 <div class="log-in-block">
     <h1>Log in</h1>
     <div class="form-block">
-        <form name="form" action="signInPage.php" method="post">
+        <form action="signInPage.php" method="post">
             <div class="input-block" id="email-input-block">
                 <div class="label-block">
                     <label for="email-input">Email:</label>
-                    <p class="email-label">Don't have an account yet? <span><a
-                                    href="signUpPage.php">Create</a></span>
+                    <p class="email-label">Don't have an account yet?
+                        <span><a href="signUpPage.php">Create</a></span>
                     </p>
                 </div>
                 <input type="email" id="email-input" name="email" required>
@@ -46,11 +46,12 @@
                 <a href="forgotPasswordPage.php">
                     Forgot password?</a>
             </div>
-            <button class="submit-button" type="button" onclick="validateSignInForm()">Submit</button>
-
+            <button class="confirm-button" id="confirm-button-sign-in" name="confirm" value="confirm" type="button">
+                Confirm
+            </button>
         </form>
     </div>
 </div>
-<script src="../javaScript/formValidation.js"></script>
+<script src="../javaScript/formHandling.js"></script>
 </body>
 </html>

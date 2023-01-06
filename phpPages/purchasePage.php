@@ -124,7 +124,7 @@
                     <p>Invalid Description</p>
                 </div>
             </div>
-            <button class="submit-button" type="button" onclick="validatePurchaseForm()">Submit</button>
+            <button class="confirm-button" id="confirm-button-purchase" name="confirm" value="confirm" type="button">Confirm</button>
         </form>
     </div>
 </div>
@@ -136,6 +136,6 @@
     &nbsp;
     &nbsp;
 </div>
-<script src="../javaScript/formValidation.js"></script>
+<script src="../javaScript/formHandling.js"></script>
 </body>
 </html>

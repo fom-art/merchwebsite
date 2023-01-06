@@ -65,7 +65,7 @@ form {
     margin-bottom: 32px;
 }
 
-.submit-button {
+.confirm-button {
     margin-top: 32px;
     padding: 8px 64px;
     border-radius: 16px;
@@ -73,7 +73,7 @@ form {
     background-color: white;
 }
 
-.submit-button:hover {
+.confirm-button:hover {
     border-radius: 16px;
     background-color: black;
     color: white;

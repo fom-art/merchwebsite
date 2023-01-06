@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500;700&family=Roboto:wght@500&display=swap"
           rel="stylesheet">
-    <script src="../javaScript/formValidation.js"></script>
 </head>
 <body>
 <div>
@@ -21,7 +20,7 @@
 <div class="log-in-block">
     <h1>Forgot password</h1>
     <div class="form-block">
-        <form>
+        <form id="form" action="forgotPasswordPage.php" method="post">
             <div class="input-block" id="email-input-block">
                 <div class="label-block">
                     <label for="email-input">Email:</label>
@@ -31,9 +30,10 @@
                     <p>Invalid Email :(</p>
                 </div>
             </div>
-            <button class="submit-button" type="button" onclick="validateForgotPasswordForm()">Submit</button>
+            <button class="confirm-button" id="confirm-button-forgot-password" type="button" name="confirm" value="confirm">Confirm</button>
         </form>
     </div>
 </div>
+<script src="../javaScript/formHandling.js"></script>
 </body>
 </html>

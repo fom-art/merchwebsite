@@ -29,7 +29,7 @@
                 <div class="label-block">
                     <label for="product-name-input">Product Name:</label>
                 </div>
-                <input type="text" id="product-name-input" name="product-name" minlength="8" required>
+                <input type="text" id="product-name-input" name="product-name" required>
                 <div class="validation-error-block">
                     <p>Invalid Name!</p>
                 </div>
@@ -38,7 +38,7 @@
                 <div class="label-block">
                     <label for="price-input">Price:</label>
                 </div>
-                <input type="number" id="price-input" name="price" minlength="8" required>
+                <input type="text" id="price-input" name="price" required>
                 <div class="validation-error-block">
                     <p>Invalid Price</p>
                 </div>
@@ -48,14 +48,14 @@
             <div class="label-block">
                 <label for="photo-input">Photo:</label>
             </div>
-            <input type="file" id="photo-input" name="photo" minlength="8" required>
+            <input type="file" id="photo-input" name="photo" required>
             <div class="validation-error-block">
                 <p>Invalid Photo!</p>
             </div>
         </div>
-        <button class="submit-button" type="button" onclick="validateAddProductForm()">Submit</button>
+        <button class="confirm-button" id="confirm-button-admin" type="button" name="confirm" value="confirm">Confirm</button>
     </form>
 </div>
-<script src="../javaScript/formValidation.js"></script>
+<script src="../javaScript/formHandling.js"></script>
 </body>
 </html>
