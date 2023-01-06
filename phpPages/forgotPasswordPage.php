@@ -9,6 +9,17 @@
           rel="stylesheet">
 </head>
 <body>
+<?php
+require_once("../phpClassesUtils/Validation.php");
+require_once("../phpClassesUtils/Utils.php");
+$validation = new Validation();
+$utils = new Utils();
+$isFormValid = $email = null;
+if ($utils->isPostSet($_POST)) {
+    $isFormValid = true;
+    $email = $_POST["email"];
+}
+?>
 <div>
     <a href="signInPage.php">
         <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
@@ -25,9 +36,17 @@
                 <div class="label-block">
                     <label for="email-input">Email:</label>
                 </div>
-                <input type="email" id="email-input" name="email" required>
+                <input type="email" id="email-input" name="email" value="<?php if ($utils->isPostSet($_POST)) {echo $email;}?>" required>
                 <div class="validation-error-block">
-                    <p>Invalid Email :(</p>
+                    <p class="js-validation-message">Invalid Email :(</p>
+                    <?php
+                    if ($utils->isPostSet($_POST)) {
+                        if (!$validation->isEmailValid($email)) {
+                            echo "<p>*</p>";
+                            $isFormValid = false;
+                        }
+                    }
+                    ?>
                 </div>
             </div>
             <button class="confirm-button" id="confirm-button-forgot-password" type="button" name="confirm" value="confirm">Confirm</button>

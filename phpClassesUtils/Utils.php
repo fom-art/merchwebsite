@@ -3,6 +3,6 @@
 class Utils
 {
 function isPostSet($POST): bool{
-    return $POST && $POST["submit"];
+    return $POST && $POST["confirm"] = "confirm";
 }
 }

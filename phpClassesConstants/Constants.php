@@ -11,4 +11,5 @@ class Constants
     public const PHONE_REGEX = "/[+]?[0-9]+$/";
     public const PRODUCT_NAME_REGEX = "/[\sa-zA-Z0-9]+$/";
     public const PRODUCT_PRICE_REGEX = "/\d+\.?\d*$/";
+    public const PURCHASE_DESCRIPTION_REGEX = "/[\sa-zA-Z0-9]+$/";
 }

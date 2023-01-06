@@ -14,14 +14,14 @@ require_once("../phpClassesUtils/Validation.php");
 require_once("../phpClassesUtils/Utils.php");
 $validation = new Validation();
 $utils = new Utils();
-$isFormValid = $email = $name = $surname = $password = $repeat_password = $address = $country = $city = $postCode = $phoneNumber = null;
+$isFormValid = $email = $name = $surname = $password = $passwordRepeat = $address = $country = $city = $postCode = $phoneNumber = null;
 if ($utils->isPostSet($_POST)) {
     $isFormValid = true;
     $email = $_POST["email"];
     $name = $_POST["name"];
     $surname = $_POST["surname"];
     $password = $_POST["password"];
-    $repeat_password = $_POST["password-repeat"];
+    $passwordRepeat = $_POST["password-repeat"];
     $address = $_POST["address"];
     $country = $_POST["country"];
     $city = $_POST["city"];
@@ -45,11 +45,11 @@ if ($utils->isPostSet($_POST)) {
                 <div class="label-block">
                     <label for="email-input">Email:</label>
                 </div>
-                <input type="email" id="email-input" name="email" value="<?php ?>" required>
+                <input type="email" id="email-input" name="email" value="<?php if ($utils->isPostSet($_POST)) {echo $email;}?>" required>
                 <div class="validation-error-block">
-                    <p>Invalid Email</p>
+                    <p class="js-validation-message">Invalid Email</p>
                     <?php
-                    if ($_POST && $_POST["submit"] = "submit") {
+                    if ($utils->isPostSet($_POST)) {
                         if (!$validation->isEmailValid($email)) {
                             echo "<p>*</p>";
                             $isFormValid = false;
@@ -62,9 +62,9 @@ if ($utils->isPostSet($_POST)) {
                     <div class="label-block">
                         <label for="name-input">Name:</label>
                     </div>
-                    <input type="text" id="name-input" name="name" required>
+                    <input type="text" id="name-input" name="name" value="<?php if ($utils->isPostSet($_POST)) {echo $name;}?>" required>
                     <div class="validation-error-block">
-                        <p>Invalid Name</p>
+                        <p class="js-validation-message">Invalid Name</p>
                         <?php
                         if ($utils->isPostSet($_POST)) {
                             if (!$validation->isNameValid($name)) {
@@ -78,9 +78,9 @@ if ($utils->isPostSet($_POST)) {
                     <div class="label-block">
                         <label for="surname-input">Surname:</label>
                     </div>
-                    <input type="text" id="surname-input" name="surname" required>
+                    <input type="text" id="surname-input" name="surname" value="<?php if ($utils->isPostSet($_POST)) {echo $surname;}?>" required>
                     <div class="validation-error-block">
-                        <p>Invalid Surname</p>
+                        <p class="js-validation-message">Invalid Surname</p>
                         <?php
                         if ($utils->isPostSet($_POST)) {
                             if (!$validation->isNameValid($surname)) {
@@ -96,9 +96,9 @@ if ($utils->isPostSet($_POST)) {
                 <div class="label-block">
                     <label for="password-input">Password:</label>
                 </div>
-                <input type="password" id="password-input" name="password" minlength="8" required>
+                <input type="password" id="password-input" name="password" minlength="8" value="<?php if ($utils->isPostSet($_POST)) {echo $password;}?>" required>
                 <div class="validation-error-block">
-                    <p>Invalid Password</p>
+                    <p class="js-validation-message">Invalid Password</p>
                     <?php
                     if ($utils->isPostSet($_POST)) {
                         if (!$validation->isPasswordValid($password)) {
@@ -113,12 +113,12 @@ if ($utils->isPostSet($_POST)) {
                 <div class="label-block">
                     <label for="repeat-password-input">Repeat the password:</label>
                 </div>
-                <input type="password" id="repeat-password-input" name="password-repeat" minlength="8" required>
+                <input type="password" id="repeat-password-input" name="password-repeat" minlength="8" value="<?php if ($utils->isPostSet($_POST)) {echo $passwordRepeat;}?>" required>
                 <div class="validation-error-block">
-                    <p>Passwords don't match</p>
+                    <p class="js-validation-message">Passwords don't match</p>
                     <?php
                     if ($utils->isPostSet($_POST)) {
-                        if (!$validation->isPasswordRepeatValid($password, $repeat_password)) {
+                        if (!$validation->isPasswordRepeatValid($password, $passwordRepeat)) {
                             echo "<p>*</p>";
                             $isFormValid = false;
                         }
@@ -130,9 +130,9 @@ if ($utils->isPostSet($_POST)) {
                 <div class="label-block">
                     <label for="address-input">Address:</label>
                 </div>
-                <input type="text" id="address-input" name="address" required>
+                <input type="text" id="address-input" name="address" value="<?php if ($utils->isPostSet($_POST)) {echo $address;}?>" required>
                 <div class="validation-error-block">
-                    <p>Invalid Address</p>
+                    <p class="js-validation-message">Invalid Address</p>
                     <?php
                     if ($utils->isPostSet($_POST)) {
                         if (!$validation->isAddressValid($address)) {
@@ -147,9 +147,9 @@ if ($utils->isPostSet($_POST)) {
                 <div class="label-block">
                     <label for="country-input">Country:</label>
                 </div>
-                <input type="text" id="country-input" name="country" required>
+                <input type="text" id="country-input" name="country" value="<?php if ($utils->isPostSet($_POST)) {echo $country;}?>" required>
                 <div class="validation-error-block">
-                    <p>Invalid Country</p>
+                    <p class="js-validation-message">Invalid Country</p>
                     <?php
                     if ($utils->isPostSet($_POST)) {
                         if (!$validation->isCountryOrCityValid($country)) {
@@ -164,9 +164,9 @@ if ($utils->isPostSet($_POST)) {
                 <div class="label-block">
                     <label for="city-input">City:</label>
                 </div>
-                <input type="text" id="city-input" name="city" required>
+                <input type="text" id="city-input" name="city" value="<?php if ($utils->isPostSet($_POST)) {echo $city;}?>" required>
                 <div class="validation-error-block">
-                    <p>Invalid City</p>
+                    <p class="js-validation-message">Invalid City</p>
                     <?php
                     if ($utils->isPostSet($_POST)) {
                         if (!$validation->isCountryOrCityValid($city)) {
@@ -182,9 +182,9 @@ if ($utils->isPostSet($_POST)) {
                     <div class="label-block">
                         <label for="post-code-input">Post Code:</label>
                     </div>
-                    <input type="text" id="post-code-input" name="post-code" required>
+                    <input type="text" id="post-code-input" name="post-code" value="<?php if ($utils->isPostSet($_POST)) {echo $postCode;}?>" required>
                     <div class="validation-error-block">
-                        <p>Invalid Post Code</p>
+                        <p class="js-validation-message">Invalid Post Code</p>
                         <?php
                         if ($utils->isPostSet($_POST)) {
                             if (!$validation->isPostCodeValid($postCode)) {
@@ -199,9 +199,9 @@ if ($utils->isPostSet($_POST)) {
                     <div class="label-block">
                         <label for="phone-number-input">Phone Number:</label>
                     </div>
-                    <input type="text" id="phone-number-input" name="phone-number" required/>
+                    <input type="text" id="phone-number-input" name="phone-number" value="<?php if ($utils->isPostSet($_POST)) {echo $phoneNumber;}?>" required/>
                     <div class="validation-error-block">
-                        <p>Invalid Phone Number</p>
+                        <p class="js-validation-message">Invalid Phone Number</p>
                         <?php
                         if ($utils->isPostSet($_POST)) {
                             if (!$validation->isPhoneNumberValid($phoneNumber)) {

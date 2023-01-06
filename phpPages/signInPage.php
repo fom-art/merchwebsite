@@ -9,6 +9,18 @@
           rel="stylesheet">
 </head>
 <body>
+<?php
+require_once("../phpClassesUtils/Validation.php");
+require_once("../phpClassesUtils/Utils.php");
+$validation = new Validation();
+$utils = new Utils();
+$isFormValid = $email = $password = null;
+if ($utils->isPostSet($_POST)) {
+    $isFormValid = true;
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+}
+?>
 <div>
     <a href="../index.php">
         <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
@@ -28,18 +40,34 @@
                         <span><a href="signUpPage.php">Create</a></span>
                     </p>
                 </div>
-                <input type="email" id="email-input" name="email" required>
+                <input type="email" id="email-input" name="email" value="<?php if ($utils->isPostSet($_POST)) {echo $email;}?>" required>
                 <div class="validation-error-block">
-                    <p>Invalid Email</p>
+                    <p class="js-validation-message">Invalid Email</p>
+                    <?php
+                    if ($utils->isPostSet($_POST)) {
+                        if (!$validation->isEmailValid($email)) {
+                            echo "<p>*</p>";
+                            $isFormValid = false;
+                        }
+                    }
+                    ?>
                 </div>
             </div>
             <div class="input-block" id="password-input-block">
                 <div class="label-block">
                     <label for="password-input">Password:</label>
                 </div>
-                <input type="password" id="password-input" name="password" minlength="8" required>
+                <input type="password" id="password-input" name="password" minlength="8" value="<?php if ($utils->isPostSet($_POST)) {echo $password;}?>" required>
                 <div class="validation-error-block">
-                    <p>Invalid Password</p>
+                    <p class="js-validation-message">Invalid Password</p>
+                    <?php
+                    if ($utils->isPostSet($_POST)) {
+                        if (!$validation->isPasswordValid($password)) {
+                            echo "<p>*</p>";
+                            $isFormValid = false;
+                        }
+                    }
+                    ?>
                 </div>
             </div>
             <div class="forgot-password-block">

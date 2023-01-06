@@ -16,7 +16,7 @@ class Validation
 
     function isPasswordValid($input): bool
     {
-        return preg_match(Constants::PASSWORD_REGEX, $input);
+        return preg_match(Constants::PASSWORD_REGEX, $input) && strlen($input) >= 8;
     }
 
     function isPasswordRepeatValid($passwordInput, $passwordRepeatInput): bool
@@ -57,6 +57,16 @@ class Validation
     function isProductPriceValid($input): bool
     {
         return preg_match(Constants::PRODUCT_PRICE_REGEX, $input);
+    }
+
+    function isProductPhotoValid($input): bool
+    {
+        return true;
+    }
+
+    function isPurchaseDescriptionValid($input): bool
+    {
+        return preg_match(Constants::PURCHASE_DESCRIPTION_REGEX, $input);
     }
 
 

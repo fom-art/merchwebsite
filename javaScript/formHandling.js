@@ -77,7 +77,6 @@ function sendPostRequest(formCode) {
     if (validationResult) {
         submitForm();
     }
-    return validationResult
 }
 
 function submitForm() {
@@ -108,7 +107,6 @@ class Validation {
             this.validateName() &&
             this.validateSurname() &&
             this.validatePassword() &&
-            this.validateRepeatPassword() &&
             this.validateAddress() &&
             this.validateCountry() &&
             this.validateCity() &&
@@ -335,12 +333,12 @@ class Validation {
     }
 
     setInputAsInvalid(inputBlockToValidate) {
-        let validationErrorBlock = inputBlockToValidate.getElementsByClassName("validation-error-block")[0]
+        let validationErrorBlock = inputBlockToValidate.getElementsByClassName("js-validation-message")[0]
         validationErrorBlock.style.display = "block"
     }
 
     setInputAsValid(inputBlockToValidate) {
-        let validationErrorBlock = inputBlockToValidate.getElementsByClassName("validation-error-block")[0]
+        let validationErrorBlock = inputBlockToValidate.getElementsByClassName("js-validation-message")[0]
         validationErrorBlock.style.display = "none"
     }
 }
