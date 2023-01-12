@@ -12,8 +12,10 @@
 <?php
 require_once("../phpClassesUtils/Validation.php");
 require_once("../phpClassesUtils/Utils.php");
+require_once("../database/DatabaseHandler.php");
 $validation = new Validation();
 $utils = new Utils();
+$database = new DatabaseHandler();
 $isFormValid = $email = null;
 if ($utils->isPostSet($_POST)) {
     $isFormValid = true;
@@ -36,20 +38,22 @@ if ($utils->isPostSet($_POST)) {
                 <div class="label-block">
                     <label for="email-input">Email:</label>
                 </div>
-                <input type="email" id="email-input" name="email" value="<?php if ($utils->isPostSet($_POST)) {echo $email;}?>" required>
+                <input type="email" id="email-input" name="email" value="<?php if ($utils->isPostSet($_POST)) {
+                    echo $email;
+                } ?>" required>
                 <div class="validation-error-block">
                     <p class="js-validation-message">Invalid Email :(</p>
                     <?php
-                    if ($utils->isPostSet($_POST)) {
-                        if (!$validation->isEmailValid($email)) {
-                            echo "<p>*</p>";
-                            $isFormValid = false;
-                        }
+                    if ($utils->isPostSet($_POST) && !$validation->isEmailValid($email) && $database->checkIfUserWithEmailExists($email)) {
+                        echo "<p>*</p>";
+                        $isFormValid = false;
                     }
                     ?>
                 </div>
             </div>
-            <button class="confirm-button" id="confirm-button-forgot-password" type="button" name="confirm" value="confirm">Confirm</button>
+            <button class="confirm-button" id="confirm-button-forgot-password" type="button" name="confirm"
+                    value="confirm">Confirm
+            </button>
         </form>
     </div>
 </div>

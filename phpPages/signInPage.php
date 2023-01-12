@@ -42,15 +42,15 @@ if ($utils->isPostSet($_POST)) {
                         <span><a href="signUpPage.php">Create</a></span>
                     </p>
                 </div>
-                <input type="email" id="email-input" name="email" value="<?php if ($utils->isPostSet($_POST)) {echo $email;}?>" required>
+                <input type="email" id="email-input" name="email" value="<?php if ($utils->isPostSet($_POST)) {
+                    echo $email;
+                } ?>" required>
                 <div class="validation-error-block">
                     <p class="js-validation-message">Invalid Email</p>
                     <?php
-                    if ($utils->isPostSet($_POST)) {
-                        if (!$validation->isEmailValid($email)) {
-                            echo "<p>*</p>";
-                            $isFormValid = false;
-                        }
+                    if ($utils->isPostSet($_POST) && !$validation->isEmailValid($email)) {
+                        echo "<p>*</p>";
+                        $isFormValid = false;
                     }
                     ?>
                 </div>
@@ -59,15 +59,16 @@ if ($utils->isPostSet($_POST)) {
                 <div class="label-block">
                     <label for="password-input">Password:</label>
                 </div>
-                <input type="password" id="password-input" name="password" minlength="8" value="<?php if ($utils->isPostSet($_POST)) {echo $password;}?>" required>
+                <input type="password" id="password-input" name="password" minlength="8"
+                       value="<?php if ($utils->isPostSet($_POST)) {
+                           echo $password;
+                       } ?>" required>
                 <div class="validation-error-block">
                     <p class="js-validation-message">Invalid Password</p>
                     <?php
-                    if ($utils->isPostSet($_POST)) {
-                        if (!$validation->isPasswordValid($password)) {
-                            echo "<p>*</p>";
-                            $isFormValid = false;
-                        }
+                    if ($utils->isPostSet($_POST) && !$validation->isPasswordValid($password)) {
+                        echo "<p>*</p>";
+                        $isFormValid = false;
                     }
                     ?>
                 </div>
@@ -76,24 +77,19 @@ if ($utils->isPostSet($_POST)) {
                 <a href="forgotPasswordPage.php">
                     Forgot password?</a>
             </div>
+            <div class="validation-error-block">
+                <?php
+                if ($utils->isPostSet($_POST) && $isFormValid && !$database->checkUserForLogIn($email, $password)) {
+                    echo "<p>Invalid Email or Password!</p>";
+                }
+                ?>
+            </div>
             <button class="confirm-button" id="confirm-button-sign-in" name="confirm" value="confirm" type="button">
                 Confirm
             </button>
-            <div class="validation-error-block">
-                <?php
-                ?>
-            </div>
         </form>
     </div>
-    <?php
-    if ($utils->isPostSet($_POST)) {
-        if ($isFormValid) {
-            echo strval($database->checkUserForLogIn($email, $password));
-        } else {
-            echo "No :(, Not valid";
-        }
-    }
-    ?>
+
 </div>
 <script src="../javaScript/formHandling.js"></script>
 </body>

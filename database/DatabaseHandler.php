@@ -50,6 +50,15 @@ class DatabaseHandler
         }
     }
 
+    function checkIfUserWithEmailExists($email): bool {
+        $user = $this->getUserByEmail($email);
+        if ($user->getId() == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     function getUserByEmail($email): User
     {
         $sqlRequestToGetUser = "SELECT * FROM $this->userDatabaseName WHERE `email` = '$email'";

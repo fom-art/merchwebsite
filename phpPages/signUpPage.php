@@ -53,11 +53,9 @@ if ($utils->isPostSet($_POST)) {
                 <div class="validation-error-block">
                     <p class="js-validation-message">Invalid Email</p>
                     <?php
-                    if ($utils->isPostSet($_POST)) {
-                        if (!$validation->isEmailValid($email)) {
-                            echo "<p>*</p>";
-                            $isFormValid = false;
-                        }
+                    if ($utils->isPostSet($_POST) && !$validation->isEmailValid($email)) {
+                        echo "<p>*</p>";
+                        $isFormValid = false;
                     } ?>
                 </div>
             </div>
@@ -72,11 +70,9 @@ if ($utils->isPostSet($_POST)) {
                     <div class="validation-error-block">
                         <p class="js-validation-message">Invalid Name</p>
                         <?php
-                        if ($utils->isPostSet($_POST)) {
-                            if (!$validation->isNameValid($name)) {
-                                echo "<p>*</p>";
-                                $isFormValid = false;
-                            }
+                        if ($utils->isPostSet($_POST) && !$validation->isNameValid($name)) {
+                            echo "<p>*</p>";
+                            $isFormValid = false;
                         } ?>
                     </div>
                 </div>
@@ -90,11 +86,9 @@ if ($utils->isPostSet($_POST)) {
                     <div class="validation-error-block">
                         <p class="js-validation-message">Invalid Surname</p>
                         <?php
-                        if ($utils->isPostSet($_POST)) {
-                            if (!$validation->isNameValid($surname)) {
-                                echo "<p>*</p>";
-                                $isFormValid = false;
-                            }
+                        if ($utils->isPostSet($_POST) && !$validation->isNameValid($surname)) {
+                            echo "<p>*</p>";
+                            $isFormValid = false;
                         }
                         ?>
                     </div>
@@ -111,11 +105,9 @@ if ($utils->isPostSet($_POST)) {
                 <div class="validation-error-block">
                     <p class="js-validation-message">Invalid Password</p>
                     <?php
-                    if ($utils->isPostSet($_POST)) {
-                        if (!$validation->isPasswordValid($password)) {
-                            echo "<p>*</p>";
-                            $isFormValid = false;
-                        }
+                    if ($utils->isPostSet($_POST) && !$validation->isPasswordValid($password)) {
+                        echo "<p>*</p>";
+                        $isFormValid = false;
                     }
                     ?>
                 </div>
@@ -131,11 +123,9 @@ if ($utils->isPostSet($_POST)) {
                 <div class="validation-error-block">
                     <p class="js-validation-message">Passwords don't match</p>
                     <?php
-                    if ($utils->isPostSet($_POST)) {
-                        if (!$validation->isPasswordRepeatValid($password, $passwordRepeat)) {
-                            echo "<p>*</p>";
-                            $isFormValid = false;
-                        }
+                    if ($utils->isPostSet($_POST) && !$validation->isPasswordRepeatValid($password, $passwordRepeat)) {
+                        echo "<p>*</p>";
+                        $isFormValid = false;
                     }
                     ?>
                 </div>
@@ -150,11 +140,9 @@ if ($utils->isPostSet($_POST)) {
                 <div class="validation-error-block">
                     <p class="js-validation-message">Invalid Address</p>
                     <?php
-                    if ($utils->isPostSet($_POST)) {
-                        if (!$validation->isAddressValid($address)) {
-                            echo "<p>*</p>";
-                            $isFormValid = false;
-                        }
+                    if ($utils->isPostSet($_POST) && !$validation->isAddressValid($address)) {
+                        echo "<p>*</p>";
+                        $isFormValid = false;
                     }
                     ?>
                 </div>
@@ -169,11 +157,9 @@ if ($utils->isPostSet($_POST)) {
                 <div class="validation-error-block">
                     <p class="js-validation-message">Invalid Country</p>
                     <?php
-                    if ($utils->isPostSet($_POST)) {
-                        if (!$validation->isCountryOrCityValid($country)) {
-                            echo "<p>*</p>";
-                            $isFormValid = false;
-                        }
+                    if ($utils->isPostSet($_POST) && !$validation->isCountryOrCityValid($country)) {
+                        echo "<p>*</p>";
+                        $isFormValid = false;
                     }
                     ?>
                 </div>
@@ -209,11 +195,9 @@ if ($utils->isPostSet($_POST)) {
                     <div class="validation-error-block">
                         <p class="js-validation-message">Invalid Post Code</p>
                         <?php
-                        if ($utils->isPostSet($_POST)) {
-                            if (!$validation->isPostCodeValid($postCode)) {
-                                echo "<p>*</p>";
-                                $isFormValid = false;
-                            }
+                        if ($utils->isPostSet($_POST) && !$validation->isPostCodeValid($postCode)) {
+                            echo "<p>*</p>";
+                            $isFormValid = false;
                         }
                         ?>
                     </div>
@@ -229,15 +213,20 @@ if ($utils->isPostSet($_POST)) {
                     <div class="validation-error-block">
                         <p class="js-validation-message">Invalid Phone Number</p>
                         <?php
-                        if ($utils->isPostSet($_POST)) {
-                            if (!$validation->isPhoneNumberValid($phoneNumber)) {
-                                echo "<p>*</p>";
-                                $isFormValid = false;
-                            }
+                        if ($utils->isPostSet($_POST) && !$validation->isPhoneNumberValid($phoneNumber)) {
+                            echo "<p>*</p>";
+                            $isFormValid = false;
                         }
                         ?>
                     </div>
                 </div>
+            </div>
+            <div class="validation-error-block">
+                <?php
+                if ($utils->isPostSet($_POST) && $isFormValid) {
+                    echo "<p>Invalid inputs. Check the inputs marked by *</p>";
+                }
+                ?>
             </div>
             <button class="confirm-button" id="confirm-button-sign-up" name="confirm" value="confirm" type="button">
                 Confirm
