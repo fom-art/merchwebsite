@@ -85,33 +85,33 @@ function submitForm() {
 
 class Validation {
     validateSignInForm() {
-        return this.validateEmail() &&
+        return this.validateEmail() *
             this.validatePassword();
     }
 
     validateSignUpForm() {
-        return this.validateEmail() &&
-            this.validateName() &&
-            this.validateSurname() &&
-            this.validatePassword() &&
-            this.validateRepeatPassword() &&
-            this.validateAddress() &&
-            this.validateCountry() &&
-            this.validateCity() &&
-            this.validatePostCode() &&
+        return this.validateEmail() *
+            this.validateName() *
+            this.validateSurname() *
+            this.validatePassword() *
+            this.validateRepeatPassword() *
+            this.validateAddress() *
+            this.validateCountry() *
+            this.validateCity() *
+            this.validatePostCode() *
             this.validatePhoneNumber()
     }
 
     validatePurchaseForm() {
-        return this.validateEmail() &&
-            this.validateName() &&
-            this.validateSurname() &&
-            this.validatePassword() &&
-            this.validateAddress() &&
-            this.validateCountry() &&
-            this.validateCity() &&
-            this.validatePostCode() &&
-            this.validatePhoneNumber() &&
+        return this.validateEmail() *
+            this.validateName() *
+            this.validateSurname() *
+            this.validatePassword() *
+            this.validateAddress() *
+            this.validateCountry() *
+            this.validateCity() *
+            this.validatePostCode() *
+            this.validatePhoneNumber() *
             this.validatePurchaseDescription();
     }
 
@@ -124,6 +124,7 @@ class Validation {
             this.validatePrice() &&
             this.validatePhoto();
     }
+
 
     validateEmail() {
         return this.runValidation(EMAIL_INPUT_ID)

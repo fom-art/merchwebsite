@@ -12,8 +12,10 @@
 <?php
 require_once("../phpClassesUtils/Validation.php");
 require_once("../phpClassesUtils/Utils.php");
+include_once("../database/DatabaseHandler.php");
 $validation = new Validation();
 $utils = new Utils();
+$database = new DatabaseHandler();
 $isFormValid = $email = $name = $surname = $password = $passwordRepeat = $address = $country = $city = $postCode = $phoneNumber = null;
 if ($utils->isPostSet($_POST)) {
     $isFormValid = true;
@@ -45,7 +47,9 @@ if ($utils->isPostSet($_POST)) {
                 <div class="label-block">
                     <label for="email-input">Email:</label>
                 </div>
-                <input type="email" id="email-input" name="email" value="<?php if ($utils->isPostSet($_POST)) {echo $email;}?>" required>
+                <input type="email" id="email-input" name="email" value="<?php if ($utils->isPostSet($_POST)) {
+                    echo $email;
+                } ?>" required>
                 <div class="validation-error-block">
                     <p class="js-validation-message">Invalid Email</p>
                     <?php
@@ -62,7 +66,9 @@ if ($utils->isPostSet($_POST)) {
                     <div class="label-block">
                         <label for="name-input">Name:</label>
                     </div>
-                    <input type="text" id="name-input" name="name" value="<?php if ($utils->isPostSet($_POST)) {echo $name;}?>" required>
+                    <input type="text" id="name-input" name="name" value="<?php if ($utils->isPostSet($_POST)) {
+                        echo $name;
+                    } ?>" required>
                     <div class="validation-error-block">
                         <p class="js-validation-message">Invalid Name</p>
                         <?php
@@ -78,7 +84,9 @@ if ($utils->isPostSet($_POST)) {
                     <div class="label-block">
                         <label for="surname-input">Surname:</label>
                     </div>
-                    <input type="text" id="surname-input" name="surname" value="<?php if ($utils->isPostSet($_POST)) {echo $surname;}?>" required>
+                    <input type="text" id="surname-input" name="surname" value="<?php if ($utils->isPostSet($_POST)) {
+                        echo $surname;
+                    } ?>" required>
                     <div class="validation-error-block">
                         <p class="js-validation-message">Invalid Surname</p>
                         <?php
@@ -96,7 +104,10 @@ if ($utils->isPostSet($_POST)) {
                 <div class="label-block">
                     <label for="password-input">Password:</label>
                 </div>
-                <input type="password" id="password-input" name="password" minlength="8" value="<?php if ($utils->isPostSet($_POST)) {echo $password;}?>" required>
+                <input type="password" id="password-input" name="password" minlength="8"
+                       value="<?php if ($utils->isPostSet($_POST)) {
+                           echo $password;
+                       } ?>" required>
                 <div class="validation-error-block">
                     <p class="js-validation-message">Invalid Password</p>
                     <?php
@@ -113,7 +124,10 @@ if ($utils->isPostSet($_POST)) {
                 <div class="label-block">
                     <label for="repeat-password-input">Repeat the password:</label>
                 </div>
-                <input type="password" id="repeat-password-input" name="password-repeat" minlength="8" value="<?php if ($utils->isPostSet($_POST)) {echo $passwordRepeat;}?>" required>
+                <input type="password" id="repeat-password-input" name="password-repeat" minlength="8"
+                       value="<?php if ($utils->isPostSet($_POST)) {
+                           echo $passwordRepeat;
+                       } ?>" required>
                 <div class="validation-error-block">
                     <p class="js-validation-message">Passwords don't match</p>
                     <?php
@@ -130,7 +144,9 @@ if ($utils->isPostSet($_POST)) {
                 <div class="label-block">
                     <label for="address-input">Address:</label>
                 </div>
-                <input type="text" id="address-input" name="address" value="<?php if ($utils->isPostSet($_POST)) {echo $address;}?>" required>
+                <input type="text" id="address-input" name="address" value="<?php if ($utils->isPostSet($_POST)) {
+                    echo $address;
+                } ?>" required>
                 <div class="validation-error-block">
                     <p class="js-validation-message">Invalid Address</p>
                     <?php
@@ -147,7 +163,9 @@ if ($utils->isPostSet($_POST)) {
                 <div class="label-block">
                     <label for="country-input">Country:</label>
                 </div>
-                <input type="text" id="country-input" name="country" value="<?php if ($utils->isPostSet($_POST)) {echo $country;}?>" required>
+                <input type="text" id="country-input" name="country" value="<?php if ($utils->isPostSet($_POST)) {
+                    echo $country;
+                } ?>" required>
                 <div class="validation-error-block">
                     <p class="js-validation-message">Invalid Country</p>
                     <?php
@@ -164,7 +182,9 @@ if ($utils->isPostSet($_POST)) {
                 <div class="label-block">
                     <label for="city-input">City:</label>
                 </div>
-                <input type="text" id="city-input" name="city" value="<?php if ($utils->isPostSet($_POST)) {echo $city;}?>" required>
+                <input type="text" id="city-input" name="city" value="<?php if ($utils->isPostSet($_POST)) {
+                    echo $city;
+                } ?>" required>
                 <div class="validation-error-block">
                     <p class="js-validation-message">Invalid City</p>
                     <?php
@@ -182,7 +202,10 @@ if ($utils->isPostSet($_POST)) {
                     <div class="label-block">
                         <label for="post-code-input">Post Code:</label>
                     </div>
-                    <input type="text" id="post-code-input" name="post-code" value="<?php if ($utils->isPostSet($_POST)) {echo $postCode;}?>" required>
+                    <input type="text" id="post-code-input" name="post-code"
+                           value="<?php if ($utils->isPostSet($_POST)) {
+                               echo $postCode;
+                           } ?>" required>
                     <div class="validation-error-block">
                         <p class="js-validation-message">Invalid Post Code</p>
                         <?php
@@ -199,7 +222,10 @@ if ($utils->isPostSet($_POST)) {
                     <div class="label-block">
                         <label for="phone-number-input">Phone Number:</label>
                     </div>
-                    <input type="text" id="phone-number-input" name="phone-number" value="<?php if ($utils->isPostSet($_POST)) {echo $phoneNumber;}?>" required/>
+                    <input type="text" id="phone-number-input" name="phone-number"
+                           value="<?php if ($utils->isPostSet($_POST)) {
+                               echo $phoneNumber;
+                           } ?>" required/>
                     <div class="validation-error-block">
                         <p class="js-validation-message">Invalid Phone Number</p>
                         <?php
@@ -216,17 +242,20 @@ if ($utils->isPostSet($_POST)) {
             <button class="confirm-button" id="confirm-button-sign-up" name="confirm" value="confirm" type="button">
                 Confirm
             </button>
+
         </form>
     </div>
 </div>
 <div class="empty-block">
     <?php
-    if ($isFormValid){
-        echo "Everything is alright";
-    } else {
-        echo "Something is amiss";
-    }
-    ?>
+    if ($isFormValid) {
+
+        if ($database->createUser($email, $password, $name, $surname, $address, $country, $city, $postCode, $phoneNumber)) {
+            echo "everything went good";
+        } else {
+            echo "No(";
+        }
+    } ?>
     &nbsp;
     &nbsp;
     &nbsp;

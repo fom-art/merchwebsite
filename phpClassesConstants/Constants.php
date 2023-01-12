@@ -7,9 +7,15 @@ class Constants
     public const NAME_REGEX = "/[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+[\sa-zA-Z0-9]+$/";
     public const ADDRESS_REGEX = "/[\sa-zA-Z0-9]+$/";
     public const COUNTRY_AND_CITY_REGEX = "/[A-Za-z\s]+$/";
-    public const POST_CODE_REGEX ="/\d{5}(-\d{4})?$/";
+    public const POST_CODE_REGEX = "/\d{5}(-\d{4})?$/";
     public const PHONE_REGEX = "/[+]?[0-9]+$/";
     public const PRODUCT_NAME_REGEX = "/[\sa-zA-Z0-9]+$/";
     public const PRODUCT_PRICE_REGEX = "/\d+\.?\d*$/";
     public const PURCHASE_DESCRIPTION_REGEX = "/[\sa-zA-Z0-9]+$/";
+    public const DATABASE_HOST_NAME = "localhost";
+    public const DATABASE_USERNAME = "fomenart";
+    public const DATABASE_PASSWORD = "webove aplikace";
+    public const USER_DATABASE_NAME = "userDatabase";
+    public const PRODUCT_DATABASE_NAME = "productDatabase";
+    public const PURCHASE_DATABASE_NAME = "purchaseDatabase";
 }

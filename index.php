@@ -18,6 +18,12 @@
 
 <body>
 <header>
+    <?php
+    require_once "database/DatabaseHandler.php";
+    $databaseHandler = new DatabaseHandler();
+    echo $databaseHandler->getUserByID(1)->getAddress();
+
+    ?>
     <div class="header-block">
         <div class="title-block">
             <h1 class="title">ANFO</h1>

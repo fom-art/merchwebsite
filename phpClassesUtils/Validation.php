@@ -2,8 +2,6 @@
 
 class Validation
 {
-    private $constants;
-
     function __construct()
     {
         require_once("../phpClassesConstants/Constants.php");
