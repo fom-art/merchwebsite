@@ -65,7 +65,7 @@ class Purchase
 
     public function setId($newValue): bool
     {
-        if (gettype($newValue) == "integer") {
+        if (gettype($newValue) == "string") {
             $this->id = $newValue;
             return true;
         } else {

@@ -2,7 +2,7 @@
 
 class User
 {
-    private $id = null;
+    private $id;
     private $email;
     private $password;
     private $name;
@@ -65,7 +65,7 @@ class User
 
     public function setId($newValue): bool
     {
-        if (gettype($newValue) == "integer") {
+        if (gettype($newValue) == "string") {
             $this->id = $newValue;
             return true;
         } else {

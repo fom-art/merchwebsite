@@ -36,13 +36,27 @@ class DatabaseHandler
         return $this->database;
     }
 
-    function getUserByID($id): User
+    function checkUserForLogIn($email, $password): bool
     {
-        $sqlRequestToGetId = "SELECT * FROM " . $this->userDatabaseName . " WHERE id = ".$id;
-        $queryResult = $this->database->query($sqlRequestToGetId);
+        $user = $this->getUserByEmail($email);
+        if ($user->getId() == null) {
+            return false;
+        } else {
+            if ($user->getPassword() == $password) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    function getUserByEmail($email): User
+    {
+        $sqlRequestToGetUser = "SELECT * FROM $this->userDatabaseName WHERE `email` = '$email'";
+        $queryResult = $this->database->query($sqlRequestToGetUser);
         if ($queryResult->num_rows > 0) {
             while ($row = $queryResult->fetch_assoc()) {
-                if ($row["id"] = $id) {
+                if ($row["email"] = $email) {
                     $user = new User();
                     $user->setId($row["id"]);
                     $user->setEmail($row["email"]);
@@ -63,8 +77,8 @@ class DatabaseHandler
 
     function getProductById($id): Product
     {
-        $sqlRequestToGetId = "SELECT * FROM " . $this->productDatabaseName . " WHERE id = ".$id;
-        $queryResult = $this->database->query($sqlRequestToGetId);
+        $sqlRequestToGetProduct = "SELECT * FROM " . $this->productDatabaseName . " WHERE id = " . $id;
+        $queryResult = $this->database->query($sqlRequestToGetProduct);
         if ($queryResult->num_rows > 0) {
             while ($row = $queryResult->fetch_assoc()) {
                 if ($row["id"] = $id) {
@@ -82,8 +96,8 @@ class DatabaseHandler
 
     function getPurchaseById($id): Purchase
     {
-        $sqlRequestToGetId = "SELECT * FROM " . $this->purchaseDatabaseName . " WHERE id = ".$id;
-        $queryResult = $this->database->query($sqlRequestToGetId);
+        $sqlRequestToGetPurchase = "SELECT * FROM " . $this->purchaseDatabaseName . " WHERE id = " . $id;
+        $queryResult = $this->database->query($sqlRequestToGetPurchase);
         if ($queryResult->num_rows > 0) {
             while ($row = $queryResult->fetch_assoc()) {
                 if ($row["id"] = $id) {
@@ -105,28 +119,28 @@ class DatabaseHandler
         return new Purchase();
     }
 
-    function createUser($email, $password, $name, $surname, $address, $country, $city, $postCode, $phoneNumber): mysqli_result|bool
+    function createUser($email, $password, $name, $surname, $address, $country, $city, $postCode, $phoneNumber)
     {
         $sqlQuery = "INSERT INTO `$this->userDatabaseName` (`email`, `password`, `name`, `surname`, `address`, `country`, `city`, `postCode`, `phoneNumber`)
         VALUES ('$email', '$password', '$name', '$surname', '$address', '$country', '$city', '$postCode', '$phoneNumber')";
-        return $this->database->query($sqlQuery);
+        $this->database->query($sqlQuery);
     }
 
-    function createProduct($productName, $productPrice, $productPhotoPath): mysqli_result|bool
+    function createProduct($productName, $productPrice, $productPhotoPath)
     {
         $sqlQuery = "INSERT INTO `$this->productDatabaseName` (`productName`, `productPrice`, `productPhotoPath`)
         VALUES ('$productName', '$productPrice', '$productPhotoPath')";
-        return $this->database->query($sqlQuery);
+        $this->database->query($sqlQuery);
     }
 
-    function createPurchase($email, $name, $surname, $address, $country, $city, $postCode, $phoneNumber, $purchaseDescription): mysqli_result|bool
+    function createPurchase($email, $name, $surname, $address, $country, $city, $postCode, $phoneNumber, $purchaseDescription)
     {
         $sqlQuery = "INSERT INTO `$this->purchaseDatabaseName` (`email`, `name`, `surname`, `address`, `country`, `city`, `postCode`, `phoneNumber`, `purchaseDescription`)
         VALUES ('$email', '$name', '$surname', '$address', '$country', '$city', '$postCode', '$phoneNumber', '$purchaseDescription')";
-        return $this->database->query($sqlQuery);
+        $this->database->query($sqlQuery);
     }
 
-    function changeUserDatabaseData($user): mysqli_result|bool
+    function changeUserDatabaseData($user)
     {
         $id = $user->getId();
         $email = $user->getEmail();
@@ -150,10 +164,10 @@ class DatabaseHandler
             `postCode` = '$postCode',
             `phoneNumber` = '$phoneNumber'
             WHERE `id` = '$id'";
-        return $this->database->query($sqlQuery);
+        $this->database->query($sqlQuery);
     }
 
-    function changeProductDatabaseData($product): mysqli_result|bool
+    function changeProductDatabaseData($product)
     {
         $id = $product->getId();
         $productName = $product->getProductName();
@@ -169,10 +183,10 @@ class DatabaseHandler
             `productType` = '$productType',
             `productDescription` = '$productDescription'
             WHERE `id` = '$id'";
-        return $this->database->query($sqlQuery);
+        $this->database->query($sqlQuery);
     }
 
-    function changePurchaseData($purchase): mysqli_result|bool
+    function changePurchaseData($purchase)
     {
         $id = $purchase->getId();
         $email = $purchase->getEmail();
@@ -196,6 +210,6 @@ class DatabaseHandler
             `phoneNumber` = '$phoneNumber',
             `purchaseDescription` = '$purchaseDescription'
             WHERE `id` = '$id'";
-        return $this->database->query($sqlQuery);
+        $this->database->query($sqlQuery);
     }
 }

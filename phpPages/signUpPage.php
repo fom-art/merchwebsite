@@ -247,15 +247,6 @@ if ($utils->isPostSet($_POST)) {
     </div>
 </div>
 <div class="empty-block">
-    <?php
-    if ($isFormValid) {
-
-        if ($database->createUser($email, $password, $name, $surname, $address, $country, $city, $postCode, $phoneNumber)) {
-            echo "everything went good";
-        } else {
-            echo "No(";
-        }
-    } ?>
     &nbsp;
     &nbsp;
     &nbsp;

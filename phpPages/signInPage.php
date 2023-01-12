@@ -12,8 +12,10 @@
 <?php
 require_once("../phpClassesUtils/Validation.php");
 require_once("../phpClassesUtils/Utils.php");
+require_once("../database/DatabaseHandler.php");
 $validation = new Validation();
 $utils = new Utils();
+$database = new DatabaseHandler();
 $isFormValid = $email = $password = null;
 if ($utils->isPostSet($_POST)) {
     $isFormValid = true;
@@ -77,8 +79,21 @@ if ($utils->isPostSet($_POST)) {
             <button class="confirm-button" id="confirm-button-sign-in" name="confirm" value="confirm" type="button">
                 Confirm
             </button>
+            <div class="validation-error-block">
+                <?php
+                ?>
+            </div>
         </form>
     </div>
+    <?php
+    if ($utils->isPostSet($_POST)) {
+        if ($isFormValid) {
+            echo strval($database->checkUserForLogIn($email, $password));
+        } else {
+            echo "No :(, Not valid";
+        }
+    }
+    ?>
 </div>
 <script src="../javaScript/formHandling.js"></script>
 </body>
