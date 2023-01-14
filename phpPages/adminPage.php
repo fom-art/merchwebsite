@@ -20,6 +20,8 @@ if ($utils->isPostSet($_POST)) {
     $productName = $_POST["product-name"];
     $productPrice = $_POST["product-price"];
     $photo = $_POST["photo"];
+    $productType = $_POST["product-type"];
+    $productDescription = $_POST["product-description"];
 }
 ?>
 <div>
@@ -46,11 +48,9 @@ if ($utils->isPostSet($_POST)) {
                 <div class="validation-error-block">
                     <p class="js-validation-message">Invalid Name!</p>
                     <?php
-                    if ($utils->isPostSet($_POST)) {
-                        if (!$validation->isProductNameValid($productName)) {
+                    if ($utils->isPostSet($_POST) && !$validation->isProductPriceValid($productPrice)) {
                             echo "<p>*</p>";
                             $isFormValid = false;
-                        }
                     }
                     ?>
                 </div>
@@ -63,11 +63,41 @@ if ($utils->isPostSet($_POST)) {
                 <div class="validation-error-block">
                     <p class="js-validation-message">Invalid Price</p>
                     <?php
-                    if ($utils->isPostSet($_POST)) {
-                        if (!$validation->isProductPriceValid($productPrice)) {
+                    if ($utils->isPostSet($_POST) && !$validation->isProductPriceValid($productPrice)) {
                             echo "<p>*</p>";
                             $isFormValid = false;
-                        }
+                    }
+                    ?>
+                </div>
+            </div>
+        </div>
+        <div class="two-inputs-in-one-row-block">
+            <div class="input-block" id="product-type-input-block">
+                <div class="label-block">
+                    <label for="product-type-input">Product Type:</label>
+                </div>
+                <input type="text" id="product-type-input" name="product-type" value="<?php if ($utils->isPostSet($_POST)) {echo $productType;}?>" required>
+                <div class="validation-error-block">
+                    <p class="js-validation-message">Invalid Product Type!</p>
+                    <?php
+                    if ($utils->isPostSet($_POST) && !$validation->isProductTypeValid($productType)) {
+                        echo "<p>*</p>";
+                        $isFormValid = false;
+                    }
+                    ?>
+                </div>
+            </div>
+            <div class="input-block" id="product-description-input-block">
+                <div class="label-block">
+                    <label for="product-description-input">Product Description:</label>
+                </div>
+                <input type="text" id="product-description-input" name="product-description" value="<?php if ($utils->isPostSet($_POST)) {echo $productDescription;}?>" required>
+                <div class="validation-error-block">
+                    <p class="js-validation-message">Invalid Description!</p>
+                    <?php
+                    if ($utils->isPostSet($_POST) && !$validation->isProductDescriptionValid($productDescription)) {
+                        echo "<p>*</p>";
+                        $isFormValid = false;
                     }
                     ?>
                 </div>
@@ -81,11 +111,9 @@ if ($utils->isPostSet($_POST)) {
             <div class="validation-error-block">
                 <p class="js-validation-message">Invalid Photo!</p>
                 <?php
-                if ($utils->isPostSet($_POST)) {
-                    if (!$validation->isProductPhotoValid($photo)) {
+                if ($utils->isPostSet($_POST) && !$validation->isProductPhotoValid($photo)) {
                         echo "<p>*</p>";
                         $isFormValid = false;
-                    }
                 }
                 ?>
             </div>

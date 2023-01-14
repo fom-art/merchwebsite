@@ -12,6 +12,8 @@ const PRODUCT_NAME_INPUT_ID = 11
 const PRICE_INPUT_ID = 12
 const PHOTO_INPUT_ID = 13
 const PURCHASE_DESCRIPTION_INPUT_ID = 14
+const PRODUCT_DESCRIPTION_INPUT_ID = 15
+const PRODUCT_TYPE_INPUT_ID = 16
 const SIGN_IN_FORM_ID = 101
 const SIGN_UP_FORM_ID = 102
 const FORGOT_PASSWORD_FORM_ID = 103
@@ -120,9 +122,11 @@ class Validation {
     }
 
     validateAddProductForm() {
-        return this.validateProductName() &&
-            this.validatePrice() &&
-            this.validatePhoto();
+        return this.validateProductName() *
+            this.validatePrice() *
+            this.validatePhoto() *
+            this.validateProductType *
+            this.validateProductDescription;
     }
 
 
@@ -186,6 +190,15 @@ class Validation {
     validatePurchaseDescription() {
         return this.runValidation(PURCHASE_DESCRIPTION_INPUT_ID)
     }
+
+    validateProductType() {
+        return this.runValidation(PRODUCT_TYPE_INPUT_ID)
+    }
+
+    validateProductDescription() {
+        return this.runValidation(PRODUCT_DESCRIPTION_INPUT_ID)
+    }
+
 
     runValidation(inputCode) {
         let inputBlockToValidate = this.getInputBlockFromCode(inputCode);
@@ -267,6 +280,10 @@ class Validation {
                 return this.isPhotoValid(input_value);
             case PURCHASE_DESCRIPTION_INPUT_ID:
                 return this.isPurchaseDescriptionValid(input_value);
+            case PRODUCT_TYPE_INPUT_ID:
+                return this.isProductTypeValid(input_value);
+            case PRODUCT_DESCRIPTION_INPUT_ID:
+                return this.isProductDescriptionValid(input_value);
         }
     }
 
@@ -322,6 +339,16 @@ class Validation {
 
     isPhotoValid(input_value) {
         return true
+    }
+
+    isProductTypeValid(input_value) {
+        let productTypeRegex = /^[a-zA-Z0-9\s]+?$/;
+        return productTypeRegex.test(input_value)
+    }
+
+    isProductDescriptionValid(input_value) {
+        let productDescriptionRegex = /^[a-zA-Z0-9\s]+?$/;
+        return productTypeRegex.test(input_value)
     }
 
     isPurchaseDescriptionValid(input_value) {

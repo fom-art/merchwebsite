@@ -12,6 +12,8 @@ class Constants
     public const PRODUCT_NAME_REGEX = "/[\sa-zA-Z0-9]+$/";
     public const PRODUCT_PRICE_REGEX = "/\d+\.?\d*$/";
     public const PURCHASE_DESCRIPTION_REGEX = "/[\sa-zA-Z0-9]+$/";
+    public const PRODUCT_TYPE_REGEX = "/[\sa-zA-Z0-9]+$/";
+    public const PRODUCT_DESCRIPTION_REGEX = "/[\sa-zA-Z0-9]+$/";
     public const DATABASE_HOST_NAME = "localhost";
     public const DATABASE_USERNAME = "fomenart";
     public const DATABASE_PASSWORD = "webove aplikace";

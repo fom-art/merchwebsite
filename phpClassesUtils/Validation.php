@@ -67,5 +67,13 @@ class Validation
         return preg_match(Constants::PURCHASE_DESCRIPTION_REGEX, $input);
     }
 
+    function isProductTypeValid($input): bool
+    {
+        return preg_match(Constants::PRODUCT_TYPE_REGEX, $input);
+    }
 
+    function isProductDescriptionValid($input): bool
+    {
+        return preg_match(Constants::PRODUCT_DESCRIPTION_REGEX, $input);
+    }
 }
