@@ -135,10 +135,10 @@ class DatabaseHandler
         $this->database->query($sqlQuery);
     }
 
-    function createProduct($productName, $productPrice, $productPhotoPath)
+    function createProduct($productName, $productPrice, $productPhotoPath, $productType, $productDescription)
     {
-        $sqlQuery = "INSERT INTO `$this->productDatabaseName` (`productName`, `productPrice`, `productPhotoPath`)
-        VALUES ('$productName', '$productPrice', '$productPhotoPath')";
+        $sqlQuery = "INSERT INTO `$this->productDatabaseName` (`productName`, `productPrice`, `productPhotoPath`, `productType`, `productDescription`)
+        VALUES ('$productName', '$productPrice', '$productPhotoPath', '$productType', '$productDescription')";
         $this->database->query($sqlQuery);
     }
 

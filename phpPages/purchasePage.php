@@ -116,7 +116,7 @@ if ($utils->isPostSet($_POST)) {
                 <div class="label-block">
                     <label for="country-input">Country:</label>
                 </div>
-                <input type="password" id="country-input" name="country" value="<?php if ($utils->isPostSet($_POST)) {
+                <input type="text" id="country-input" name="country" value="<?php if ($utils->isPostSet($_POST)) {
                     echo $country;
                 } ?>" required>
                 <div class="validation-error-block">
@@ -205,6 +205,8 @@ if ($utils->isPostSet($_POST)) {
             <div class="validation-error-block">
                 <?php
                 if ($utils->isPostSet($_POST) && $isFormValid) {
+                    $database->createPurchase($email, $name, $surname, $address, $country, $city, $postCode, $phoneNumber, $purchaseDescription);
+                } else {
                     echo "<p>Invalid inputs. Check the inputs marked by *</p>";
                 }
                 ?>

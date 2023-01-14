@@ -224,6 +224,8 @@ if ($utils->isPostSet($_POST)) {
             <div class="validation-error-block">
                 <?php
                 if ($utils->isPostSet($_POST) && $isFormValid) {
+                    $database->createUser($email, $password, $name, $surname, $address, $country, $city, $postCode, $phoneNumber);
+                } else {
                     echo "<p>Invalid inputs. Check the inputs marked by *</p>";
                 }
                 ?>
