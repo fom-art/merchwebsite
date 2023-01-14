@@ -108,7 +108,6 @@ class Validation {
         return this.validateEmail() *
             this.validateName() *
             this.validateSurname() *
-            this.validatePassword() *
             this.validateAddress() *
             this.validateCountry() *
             this.validateCity() *
@@ -241,7 +240,10 @@ class Validation {
                 return document.getElementById("photo-input-block");
             case PURCHASE_DESCRIPTION_INPUT_ID:
                 return document.getElementById("purchase-description-input-block");
-
+            case PRODUCT_TYPE_INPUT_ID:
+                return document.getElementById("product-type-input-block");
+            case PRODUCT_DESCRIPTION_INPUT_ID:
+                return document.getElementById("product-description-input-block");
         }
     }
 

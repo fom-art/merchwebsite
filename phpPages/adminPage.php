@@ -137,10 +137,12 @@ if ($utils->isPostSet($_POST)) {
         </button>
         <div class="validation-error-block">
             <?php
-            if ($utils->isPostSet($_POST) && $isFormValid) {
-                $database->createProduct($productName, $productPrice, $photo, $productType, $productDescription);
-            } else {
-                echo "<p>Invalid inputs. Check the inputs marked by *</p>";
+            if ($utils->isPostSet($_POST)) {
+                if ($isFormValid) {
+                    $database->createProduct($productName, $productPrice, $photo, $productType, $productDescription);
+                } else {
+                    echo "<p>Invalid inputs. Check the inputs marked by *</p>";
+                }
             }
             ?>
         </div>

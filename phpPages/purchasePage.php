@@ -41,7 +41,7 @@ if ($utils->isPostSet($_POST)) {
 <div class="log-in-block">
     <h1>Make a purchase</h1>
     <div class="form-block">
-        <form name="form" action="" method="post">
+        <form name="form" action="purchasePage.php" method="post">
             <div class="input-block" id="email-input-block">
                 <div class="label-block">
                     <label for="email-input">Email:</label>
@@ -133,7 +133,7 @@ if ($utils->isPostSet($_POST)) {
                 <div class="label-block">
                     <label for="city-input">City:</label>
                 </div>
-                <input type="password" id="city-input" name="city" value="<?php if ($utils->isPostSet($_POST)) {
+                <input type="text" id="city-input" name="city" value="<?php if ($utils->isPostSet($_POST)) {
                     echo $city;
                 } ?>" required>
                 <div class="validation-error-block">
@@ -204,10 +204,12 @@ if ($utils->isPostSet($_POST)) {
             </div>
             <div class="validation-error-block">
                 <?php
-                if ($utils->isPostSet($_POST) && $isFormValid) {
-                    $database->createPurchase($email, $name, $surname, $address, $country, $city, $postCode, $phoneNumber, $purchaseDescription);
-                } else {
-                    echo "<p>Invalid inputs. Check the inputs marked by *</p>";
+                if ($utils->isPostSet($_POST)) {
+                    if ($isFormValid) {
+                        $database->createPurchase($email, $name, $surname, $address, $country, $city, $postCode, $phoneNumber, $purchaseDescription);
+                    } else {
+                        echo "<p>Invalid inputs. Check the inputs marked by *</p>";
+                    }
                 }
                 ?>
             </div>

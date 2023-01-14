@@ -79,7 +79,7 @@ if ($utils->isPostSet($_POST)) {
             </div>
             <div class="validation-error-block">
                 <?php
-                if ($utils->isPostSet($_POST) && $isFormValid && !$database->checkUserForLogIn($email, $password)) {
+                if ($utils->isPostSet($_POST) && !$isFormValid && !$database->checkUserForLogIn($email, $password)) {
                     echo "<p>Invalid Email or Password!</p>";
                 }
                 ?>

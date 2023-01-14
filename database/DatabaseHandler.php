@@ -139,14 +139,14 @@ class DatabaseHandler
     {
         $sqlQuery = "INSERT INTO `$this->productDatabaseName` (`productName`, `productPrice`, `productPhotoPath`, `productType`, `productDescription`)
         VALUES ('$productName', '$productPrice', '$productPhotoPath', '$productType', '$productDescription')";
-        $this->database->query($sqlQuery);
+        return $this->database->query($sqlQuery);
     }
 
     function createPurchase($email, $name, $surname, $address, $country, $city, $postCode, $phoneNumber, $purchaseDescription)
     {
         $sqlQuery = "INSERT INTO `$this->purchaseDatabaseName` (`email`, `name`, `surname`, `address`, `country`, `city`, `postCode`, `phoneNumber`, `purchaseDescription`)
         VALUES ('$email', '$name', '$surname', '$address', '$country', '$city', '$postCode', '$phoneNumber', '$purchaseDescription')";
-        $this->database->query($sqlQuery);
+        return $this->database->query($sqlQuery);
     }
 
     function changeUserDatabaseData($user)
