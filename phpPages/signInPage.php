@@ -1,28 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Account</title>
-    <link rel="stylesheet" href="../styles/signInStyles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500;700&family=Roboto:wght@500&display=swap"
-          rel="stylesheet">
-</head>
-<body>
 <?php
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
+if (isset($_SESSION["user"])) {
+    header("Location: ../index.php");
+}
 require_once("../phpClassesUtils/Validation.php");
 require_once("../phpClassesUtils/Utils.php");
 require_once("../database/DatabaseHandler.php");
 $validation = new Validation();
 $utils = new Utils();
 $database = new DatabaseHandler();
-$isFormValid = $email = $password = null;
+$email = $password = null;
+$isFormValid = false;
 if ($utils->isPostSet($_POST)) {
-    $isFormValid = true;
     $email = $_POST["email"];
     $password = $_POST["password"];
+    $isFormValid = $utils->isSignInSuccessful($_POST);
+}
+if ($isFormValid) {
+    session_start();
+    unset($_SESSION['user']);
+    $user = $database->getUserByEmail($email);
+    $_SESSION['user'] = array('id' => $user->getId(), 'email' => $user->getEmail(), 'name' => $user->getName(), 'surname' => $user->getSurname(),
+        'address' => $user->getAddress(), 'country' => $user->getCountry(), 'city' => $user->getCity(),
+        'post-code' => $user->getPostCode(), 'phone-number' => $user->getPhoneNumber());
 }
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Account</title>
+    <link rel="stylesheet" href="../styles/formStyles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500;700&family=Roboto:wght@500&display=swap"
+          rel="stylesheet">
+</head>
+<body>
 <div>
     <a href="../index.php">
         <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
@@ -31,7 +44,11 @@ if ($utils->isPostSet($_POST)) {
         </svg>
     </a>
 </div>
-<div class="log-in-block">
+<div class="<?php if ($isFormValid) {
+    echo "block-hidden";
+} else {
+    echo "content-block";
+} ?>">
     <h1>Log in</h1>
     <div class="form-block">
         <form action="signInPage.php" method="post">
@@ -43,7 +60,7 @@ if ($utils->isPostSet($_POST)) {
                     </p>
                 </div>
                 <input type="email" id="email-input" name="email" value="<?php if ($utils->isPostSet($_POST)) {
-                    echo $email;
+                    echo htmlspecialchars($email);
                 } ?>" required>
                 <div class="validation-error-block">
                     <p class="js-validation-message">Invalid Email</p>
@@ -61,7 +78,7 @@ if ($utils->isPostSet($_POST)) {
                 </div>
                 <input type="password" id="password-input" name="password" minlength="8"
                        value="<?php if ($utils->isPostSet($_POST)) {
-                           echo $password;
+                           echo htmlspecialchars($password);
                        } ?>" required>
                 <div class="validation-error-block">
                     <p class="js-validation-message">Invalid Password</p>
@@ -79,8 +96,10 @@ if ($utils->isPostSet($_POST)) {
             </div>
             <div class="validation-error-block">
                 <?php
-                if ($utils->isPostSet($_POST) && !$isFormValid && !$database->checkUserForLogIn($email, $password)) {
-                    echo "<p>Invalid Email or Password!</p>";
+                if ($utils->isPostSet($_POST)) {
+                    if (!$isFormValid || !$database->checkUserForLogIn($email, $password)) {
+                        echo "<p>Invalid Email or Password!</p>";
+                    }
                 }
                 ?>
             </div>
@@ -90,6 +109,25 @@ if ($utils->isPostSet($_POST)) {
         </form>
     </div>
 
+</div>
+<div class="<?php if ($isFormValid) {
+    echo "content-block";
+} else {
+    echo "block-hidden";
+}
+?>">
+    <?php if ($isFormValid) {
+
+    } ?>
+    <h1>Registration Successful!</h1>
+    <div class="form-block">
+        <form id="registration-success-form" name="form" action="../index.php" method="post">
+            <button class="confirm-button" id="confirm-registration-success-button" name="confirm" value="confirm"
+                    type="button">
+                Confirm
+            </button>
+        </form>
+    </div>
 </div>
 <script src="../javaScript/formHandling.js"></script>
 </body>

@@ -35,6 +35,9 @@ if (document.getElementById("confirm-button-purchase")) {
 if (document.getElementById("confirm-button-admin")) {
     document.getElementById("confirm-button-admin").addEventListener("click", sendAdminForm)
 }
+if (document.getElementById("confirm-registration-success-button")) {
+    document.getElementById("confirm-registration-success-button").addEventListener("click", submitRegistrationSuccessForm)
+}
 
 function sendSignInForm() {
     sendPostRequest(SIGN_IN_FORM_ID)
@@ -83,6 +86,10 @@ function sendPostRequest(formCode) {
 
 function submitForm() {
     document.getElementsByTagName("form")[0].submit();
+}
+
+function submitRegistrationSuccessForm() {
+    document.getElementById("registration-success-form").submit()
 }
 
 class Validation {
@@ -236,14 +243,13 @@ class Validation {
                 return document.getElementById("product-name-input-block");
             case PRICE_INPUT_ID:
                 return document.getElementById("product-price-input-block");
+            case PRODUCT_TYPE_INPUT_ID:
+                return document.getElementById("product-type-input-block");
             case PHOTO_INPUT_ID:
                 return document.getElementById("photo-input-block");
             case PURCHASE_DESCRIPTION_INPUT_ID:
                 return document.getElementById("purchase-description-input-block");
-            case PRODUCT_TYPE_INPUT_ID:
-                return document.getElementById("product-type-input-block");
-            case PRODUCT_DESCRIPTION_INPUT_ID:
-                return document.getElementById("product-description-input-block");
+
         }
     }
 
@@ -340,7 +346,8 @@ class Validation {
     }
 
     isPhotoValid(input_value) {
-        return true
+        let extensions = /(\.jpg|\.jpeg|\.png)$/i
+        return extensions.exec(input_value)
     }
 
     isProductTypeValid(input_value) {
@@ -350,7 +357,7 @@ class Validation {
 
     isProductDescriptionValid(input_value) {
         let productDescriptionRegex = /^[a-zA-Z0-9\s]+?$/;
-        return productTypeRegex.test(input_value)
+        return productDescriptionRegex.test(input_value)
     }
 
     isPurchaseDescriptionValid(input_value) {

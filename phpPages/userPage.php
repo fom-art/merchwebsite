@@ -1,12 +1,15 @@
 <?php
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
 session_start();
+if (!isset($_SESSION["user"])) {
+    header("Location: ../index.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Purchase products</title>
+    <title>User Information</title>
     <link rel="stylesheet" href="../styles/formStyles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500;700&family=Roboto:wght@500&display=swap"
@@ -48,9 +51,9 @@ if ($utils->isPostSet($_POST)) {
 } else {
     echo "content-block";
 } ?>">
-    <h1>Make a purchase</h1>
+    <h1>Change User Data</h1>
     <div class="form-block">
-        <form name="form" action="purchasePage.php" method="post">
+        <form name="form" action="userPage.php" method="post">
             <div class="input-block" id="email-input-block">
                 <div class="label-block">
                     <label for="email-input">Email:</label>
@@ -218,24 +221,6 @@ if ($utils->isPostSet($_POST)) {
                     </div>
                 </div>
             </div>
-            <div class="input-block" id="purchase-description-input-block">
-                <div class="label-block">
-                    <label for="purchase-describe-input-block">Describe your purchase:</label>
-                </div>
-                <input type="text" id="purchase-describe-input" name="purchase-description"
-                       value="<?php if ($utils->isPostSet($_POST)) {
-                           echo htmlspecialchars($purchaseDescription);
-                       } ?>" required/>
-                <div class="validation-error-block">
-                    <p class="js-validation-message">Invalid Description</p>
-                    <?php
-                    if ($utils->isPostSet($_POST) && !$validation->isPurchaseDescriptionValid($purchaseDescription)) {
-                        echo "<p>*</p>";
-                        $isFormValid = false;
-                    }
-                    ?>
-                </div>
-            </div>
             <div class="validation-error-block">
                 <?php
                 if ($utils->isPostSet($_POST) && $isFormValid) {
@@ -246,17 +231,19 @@ if ($utils->isPostSet($_POST)) {
             <button class="confirm-button" id="confirm-button-purchase" name="confirm" value="confirm" type="button">
                 Confirm
             </button>
+            <input type="submit" value="Log Out" name="log-out" class="confirm-button" id="log-out-button" onClick="<?php unset($_SESSION["user"])?>"/>
         </form>
     </div>
 </div>
 <div class="<?php if ($isFormValid) {
     echo "content-block";
-    $database->createPurchase($email, $name, $surname, $address, $country, $city, $postCode, $phoneNumber, $purchaseDescription);
+//    $user = new User();
+//    $user->setUser($email, $name, $surname, $address, $country, $city, $postCode, $phoneNumber);
+//    $database->changeUserDatabaseData();
 } else {
     echo "block-hidden";
 } ?>">
-    <h1>Purchase was made successfully!</h1><br>
-    <h1>Wait for the response on your email</h1>
+    <h1>User data was changed successfully!</h1><br>
     <div class="form-block">
         <form id="registration-success-form" name="form" action="../index.php" method="post">
             <button class="confirm-button" id="confirm-registration-success-button" name="confirm" value="confirm"

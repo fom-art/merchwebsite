@@ -1,12 +1,19 @@
+<?php
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
+if (isset($_SESSION["user"])) {
+    header("Location: ../index.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Create an account</title>
-    <link rel="stylesheet" href="../styles/signInStyles.css">
+    <link rel="stylesheet" href="../styles/formStyles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500;700&family=Roboto:wght@500&display=swap"
           rel="stylesheet">
+
 </head>
 <body>
 <?php
@@ -16,9 +23,10 @@ include_once("../database/DatabaseHandler.php");
 $validation = new Validation();
 $utils = new Utils();
 $database = new DatabaseHandler();
-$isFormValid = $email = $name = $surname = $password = $passwordRepeat = $address = $country = $city = $postCode = $phoneNumber = null;
+$email = $name = $surname = $password = $passwordRepeat = $address = $country = $city = $postCode = $phoneNumber = null;
+$isFormValid = false;
+$isUserWithSuchEmailAlreadyRegistered = false;
 if ($utils->isPostSet($_POST)) {
-    $isFormValid = true;
     $email = $_POST["email"];
     $name = $_POST["name"];
     $surname = $_POST["surname"];
@@ -29,6 +37,8 @@ if ($utils->isPostSet($_POST)) {
     $city = $_POST["city"];
     $postCode = $_POST["post-code"];
     $phoneNumber = $_POST["phone-number"];
+    $isFormValid = $validation->validateSignUpForm($email, $name, $surname, $password, $passwordRepeat, $address, $country, $city, $postCode, $phoneNumber);
+    $isUserWithSuchEmailAlreadyRegistered = $database->checkIfUserWithEmailExists($email);
 }
 ?>
 <div>
@@ -39,16 +49,23 @@ if ($utils->isPostSet($_POST)) {
         </svg>
     </a>
 </div>
-<div class="log-in-block">
+<div class="<?php if ($isFormValid  && !$isUserWithSuchEmailAlreadyRegistered) {
+    echo "block-hidden";
+} else {
+    echo "content-block";
+} ?>">
     <h1>Sign up</h1>
     <div class="form-block">
         <form name="form" action="signUpPage.php" method="post">
+            <div class="hidden-input-block">
+                <input name="hidden" value="sign-in">
+            </div>
             <div class="input-block" id="email-input-block">
                 <div class="label-block">
                     <label for="email-input">Email:</label>
                 </div>
                 <input type="email" id="email-input" name="email" value="<?php if ($utils->isPostSet($_POST)) {
-                    echo $email;
+                    echo htmlspecialchars($email);
                 } ?>" required>
                 <div class="validation-error-block">
                     <p class="js-validation-message">Invalid Email</p>
@@ -65,7 +82,7 @@ if ($utils->isPostSet($_POST)) {
                         <label for="name-input">Name:</label>
                     </div>
                     <input type="text" id="name-input" name="name" value="<?php if ($utils->isPostSet($_POST)) {
-                        echo $name;
+                        echo htmlspecialchars($name);
                     } ?>" required>
                     <div class="validation-error-block">
                         <p class="js-validation-message">Invalid Name</p>
@@ -81,7 +98,7 @@ if ($utils->isPostSet($_POST)) {
                         <label for="surname-input">Surname:</label>
                     </div>
                     <input type="text" id="surname-input" name="surname" value="<?php if ($utils->isPostSet($_POST)) {
-                        echo $surname;
+                        echo htmlspecialchars($surname);
                     } ?>" required>
                     <div class="validation-error-block">
                         <p class="js-validation-message">Invalid Surname</p>
@@ -100,7 +117,7 @@ if ($utils->isPostSet($_POST)) {
                 </div>
                 <input type="password" id="password-input" name="password" minlength="8"
                        value="<?php if ($utils->isPostSet($_POST)) {
-                           echo $password;
+                           echo htmlspecialchars($password);
                        } ?>" required>
                 <div class="validation-error-block">
                     <p class="js-validation-message">Invalid Password</p>
@@ -118,7 +135,7 @@ if ($utils->isPostSet($_POST)) {
                 </div>
                 <input type="password" id="repeat-password-input" name="password-repeat" minlength="8"
                        value="<?php if ($utils->isPostSet($_POST)) {
-                           echo $passwordRepeat;
+                           echo htmlspecialchars($passwordRepeat);
                        } ?>" required>
                 <div class="validation-error-block">
                     <p class="js-validation-message">Passwords don't match</p>
@@ -135,7 +152,7 @@ if ($utils->isPostSet($_POST)) {
                     <label for="address-input">Address:</label>
                 </div>
                 <input type="text" id="address-input" name="address" value="<?php if ($utils->isPostSet($_POST)) {
-                    echo $address;
+                    echo htmlspecialchars($address);
                 } ?>" required>
                 <div class="validation-error-block">
                     <p class="js-validation-message">Invalid Address</p>
@@ -152,7 +169,7 @@ if ($utils->isPostSet($_POST)) {
                     <label for="country-input">Country:</label>
                 </div>
                 <input type="text" id="country-input" name="country" value="<?php if ($utils->isPostSet($_POST)) {
-                    echo $country;
+                    echo htmlspecialchars($country);
                 } ?>" required>
                 <div class="validation-error-block">
                     <p class="js-validation-message">Invalid Country</p>
@@ -169,7 +186,7 @@ if ($utils->isPostSet($_POST)) {
                     <label for="city-input">City:</label>
                 </div>
                 <input type="text" id="city-input" name="city" value="<?php if ($utils->isPostSet($_POST)) {
-                    echo $city;
+                    echo htmlspecialchars($city);
                 } ?>" required>
                 <div class="validation-error-block">
                     <p class="js-validation-message">Invalid City</p>
@@ -190,7 +207,7 @@ if ($utils->isPostSet($_POST)) {
                     </div>
                     <input type="text" id="post-code-input" name="post-code"
                            value="<?php if ($utils->isPostSet($_POST)) {
-                               echo $postCode;
+                               echo htmlspecialchars($postCode);
                            } ?>" required>
                     <div class="validation-error-block">
                         <p class="js-validation-message">Invalid Post Code</p>
@@ -208,7 +225,7 @@ if ($utils->isPostSet($_POST)) {
                     </div>
                     <input type="text" id="phone-number-input" name="phone-number"
                            value="<?php if ($utils->isPostSet($_POST)) {
-                               echo $phoneNumber;
+                               echo htmlspecialchars($phoneNumber);
                            } ?>" required/>
                     <div class="validation-error-block">
                         <p class="js-validation-message">Invalid Phone Number</p>
@@ -224,10 +241,11 @@ if ($utils->isPostSet($_POST)) {
             <div class="validation-error-block">
                 <?php
                 if ($utils->isPostSet($_POST)) {
-                    if ($isFormValid) {
-                        $database->createUser($email, $password, $name, $surname, $address, $country, $city, $postCode, $phoneNumber);
-                    } else {
+                    if (!$isFormValid) {
                         echo "<p>Invalid inputs. Check the inputs marked by *</p>";
+                    }
+                    if ($isUserWithSuchEmailAlreadyRegistered) {
+                        echo "<p>User with such email address is already registered!</p>";
                     }
                 }
                 ?>
@@ -238,6 +256,24 @@ if ($utils->isPostSet($_POST)) {
 
         </form>
     </div>
+</div>
+<div class="<?php if ($isFormValid && !$isUserWithSuchEmailAlreadyRegistered) {
+    echo "content-block";
+    $database->createUser($email, $password, $name, $surname, $address, $country, $city, $postCode, $postCode);
+} else {
+    echo "block-hidden";
+} ?>">
+    <h1>Registration Successful!</h1>
+    <div class="form-block">
+        <form id="registration-success-form" name="form" action="signInPage.php" method="post">
+            <button class="confirm-button" id="confirm-registration-success-button" name="confirm" value="confirm"
+                    type="button">
+                Confirm
+            </button>
+        </form>
+    </div>
+</div>
+
 </div>
 <div class="empty-block">
     &nbsp;

@@ -57,9 +57,9 @@ class Validation
         return preg_match(Constants::PRODUCT_PRICE_REGEX, $input);
     }
 
-    function isProductPhotoValid($input): bool
+    function isProductPhotoExtensionValid($input): bool
     {
-        return true;
+        return in_array($input, Constants::ALLOWED_PHOTO_EXTENSIONS);
     }
 
     function isPurchaseDescriptionValid($input): bool
@@ -75,5 +75,42 @@ class Validation
     function isProductDescriptionValid($input): bool
     {
         return preg_match(Constants::PRODUCT_DESCRIPTION_REGEX, $input);
+    }
+
+    function validateSignUpForm($email, $name, $surname, $password, $passwordRepeat, $address, $country, $city, $postCode, $phoneNumber): bool {
+        return $this->isEmailValid($email) *
+            $this->isNameValid($name) *
+            $this->isNameValid($surname) *
+            $this->isPasswordValid($password) *
+            $this->isPasswordRepeatValid($password, $passwordRepeat) *
+            $this->isAddressValid($address) *
+            $this->isCountryOrCityValid($country) *
+            $this->isCountryOrCityValid($city) *
+            $this->isPostCodeValid($postCode) *
+            $this->isPhoneNumberValid($phoneNumber);
+    }
+
+    function validateSignInForm($email, $password): bool {
+        return $this->isEmailValid($email) *
+            $this->isPasswordValid($password);
+    }
+
+    function validatePurchaseForm($email, $name, $surname, $address, $country, $city, $postCode, $phoneNumber, $purchaseDescription): bool {
+        return $this->isEmailValid($email) *
+            $this->isNameValid($name) *
+            $this->isNameValid($surname) *
+            $this->isAddressValid($address) *
+            $this->isCountryOrCityValid($country) *
+            $this->isCountryOrCityValid($city) *
+            $this->isPostCodeValid($postCode) *
+            $this->isPhoneNumberValid($phoneNumber)*
+            $this->isPurchaseDescriptionValid($purchaseDescription);
+    }
+    function validateProductForm($productName, $productPrice, $productType, $productDescription, $productPhotoExtension): bool {
+        return $this->isProductNameValid($productName) *
+            $this->isProductPriceValid($productPrice) *
+            $this->isProductTypeValid($productType) *
+            $this->isProductDescriptionValid($productDescription) *
+            $this->isProductPhotoExtensionValid($productPhotoExtension) ;
     }
 }

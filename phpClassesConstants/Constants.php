@@ -14,10 +14,12 @@ class Constants
     public const PURCHASE_DESCRIPTION_REGEX = "/[\sa-zA-Z0-9]+$/";
     public const PRODUCT_TYPE_REGEX = "/[\sa-zA-Z0-9]+$/";
     public const PRODUCT_DESCRIPTION_REGEX = "/[\sa-zA-Z0-9]+$/";
+    public const ALLOWED_PHOTO_EXTENSIONS = array('png', 'jpg', 'jpeg', 'image/jpeg', 'image/png');
     public const DATABASE_HOST_NAME = "localhost";
     public const DATABASE_USERNAME = "fomenart";
     public const DATABASE_PASSWORD = "webove aplikace";
     public const USER_DATABASE_NAME = "userDatabase";
     public const PRODUCT_DATABASE_NAME = "productDatabase";
     public const PURCHASE_DATABASE_NAME = "purchaseDatabase";
+    public const ADMIN_ID_COLLECTION = ["18", "26"];
 }

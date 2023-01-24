@@ -42,11 +42,7 @@ class DatabaseHandler
         if ($user->getId() == null) {
             return false;
         } else {
-            if ($user->getPassword() == $password) {
-                return true;
-            } else {
-                return false;
-            }
+            return password_verify($password, $user->getPassword());
         }
     }
 
@@ -130,30 +126,39 @@ class DatabaseHandler
 
     function createUser($email, $password, $name, $surname, $address, $country, $city, $postCode, $phoneNumber)
     {
+        $hashedPassword = $this->hashThePassword($password);
         $sqlQuery = "INSERT INTO `$this->userDatabaseName` (`email`, `password`, `name`, `surname`, `address`, `country`, `city`, `postCode`, `phoneNumber`)
-        VALUES ('$email', '$password', '$name', '$surname', '$address', '$country', '$city', '$postCode', '$phoneNumber')";
+        VALUES ('$email', '$hashedPassword', '$name', '$surname', '$address', '$country', '$city', '$postCode', '$phoneNumber')";
         $this->database->query($sqlQuery);
     }
 
-    function createProduct($productName, $productPrice, $productPhotoPath, $productType, $productDescription)
+    function createProduct($productName, $productPrice, $productType, $productDescription, $productPhoto)
     {
-        $sqlQuery = "INSERT INTO `$this->productDatabaseName` (`productName`, `productPrice`, `productPhotoPath`, `productType`, `productDescription`)
-        VALUES ('$productName', '$productPrice', '$productPhotoPath', '$productType', '$productDescription')";
-        return $this->database->query($sqlQuery);
+        $target_dir = "../images";
+        $temp_name = $productPhoto['tmp_name'];
+        $file = $productPhoto['name'];
+        $path = pathinfo($file);
+        $ext = $path['extension'];
+        $filename = $path['filename'];
+        $productPhotoPath = $productPhoto['name'];
+        $path_filename_ext = $target_dir.$filename.".".$ext;
+        move_uploaded_file($temp_name,$path_filename_ext);
+        $sqlQuery = "INSERT INTO `$this->productDatabaseName` (`productName`, `productPrice`, `productType`, `productDescription`, `productPhotoPath`)
+        VALUES ('$productName', '$productPrice', '$productType', '$productDescription',  '$productPhotoPath')";
+        $this->database->query($sqlQuery);
     }
 
     function createPurchase($email, $name, $surname, $address, $country, $city, $postCode, $phoneNumber, $purchaseDescription)
     {
         $sqlQuery = "INSERT INTO `$this->purchaseDatabaseName` (`email`, `name`, `surname`, `address`, `country`, `city`, `postCode`, `phoneNumber`, `purchaseDescription`)
         VALUES ('$email', '$name', '$surname', '$address', '$country', '$city', '$postCode', '$phoneNumber', '$purchaseDescription')";
-        return $this->database->query($sqlQuery);
+        $this->database->query($sqlQuery);
     }
 
     function changeUserDatabaseData($user)
     {
         $id = $user->getId();
         $email = $user->getEmail();
-        $password = $user->getPassword();
         $name = $user->getName();
         $surname = $user->getSurname();
         $address = $user->getAddress();
@@ -164,7 +169,6 @@ class DatabaseHandler
         $sqlQuery = "UPDATE `userDatabase` SET
             `id` = '$id',
             `email` = '$email',
-            `password` = '$password',
             `name` = '$name',
             `surname` = '$surname',
             `address` = '$address',
@@ -220,5 +224,9 @@ class DatabaseHandler
             `purchaseDescription` = '$purchaseDescription'
             WHERE `id` = '$id'";
         $this->database->query($sqlQuery);
+    }
+
+    private function hashThePassword($passwordToHash): string {
+        return password_hash($passwordToHash, PASSWORD_BCRYPT);
     }
 }

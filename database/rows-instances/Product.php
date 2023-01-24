@@ -61,7 +61,7 @@ class Product
 
     public function setProductPrice($newValue): bool
     {
-        if (gettype($newValue) == "double") {
+        if (gettype($newValue) == "string") {
             $this->productPrice = $newValue;
             return true;
         } else {
@@ -99,10 +99,12 @@ class Product
             }
         }
 
-    public function setProduct($id, $productName, $productPrice, $productPhotoPath){
+    public function setProduct($id, $productName, $productPrice, $productType, $productDescription, $productPhotoPath){
         $this->setId($id);
-        $this->setId($productName);
-        $this->setId($productPrice);
-        $this->setId($productPhotoPath);
+        $this->setProductName($productName);
+        $this->setProductPrice($productPrice);
+        $this->setProductType($productType);
+        $this->setProductDescription($productDescription);
+        $this->setPhotoPath($productPhotoPath);
     }
 }

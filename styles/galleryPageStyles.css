@@ -9,13 +9,50 @@ header {
     box-shadow: 0 0 16px rgba(38, 38, 38, 0.16);
 }
 
+.gallery-mechanic {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 0 16px rgba(38, 38, 38, 0.16);
+}
+
+svg {
+    height: 30px ;
+    width: 30px ;
+    fill: black;
+}
+
+#log-in-svg {
+    fill: white;
+}
+
+#pages-count {
+    align-content: center;
+}
+
 .title-block {
     width: 80%;
     display: flex;
     justify-content: center;
 }
 
-.icon-block {
+.pagination-button {
+    margin-top: 32px;
+    padding: 8px 64px;
+    border-radius: 16px;
+    border: solid black 2px;
+    background-color: white;
+}
+
+.pagination-button:hover {
+    border-radius: 16px;
+    background-color: black;
+    color: white;
+}
+
+
+.icons-header-row-block {
     width: 10%;
     display: flex;
     justify-content: space-around;

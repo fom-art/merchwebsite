@@ -2,12 +2,6 @@
     font-family: 'Raleway', sans-serif;
 }
 
-.title-block {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
 .content-block {
     display: block;
     width: 500px;
@@ -28,6 +22,10 @@
     box-sizing: border-box;
 }
 
+.hidden-input-block {
+    display: none;
+}
+
 input:invalid {
     border: 2px solid red;
 }
@@ -39,9 +37,8 @@ input:invalid:required {
 .validation-error-block {
     color: red;
 }
-
 .js-validation-message {
-    display: none;
+    display: none
 }
 
 .label-block {
@@ -67,9 +64,18 @@ input:invalid:required {
     gap: 32px;
 }
 
+
+.empty-block {
+    height: 200px; !important;
+}
+
 form {
     box-sizing: border-box;
     margin-bottom: 32px;
+}
+
+.product-type {
+    display: none;
 }
 
 .confirm-button {
@@ -96,4 +102,15 @@ input {
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
+}
+
+.forgot-password-block > a {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+.forgot-password-block > a:hover {
+    text-decoration: underline;
+    color: #661f8b;
 }
