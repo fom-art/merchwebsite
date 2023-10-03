@@ -11,12 +11,12 @@ for (var i = 0; i < 27; i++) {
         price: "3$",
     });
     images.push({
-        name: "Genshin Key Chain",
-        source: "images/randomMerch.jpg",
-        price: "3$",
+        name: "Stickerpack Genshin Impact Inazuma Edition",
+        source: "images/stickerpack2.png",
+        price: "4.5$",
     });
 }
-let perPage = 7;
+let perPage = 8;
 let page = 1;
 let pages = Math.ceil(images.length / perPage);
 

@@ -12,50 +12,50 @@ const PRODUCT_NAME_INPUT_ID = 11
 const PRICE_INPUT_ID = 12
 const PHOTO_INPUT_ID = 13
 const PURCHASE_DESCRIPTION_INPUT_ID = 14
-const PRODUCT_DESCRIPTION_INPUT_ID = 15
-const PRODUCT_TYPE_INPUT_ID = 16
 const SIGN_IN_FORM_ID = 101
 const SIGN_UP_FORM_ID = 102
 const FORGOT_PASSWORD_FORM_ID = 103
 const PURCHASE_FORM_ID = 104
 const ADMIN_FORM_ID = 105
 
-if (document.getElementById("confirm-button-sign-up")) {
-    document.getElementById("confirm-button-sign-up").addEventListener("click", sendSignUpForm)
+if (document.getElementById("form-sign-up")) {
+    document.getElementById("form-sign-up").addEventListener("submit", sendSignUpForm)
 }
-if (document.getElementById("confirm-button-sign-in")) {
-    document.getElementById("confirm-button-sign-in").addEventListener("click", sendSignInForm)
+if (document.getElementById("form-sign-in")) {
+    document.getElementById("form-sign-in").addEventListener("submit", sendSignInForm)
 }
-if (document.getElementById("confirm-button-forgot-password")) {
-    document.getElementById("confirm-button-forgot-password").addEventListener("click", sendForgotPasswordForm)
+if (document.getElementById("form-forgot-password")) {
+    document.getElementById("form-forgot-password").addEventListener("submit", sendForgotPasswordForm)
 }
-if (document.getElementById("confirm-button-purchase")) {
-    document.getElementById("confirm-button-purchase").addEventListener("click", sendPurchaseForm)
+if (document.getElementById("form-purchase")) {
+    document.getElementById("form-purchase").addEventListener("submit", sendPurchaseForm)
 }
-if (document.getElementById("confirm-button-admin")) {
-    document.getElementById("confirm-button-admin").addEventListener("click", sendAdminForm)
-}
-if (document.getElementById("confirm-registration-success-button")) {
-    document.getElementById("confirm-registration-success-button").addEventListener("click", submitRegistrationSuccessForm)
+if (document.getElementById("form-admin")) {
+    document.getElementById("form-admin").addEventListener("submit", sendAdminForm)
 }
 
-function sendSignInForm() {
+function sendSignInForm(event) {
+    event.preventDefault();
     sendPostRequest(SIGN_IN_FORM_ID)
 }
 
-function sendSignUpForm() {
+function sendSignUpForm(event) {
+    event.preventDefault();
     sendPostRequest(SIGN_UP_FORM_ID)
 }
 
-function sendForgotPasswordForm() {
+function sendForgotPasswordForm(event) {
+    event.preventDefault();
     sendPostRequest(FORGOT_PASSWORD_FORM_ID)
 }
 
-function sendPurchaseForm() {
+function sendPurchaseForm(event) {
+    event.preventDefault();
     sendPostRequest(PURCHASE_FORM_ID)
 }
 
-function sendAdminForm() {
+function sendAdminForm(event) {
+    event.preventDefault();
     sendPostRequest(ADMIN_FORM_ID)
 }
 
@@ -88,10 +88,6 @@ function submitForm() {
     document.getElementsByTagName("form")[0].submit();
 }
 
-function submitRegistrationSuccessForm() {
-    document.getElementById("registration-success-form").submit()
-}
-
 class Validation {
     validateSignInForm() {
         return this.validateEmail() *
@@ -115,6 +111,7 @@ class Validation {
         return this.validateEmail() *
             this.validateName() *
             this.validateSurname() *
+            this.validatePassword() *
             this.validateAddress() *
             this.validateCountry() *
             this.validateCity() *
@@ -128,11 +125,9 @@ class Validation {
     }
 
     validateAddProductForm() {
-        return this.validateProductName() *
-            this.validatePrice() *
-            this.validatePhoto() *
-            this.validateProductType *
-            this.validateProductDescription;
+        return this.validateProductName() &&
+            this.validatePrice() &&
+            this.validatePhoto();
     }
 
 
@@ -197,15 +192,6 @@ class Validation {
         return this.runValidation(PURCHASE_DESCRIPTION_INPUT_ID)
     }
 
-    validateProductType() {
-        return this.runValidation(PRODUCT_TYPE_INPUT_ID)
-    }
-
-    validateProductDescription() {
-        return this.runValidation(PRODUCT_DESCRIPTION_INPUT_ID)
-    }
-
-
     runValidation(inputCode) {
         let inputBlockToValidate = this.getInputBlockFromCode(inputCode);
         if (this.isInputValid(inputBlockToValidate, inputCode)) {
@@ -243,8 +229,6 @@ class Validation {
                 return document.getElementById("product-name-input-block");
             case PRICE_INPUT_ID:
                 return document.getElementById("product-price-input-block");
-            case PRODUCT_TYPE_INPUT_ID:
-                return document.getElementById("product-type-input-block");
             case PHOTO_INPUT_ID:
                 return document.getElementById("photo-input-block");
             case PURCHASE_DESCRIPTION_INPUT_ID:
@@ -288,10 +272,6 @@ class Validation {
                 return this.isPhotoValid(input_value);
             case PURCHASE_DESCRIPTION_INPUT_ID:
                 return this.isPurchaseDescriptionValid(input_value);
-            case PRODUCT_TYPE_INPUT_ID:
-                return this.isProductTypeValid(input_value);
-            case PRODUCT_DESCRIPTION_INPUT_ID:
-                return this.isProductDescriptionValid(input_value);
         }
     }
 
@@ -346,18 +326,7 @@ class Validation {
     }
 
     isPhotoValid(input_value) {
-        let extensions = /(\.jpg|\.jpeg|\.png)$/i
-        return extensions.exec(input_value)
-    }
-
-    isProductTypeValid(input_value) {
-        let productTypeRegex = /^[a-zA-Z0-9\s]+?$/;
-        return productTypeRegex.test(input_value)
-    }
-
-    isProductDescriptionValid(input_value) {
-        let productDescriptionRegex = /^[a-zA-Z0-9\s]+?$/;
-        return productDescriptionRegex.test(input_value)
+        return true
     }
 
     isPurchaseDescriptionValid(input_value) {
@@ -379,4 +348,3 @@ class Validation {
         validationErrorBlock.style.display = "none"
     }
 }
-

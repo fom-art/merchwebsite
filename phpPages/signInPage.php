@@ -1,30 +1,45 @@
 <?php
+session_start();
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
+
 if (isset($_SESSION["user"])) {
     header("Location: ../index.php");
+    exit;
 }
+
 require_once("../phpClassesUtils/Validation.php");
 require_once("../phpClassesUtils/Utils.php");
 require_once("../database/DatabaseHandler.php");
+
 $validation = new Validation();
 $utils = new Utils();
 $database = new DatabaseHandler();
+
 $email = $password = null;
 $isFormValid = false;
+
 if ($utils->isPostSet($_POST)) {
     $email = $_POST["email"];
     $password = $_POST["password"];
     $isFormValid = $utils->isSignInSuccessful($_POST);
-}
-if ($isFormValid) {
-    session_start();
-    unset($_SESSION['user']);
-    $user = $database->getUserByEmail($email);
-    $_SESSION['user'] = array('id' => $user->getId(), 'email' => $user->getEmail(), 'name' => $user->getName(), 'surname' => $user->getSurname(),
-        'address' => $user->getAddress(), 'country' => $user->getCountry(), 'city' => $user->getCity(),
-        'post-code' => $user->getPostCode(), 'phone-number' => $user->getPhoneNumber());
+
+    if ($isFormValid) {
+        $user = $database->getUserByEmail($email);
+        $_SESSION['user'] = [
+            'id' => $user->getId(),
+            'email' => $user->getEmail(),
+            'name' => $user->getName(),
+            'surname' => $user->getSurname(),
+            'address' => $user->getAddress(),
+            'country' => $user->getCountry(),
+            'city' => $user->getCity(),
+            'post-code' => $user->getPostCode(),
+            'phone-number' => $user->getPhoneNumber(),
+        ];
+    }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,14 +59,11 @@ if ($isFormValid) {
         </svg>
     </a>
 </div>
-<div class="<?php if ($isFormValid) {
-    echo "block-hidden";
-} else {
-    echo "content-block";
-} ?>">
+<div class="<?php echo $isFormValid ? 'block-hidden' : 'content-block'; ?>">
     <h1>Log in</h1>
     <div class="form-block">
-        <form action="signInPage.php" method="post">
+        <form id="form-sign-in" action="signInPage.php" method="post">
+            <!-- Email Input -->
             <div class="input-block" id="email-input-block">
                 <div class="label-block">
                     <label for="email-input">Email:</label>
@@ -59,41 +71,38 @@ if ($isFormValid) {
                         <span><a href="signUpPage.php">Create</a></span>
                     </p>
                 </div>
-                <input type="email" id="email-input" name="email" value="<?php if ($utils->isPostSet($_POST)) {
-                    echo htmlspecialchars($email);
-                } ?>" required>
+                <input type="email" id="email-input" name="email" value="<?= $utils->isPostSet($_POST) ? htmlspecialchars($email) : ''; ?>" required>
                 <div class="validation-error-block">
                     <p class="js-validation-message">Invalid Email</p>
                     <?php
                     if ($utils->isPostSet($_POST) && !$validation->isEmailValid($email)) {
-                        echo "<p>*</p>";
+                        echo "<p>Invalid Email</p>";
                         $isFormValid = false;
                     }
                     ?>
                 </div>
             </div>
+            <!-- Password Input -->
             <div class="input-block" id="password-input-block">
                 <div class="label-block">
                     <label for="password-input">Password:</label>
                 </div>
-                <input type="password" id="password-input" name="password" minlength="8"
-                       value="<?php if ($utils->isPostSet($_POST)) {
-                           echo htmlspecialchars($password);
-                       } ?>" required>
+                <input type="password" id="password-input" name="password" minlength="8" value="<?= $utils->isPostSet($_POST) ? htmlspecialchars($password) : ''; ?>" required>
                 <div class="validation-error-block">
                     <p class="js-validation-message">Invalid Password</p>
                     <?php
                     if ($utils->isPostSet($_POST) && !$validation->isPasswordValid($password)) {
-                        echo "<p>*</p>";
+                        echo "<p>Invalid Password</p>";
                         $isFormValid = false;
                     }
                     ?>
                 </div>
             </div>
+            <!-- Forgot Password Link -->
             <div class="forgot-password-block">
-                <a href="forgotPasswordPage.php">
-                    Forgot password?</a>
+                <a href="forgotPasswordPage.php">Forgot password?</a>
             </div>
+            <!-- Validation Errors -->
             <div class="validation-error-block">
                 <?php
                 if ($utils->isPostSet($_POST)) {
@@ -103,29 +112,17 @@ if ($isFormValid) {
                 }
                 ?>
             </div>
-            <button class="confirm-button" id="confirm-button-sign-in" name="confirm" value="confirm" type="button">
-                Confirm
-            </button>
+            <!-- Submit Button -->
+            <button class="confirm-button" id="confirm-button-sign-in" name="confirm" value="confirm" type="submit">Confirm</button>
         </form>
     </div>
-
 </div>
-<div class="<?php if ($isFormValid) {
-    echo "content-block";
-} else {
-    echo "block-hidden";
-}
-?>">
-    <?php if ($isFormValid) {
 
-    } ?>
+<div class="<?php echo $isFormValid ? 'content-block' : 'block-hidden'; ?>">
     <h1>Registration Successful!</h1>
     <div class="form-block">
         <form id="registration-success-form" name="form" action="../index.php" method="post">
-            <button class="confirm-button" id="confirm-registration-success-button" name="confirm" value="confirm"
-                    type="button">
-                Confirm
-            </button>
+            <button class="confirm-button" id="confirm-registration-success-button" name="confirm" value="confirm" type="button">Confirm</button>
         </form>
     </div>
 </div>

@@ -41,6 +41,10 @@ input:invalid:required {
     display: none
 }
 
+.php-validation-message {
+    font-weight: bold;
+}
+
 .label-block {
     width: 100%;
     display: flex;
