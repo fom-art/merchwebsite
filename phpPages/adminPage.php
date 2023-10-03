@@ -1,56 +1,11 @@
 <?php
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
-
 include_once("../phpClassesConstants/Constants.php");
 session_start();
-
-// Check if the user is an admin, if not, redirect
 if (!in_array($_SESSION['user']['id'], Constants::ADMIN_ID_COLLECTION)) {
     header("Location: ../index.php");
-    exit();
-}
-
-require_once("../phpClassesUtils/Validation.php");
-require_once("../phpClassesUtils/Utils.php");
-require_once("../database/DatabaseHandler.php");
-
-$validation = new Validation();
-$utils = new Utils();
-$database = new DatabaseHandler();
-
-$productName = $productPrice = $productType = $productDescription = '';
-$fileExtension = '';
-
-$isFormValid = false;
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $productName = $_POST["product-name"];
-    $productPrice = $_POST["product-price"];
-    $productType = $_POST["product-type"];
-    $productDescription = $_POST["product-description"];
-    $fileExtension = pathinfo($_FILES["photo-file"]["name"], PATHINFO_EXTENSION);
-
-    // Validate form inputs
-    $isFormValid = $validation->validateProductForm($productName, $productPrice, $productType, $productDescription, $fileExtension);
-
-    if ($isFormValid) {
-        // Handle file upload securely
-        $targetDirectory = "../images/";
-        $uploadedFileName = $utils->generateRandomFileName($fileExtension);
-        $targetFilePath = $targetDirectory . $uploadedFileName;
-
-        if (move_uploaded_file($_FILES["photo-file"]["tmp_name"], $targetFilePath)) {
-            // File uploaded successfully
-            $database->createProduct($productName, $productPrice, $productType, $productDescription, $uploadedFileName);
-            $isFormValid = true;
-        } else {
-            // File upload failed
-            $isFormValid = false;
-        }
-    }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,6 +17,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           rel="stylesheet">
 </head>
 <body>
+<?php
+require_once("../phpClassesUtils/Validation.php");
+require_once("../phpClassesUtils/Utils.php");
+require_once("../database/DatabaseHandler.php");
+$validation = new Validation();
+$utils = new Utils();
+$database = new DatabaseHandler();
+$productName = $productPrice = $photo = null;
+$isFormValid = false;
+if ($utils->isPostSet($_POST)) {
+    $productName = $_POST["product-name"];
+    $productPrice = $_POST["product-price"];
+    $photo = $_FILES["photo-file"];
+    $file_extension = pathinfo($photo["name"], PATHINFO_EXTENSION);
+    $productType = $_POST["product-type"];
+    $productDescription = $_POST["product-description"];
+    $isFormValid = $validation->validateProductForm($productName, $productPrice, $productType, $productDescription, $file_extension);
+}
+?>
 <div>
     <a href="../index.php">
         <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
@@ -70,34 +44,141 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </svg>
     </a>
 </div>
-
-<div class="<?php echo $isFormValid ? "block-hidden" : "content-block"; ?>">
+<div class="<?php if ($isFormValid) {
+    echo "block-hidden";
+} else {
+    echo "content-block";
+} ?>">
     <div class="header-block">
         <div class="title-block">
             <h1 class="title">Add a product</h1>
         </div>
     </div>
     <div class="form-block">
-        <form id="form-admin" action="adminPage.php" method="post" enctype="multipart/form-data">
-            <!-- Form inputs and validation blocks here -->
+        <form action="adminPage.php" method="post" enctype="multipart/form-data">
+            <div class="two-inputs-in-one-row-block">
+                <div class="input-block" id="product-name-input-block">
+                    <div class="label-block">
+                        <label for="product-name-input">Product Name:</label>
+                    </div>
+                    <input type="text" id="product-name-input" name="product-name"
+                           value="<?php if ($utils->isPostSet($_POST)) {
+                               echo htmlspecialchars($productName);
+                           } ?>" required>
+                    <div class="validation-error-block">
+                        <p class="js-validation-message">Invalid Name!</p>
+                        <?php
+                        if ($utils->isPostSet($_POST) && !$validation->isProductPriceValid($productPrice)) {
+                            echo "<p>*</p>";
+                            $isFormValid = false;
+                        }
+                        ?>
+                    </div>
+                </div>
+                <div class="input-block" id="product-price-input-block">
+                    <div class="label-block">
+                        <label for="price-input">Price:</label>
+                    </div>
+                    <input type="text" id="price-input" name="product-price"
+                           value="<?php if ($utils->isPostSet($_POST)) {
+                               echo htmlspecialchars($productPrice);
+                           } ?>" required>
+                    <div class="validation-error-block">
+                        <p class="js-validation-message">Invalid Price</p>
+                        <?php
+                        if ($utils->isPostSet($_POST) && !$validation->isProductPriceValid($productPrice)) {
+                            echo "<p>*</p>";
+                            $isFormValid = false;
+                        }
+                        ?>
+                    </div>
+                </div>
+            </div>
+            <div class="two-inputs-in-one-row-block">
+                <div class="input-block" id="product-type-input-block">
+                    <div class="label-block">
+                        <label for="product-type-input">Product Type:</label>
+                    </div>
+                    <input type="text" id="product-type-input" name="product-type"
+                           value="<?php if ($utils->isPostSet($_POST)) {
+                               echo htmlspecialchars($_POST["product-type"]);
+                           } ?>" required>
+                    <div class="validation-error-block">
+                        <p class="js-validation-message">Invalid Product Type!</p>
+                        <?php
+                        if ($utils->isPostSet($_POST) && !$validation->isProductTypeValid($productType)) {
+                            echo "<p>*</p>";
+                            $isFormValid = false;
+                        }
+                        ?>
+                    </div>
+                </div>
+                <div class="input-block" id="product-description-input-block">
+                    <div class="label-block">
+                        <label for="product-description-input">Product Description:</label>
+                    </div>
+                    <input type="text" id="product-description-input" name="product-description"
+                           value="<?php if ($utils->isPostSet($_POST)) {
+                               echo htmlspecialchars($productDescription);
+                           } ?>" required>
+                    <div class="validation-error-block">
+                        <p class="js-validation-message">Invalid Description!</p>
+                        <?php
+                        if ($utils->isPostSet($_POST) && !$validation->isProductDescriptionValid($productDescription)) {
+                            echo "<p>*</p>";
+                            $isFormValid = false;
+                        }
+                        ?>
+                    </div>
+                </div>
+            </div>
+            <div class="input-block" id="photo-input-block">
+                <div class="label-block">
+                    <label for="photo-input">Photo:</label>
+                </div>
+                <input type="file" name="photo-file" id="photo-input" accept="image/png" data-photo-file required>
+                <div class="validation-error-block">
+                    <p class="js-validation-message">Invalid Photo!</p>
+                    <?php
+                    if ($utils->isPostSet($_POST) && !$validation->isProductPhotoExtensionValid($file_extension)) {
+                        echo "<p>*</p>";
+                        $isFormValid = false;
+                    }
+                    ?>
+                </div>
+            </div>
+            <button class="confirm-button" id="confirm-button-admin" type="button" name="confirm" value="confirm">
+                Confirm
+            </button>
+            <div class="validation-error-block">
+                <?php
+                if ($utils->isPostSet($_POST) && $isFormValid) {
+                    echo "<p>Invalid inputs. Check the inputs marked by *</p>";
+                }
+                ?>
+            </div>
         </form>
     </div>
 </div>
-
-<div class="<?php echo $isFormValid ? "content-block" : "block-hidden"; ?>">
-    <?php if ($isFormValid): ?>
-        <?php $database->createProduct($productName, $productPrice, $productType, $productDescription, $uploadedFileName); ?>
-        <h1>The product was added! :)</h1>
-        <div class="form-block">
-            <form id="registration-success-form" name="form" action="../index.php" method="post">
-                <button class="confirm-button" id="confirm-registration-success-button" name="confirm" value="confirm"
-                        type="submit">Confirm
-                </button>
-            </form>
-        </div>
-    <?php endif; ?>
+<div class="<?php if ($isFormValid) {
+    echo "content-block";
+} else {
+    echo "block-hidden";
+} ?>">
+    <?php
+    if ($isFormValid) {
+        $database->createProduct($productName, $productPrice, $productType, $productDescription, $photo);
+    } ?>
+    <h1>The product was added! :)</h1>
+    <div class="form-block">
+        <form id="registration-success-form" name="form" action="../index.php" method="post">
+            <button class="confirm-button" id="confirm-registration-success-button" name="confirm" value="confirm"
+                    type="button">
+                Confirm
+            </button>
+        </form>
+    </div>
 </div>
-
 <script src="../javaScript/formHandling.js"></script>
 </body>
 </html>
