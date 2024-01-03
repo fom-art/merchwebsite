@@ -1,47 +1,41 @@
+/* Global Styles */
 * {
     font-family: 'Raleway', sans-serif;
+    box-sizing: border-box; /* Consistent box sizing */
 }
 
+/* Title Block Styles */
 .title-block {
     width: 100%;
     display: flex;
     justify-content: center;
 }
 
+/* Content Block Styles */
 .content-block {
     display: block;
     width: 500px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 70px;
+    margin: 70px auto;
     box-shadow: 0 0 16px rgba(38, 38, 38, 0.16);
-    align-self: center;
     padding: 48px 48px 8px;
 }
 
-.block-hidden {
-    display: none;
+/* Input Styles */
+input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
 }
 
-.input-block {
-    margin: 32px 0;
-    box-sizing: border-box;
-}
-
-input:invalid {
-    border: 2px solid red;
-}
-
+input:invalid,
 input:invalid:required {
     border: 2px solid red;
 }
 
-.validation-error-block {
-    color: red;
-}
-
-.js-validation-message {
-    display: none;
+/* Label Styles */
+label {
+    display: inline-block;
+    text-align: right;
 }
 
 .label-block {
@@ -54,46 +48,50 @@ input:invalid:required {
 }
 
 .label-block p {
-    margin: 0 0;
+    margin: 0;
 }
 
-.forgot-password-block {
-    margin: 32px 0;
+/* Validation Message Styles */
+.validation-error-block,
+.js-validation-message {
+    color: red;
 }
 
-.two-inputs-in-one-row-block{
-    display: flex;
-    justify-content: space-between;
-    gap: 32px;
+.js-validation-message {
+    display: none;
 }
 
+/* Form Styles */
 form {
-    box-sizing: border-box;
     margin-bottom: 32px;
 }
 
+/* Button Styles */
 .confirm-button {
     margin-top: 32px;
     padding: 8px 64px;
     border-radius: 16px;
-    border: solid black 2px;
+    border: 2px solid black;
     background-color: white;
 }
 
 .confirm-button:hover {
-    border-radius: 16px;
     background-color: black;
     color: white;
 }
 
-label {
-    display: inline-block;
-    text-align: right;
+/* Miscellaneous Styles */
+.block-hidden {
+    display: none;
 }
 
-input {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
+.input-block,
+.forgot-password-block {
+    margin: 32px 0;
+}
+
+.two-inputs-in-one-row-block {
+    display: flex;
+    justify-content: space-between;
+    gap: 32px;
 }

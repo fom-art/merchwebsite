@@ -49,7 +49,7 @@ if ($utils->isPostSet($_POST)) {
         </svg>
     </a>
 </div>
-<div class="<?php if ($isFormValid  && !$isUserWithSuchEmailAlreadyRegistered) {
+<div class="<?php if ($isFormValid && !$isUserWithSuchEmailAlreadyRegistered) {
     echo "block-hidden";
 } else {
     echo "content-block";
@@ -57,9 +57,6 @@ if ($utils->isPostSet($_POST)) {
     <h1>Sign up</h1>
     <div class="form-block">
         <form name="form" action="signUpPage.php" method="post">
-            <div class="hidden-input-block">
-                <input name="hidden" value="sign-in">
-            </div>
             <div class="input-block" id="email-input-block">
                 <div class="label-block">
                     <label for="email-input">Email:</label>
@@ -226,7 +223,7 @@ if ($utils->isPostSet($_POST)) {
                     <input type="text" id="phone-number-input" name="phone-number"
                            value="<?php if ($utils->isPostSet($_POST)) {
                                echo htmlspecialchars($phoneNumber);
-                           } ?>" required/>
+                           } ?>" required>
                     <div class="validation-error-block">
                         <p class="js-validation-message">Invalid Phone Number</p>
                         <?php
@@ -274,7 +271,6 @@ if ($utils->isPostSet($_POST)) {
     </div>
 </div>
 
-</div>
 <div class="empty-block">
     &nbsp;
     &nbsp;

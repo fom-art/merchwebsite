@@ -43,19 +43,14 @@ class User
         return $this->address;
     }
 
-    public function getCountry()
-    {
-        return $this->country;
-    }
-
     public function getCity()
     {
         return $this->city;
     }
 
-    public function getPostCode()
+    public function getCountry()
     {
-        return $this->postCode;
+        return $this->country;
     }
 
     public function getPhoneNumber()
@@ -63,9 +58,14 @@ class User
         return $this->phoneNumber;
     }
 
+    public function getPostCode()
+    {
+        return $this->postCode;
+    }
+
     public function setId($newValue): bool
     {
-        if (is_string($newValue)) {
+        if (gettype($newValue) == "string") {
             $this->id = $newValue;
             return true;
         } else {
@@ -75,7 +75,7 @@ class User
 
     public function setEmail($newValue): bool
     {
-        if (is_string($newValue)) {
+        if (gettype($newValue) == "string") {
             $this->email = $newValue;
             return true;
         } else {
@@ -85,7 +85,7 @@ class User
 
     public function setPassword($newValue): bool
     {
-        if (is_string($newValue)) {
+        if (gettype($newValue) == "string") {
             $this->password = $newValue;
             return true;
         } else {
@@ -95,7 +95,7 @@ class User
 
     public function setName($newValue): bool
     {
-        if (is_string($newValue)) {
+        if (gettype($newValue) == "string") {
             $this->name = $newValue;
             return true;
         } else {
@@ -105,7 +105,7 @@ class User
 
     public function setSurname($newValue): bool
     {
-        if (is_string($newValue)) {
+        if (gettype($newValue) == "string") {
             $this->surname = $newValue;
             return true;
         } else {
@@ -115,7 +115,7 @@ class User
 
     public function setAddress($newValue): bool
     {
-        if (is_string($newValue)) {
+        if (gettype($newValue) == "string") {
             $this->address = $newValue;
             return true;
         } else {
@@ -125,7 +125,7 @@ class User
 
     public function setCountry($newValue): bool
     {
-        if (is_string($newValue)) {
+        if (gettype($newValue) == "string") {
             $this->country = $newValue;
             return true;
         } else {
@@ -135,7 +135,7 @@ class User
 
     public function setCity($newValue): bool
     {
-        if (is_string($newValue)) {
+        if (gettype($newValue) == "string") {
             $this->city = $newValue;
             return true;
         } else {
@@ -145,7 +145,7 @@ class User
 
     public function setPostCode($newValue): bool
     {
-        if (is_string($newValue)) {
+        if (gettype($newValue) == "string") {
             $this->postCode = $newValue;
             return true;
         } else {
@@ -155,7 +155,7 @@ class User
 
     public function setPhoneNumber($newValue): bool
     {
-        if (is_string($newValue)) {
+        if (gettype($newValue) == "string") {
             $this->phoneNumber = $newValue;
             return true;
         } else {

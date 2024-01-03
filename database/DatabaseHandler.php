@@ -7,6 +7,7 @@ class DatabaseHandler
     private string $productDatabaseName;
     private string $purchaseDatabaseName;
 
+
     function __construct()
     {
         require_once(realpath(dirname(__FILE__) . '/../phpClassesConstants/Constants.php'));
@@ -27,6 +28,7 @@ class DatabaseHandler
         $this->userDatabaseName = Constants::USER_DATABASE_NAME;
         $this->productDatabaseName = Constants::PRODUCT_DATABASE_NAME;
         $this->purchaseDatabaseName = Constants::PURCHASE_DATABASE_NAME;
+
     }
 
     function getOriginalDatabase(): mysqli
@@ -44,8 +46,7 @@ class DatabaseHandler
         }
     }
 
-    function checkIfUserWithEmailExists($email): bool
-    {
+    function checkIfUserWithEmailExists($email): bool {
         $user = $this->getUserByEmail($email);
         if ($user->getId() == null) {
             return false;
@@ -60,7 +61,7 @@ class DatabaseHandler
         $queryResult = $this->database->query($sqlRequestToGetUser);
         if ($queryResult->num_rows > 0) {
             while ($row = $queryResult->fetch_assoc()) {
-                if ($row["email"] == $email) {
+                if ($row["email"] = $email) {
                     $user = new User();
                     $user->setId($row["id"]);
                     $user->setEmail($row["email"]);
@@ -76,7 +77,7 @@ class DatabaseHandler
                 }
             }
         }
-        return new User();
+        return new User;
     }
 
     function getProductById($id): Product
@@ -85,7 +86,7 @@ class DatabaseHandler
         $queryResult = $this->database->query($sqlRequestToGetProduct);
         if ($queryResult->num_rows > 0) {
             while ($row = $queryResult->fetch_assoc()) {
-                if ($row["id"] == $id) {
+                if ($row["id"] = $id) {
                     $product = new Product();
                     $product->setId($row["id"]);
                     $product->setProductName($row["productName"]);
@@ -104,7 +105,7 @@ class DatabaseHandler
         $queryResult = $this->database->query($sqlRequestToGetPurchase);
         if ($queryResult->num_rows > 0) {
             while ($row = $queryResult->fetch_assoc()) {
-                if ($row["id"] == $id) {
+                if ($row["id"] = $id) {
                     $purchase = new Purchase();
                     $purchase->setId($row["id"]);
                     $purchase->setEmail($row["email"]);
@@ -140,8 +141,8 @@ class DatabaseHandler
         $ext = $path['extension'];
         $filename = $path['filename'];
         $productPhotoPath = $productPhoto['name'];
-        $path_filename_ext = $target_dir . $filename . "." . $ext;
-        move_uploaded_file($temp_name, $path_filename_ext);
+        $path_filename_ext = $target_dir.$filename.".".$ext;
+        move_uploaded_file($temp_name,$path_filename_ext);
         $sqlQuery = "INSERT INTO `$this->productDatabaseName` (`productName`, `productPrice`, `productType`, `productDescription`, `productPhotoPath`)
         VALUES ('$productName', '$productPrice', '$productType', '$productDescription',  '$productPhotoPath')";
         $this->database->query($sqlQuery);
@@ -225,8 +226,7 @@ class DatabaseHandler
         $this->database->query($sqlQuery);
     }
 
-    private function hashThePassword($passwordToHash): string
-    {
+    private function hashThePassword($passwordToHash): string {
         return password_hash($passwordToHash, PASSWORD_BCRYPT);
     }
 }

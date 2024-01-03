@@ -41,7 +41,7 @@ class Product
 
     public function setId($newValue): bool
     {
-        if (is_string($newValue)) {
+        if (gettype($newValue) == "string") {
             $this->id = $newValue;
             return true;
         } else {
@@ -51,7 +51,7 @@ class Product
 
     public function setProductName($newValue): bool
     {
-        if (is_string($newValue)) {
+        if (gettype($newValue) == "string") {
             $this->productName = $newValue;
             return true;
         } else {
@@ -61,7 +61,7 @@ class Product
 
     public function setProductPrice($newValue): bool
     {
-        if (is_string($newValue)) {
+        if (gettype($newValue) == "string") {
             $this->productPrice = $newValue;
             return true;
         } else {
@@ -71,7 +71,7 @@ class Product
 
     public function setPhotoPath($newValue): bool
     {
-        if (is_string($newValue)) {
+        if (gettype($newValue) == "string") {
             $this->productPhotoPath = $newValue;
             return true;
         } else {
@@ -81,7 +81,7 @@ class Product
 
     public function setProductType($newValue): bool
     {
-        if (is_string($newValue)) {
+        if (gettype($newValue) == "string") {
             $this->productType = $newValue;
             return true;
         } else {
@@ -90,17 +90,16 @@ class Product
     }
 
     public function setProductDescription($newValue): bool
-    {
-        if (is_string($newValue)) {
-            $this->productDescription = $newValue;
-            return true;
-        } else {
-            return false;
+        {
+            if (gettype($newValue) == "string") {
+                $this->productDescription = $newValue;
+                return true;
+            } else {
+                return false;
+            }
         }
-    }
 
-    public function setProduct($id, $productName, $productPrice, $productType, $productDescription, $productPhotoPath)
-    {
+    public function setProduct($id, $productName, $productPrice, $productType, $productDescription, $productPhotoPath){
         $this->setId($id);
         $this->setProductName($productName);
         $this->setProductPrice($productPrice);

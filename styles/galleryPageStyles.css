@@ -1,3 +1,12 @@
+/* Global Settings */
+* {
+    box-sizing: border-box; /* Ensures consistent sizing */
+}
+body {
+    font-family: 'Roboto', sans-serif; /* Default font */
+}
+
+/* Header Styles */
 header {
     width: 100%;
 }
@@ -9,16 +18,16 @@ header {
     box-shadow: 0 0 16px rgba(38, 38, 38, 0.16);
 }
 
-.gallery-mechanic {
-    width: 100%;
+.title-block {
+    width: 80%;
     display: flex;
-    justify-content: space-around;
-    align-items: center;
+    justify-content: center;
 }
 
+/* SVG Icon Styles */
 svg {
-    height: 30px ;
-    width: 30px ;
+    height: 30px;
+    width: 30px;
     fill: black;
 }
 
@@ -26,84 +35,12 @@ svg {
     fill: white;
 }
 
-#pages-count {
-    align-content: center;
-}
-
-.title-block {
-    width: 80%;
-    display: flex;
-    justify-content: center;
-}
-
-.pagination-button {
-    margin-top: 32px;
-    padding: 8px 64px;
-    border-radius: 16px;
-    border: solid black 2px;
-    background-color: white;
-}
-
-.pagination-button:hover {
-    border-radius: 16px;
-    background-color: black;
-    color: white;
-}
-
-
-.icons-header-row-block {
-    width: 10%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
-
+/* Navigation Styles */
 .navigation-block {
     width: 100%;
     position: sticky;
     top: 0;
-    background: #ffffff;
-}
-
-.gallery-block {
-    margin: 0 50px;
-    gap: 60px;
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-}
-
-.footer-block {
-    color: white;
-    padding: 23px 40px 20px 81px;
-    background: #242424;
-}
-
-.social-media-block {
-    display: flex;
-    align-items: center;
-}
-
-
-.product-card {
-    flex-basis: 300px;
-}
-
-.product-name {
-    font-family: 'Source Sans Pro', sans-serif;
-    font-size: 18px;
-}
-
-.product-price {
-    font-family: 'Roboto Mono', monospace;
-    font-size: 18px;
-}
-
-.product-card img {
-    width: 300px;
-    max-width: 100%;
-    object-fit: cover;
-    height: auto;
+    background-color: #ffffff;
 }
 
 .navigation-list {
@@ -117,8 +54,113 @@ svg {
     font-family: 'Montserrat', sans-serif;
 }
 
+.navigation-list a {
+    color: black;
+    text-decoration: none;
+}
+
 .navigation-list > li:hover {
     box-shadow: 0 0 16px rgba(38, 38, 38, 0.16);
+}
+
+/* Pagination Styles */
+.gallery-mechanic {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 0 16px rgba(38, 38, 38, 0.16);
+}
+
+.pagination-button {
+    margin-top: 32px;
+    padding: 8px 64px;
+    border-radius: 16px;
+    border: solid black 2px;
+    background-color: white;
+}
+
+.pagination-button:hover {
+    background-color: black;
+    color: white;
+}
+
+#pages-count {
+    align-content: center;
+}
+
+/* Product Gallery Styles */
+.gallery-block {
+    margin: 0 50px;
+    gap: 60px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.product-card {
+    flex-basis: 300px;
+}
+
+.product-image {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.product-card img {
+    width: 300px;
+    max-width: 100%;
+    object-fit: cover;
+    height: auto;
+}
+
+.product-name,
+.product-price {
+    font-size: 18px;
+}
+
+.product-name {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.product-price {
+    font-family: 'Roboto Mono', monospace;
+}
+
+/* Footer Styles */
+footer {
+    margin-top: 40px;
+}
+
+.footer-block {
+    color: white;
+    padding: 23px 40px 20px 81px;
+    background-color: #242424;
+}
+
+.social-media-block {
+    display: flex;
+    align-items: center;
+}
+
+.social-media-block h3,
+.copyright-block h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+}
+
+.icons-header-row-block {
+    width: 10%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+/* Text and Link Styles */
+a {
+    background-color: transparent;
+    text-decoration: none;
 }
 
 .title {
@@ -129,29 +171,14 @@ svg {
 }
 
 .social-media-block h3 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 16px;
     padding-inline-end: 16px;
 }
 
-a {
-    background-color: transparent;
-    text-decoration: none;
-}
-
-.navigation-list a{
-    color: black;
-}
-
-.copyright-block a h3{
+/* Copyright Block */
+copyright-block a h3 {
     color: white;
 }
 
-.copyright-block h3 {
-    font-family: 'Montserrat', sans-serif;
+copyright-block h3 {
     font-size: 12px;
-}
-
-footer {
-    margin-top: 40px;
 }

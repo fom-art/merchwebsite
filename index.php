@@ -28,15 +28,16 @@ include_once("phpClassesConstants/Constants.php")
             <h1 class="title">ANFO</h1>
         </div>
         <div class="icons-header-row-block">
-<!--            special button, which is visible for registered users, who have special id allowing them to enter this page-->
             <?php
-            if (in_array($_SESSION['user']['id'], Constants::ADMIN_ID_COLLECTION)) {
-                echo '<div class="icon-block"><a href="phpPages/adminPage.php" id="add-product-button" class="icon-block">',
-                '<svg viewBox="0 0 16 16">',
-                '<path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>',
-                '</svg>',
-                '</a>',
-                '</div>';
+            if (isset($_SESSION['user']['id'])){
+                if (in_array($_SESSION['user']['id'], Constants::ADMIN_ID_COLLECTION)) {
+                    echo '<div class="icon-block"><a href="phpPages/adminPage.php" id="add-product-button" class="icon-block">',
+                    '<svg viewBox="0 0 16 16">',
+                    '<path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>',
+                    '</svg>',
+                    '</a>',
+                    '</div>';
+                }
             }
             ?>
 <!--            this button sends you eather on registration page, or your account page, based on your session data-->
@@ -133,7 +134,6 @@ include_once("phpClassesConstants/Constants.php")
     </div>
 </footer>
 <script src="javaScript/pagination.js"></script>
-t
 </body>
 
 </html>

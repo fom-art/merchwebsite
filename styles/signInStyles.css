@@ -1,83 +1,21 @@
+/* Global Styles */
 * {
     font-family: 'Raleway', sans-serif;
+    box-sizing: border-box; /* Ensures consistent box sizing */
 }
 
+/* Log In Block Styles */
 .log-in-block {
     display: block;
     width: 500px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 70px;
+    margin: 70px auto;
     box-shadow: 0 0 16px rgba(38, 38, 38, 0.16);
-    align-self: center;
     padding: 48px 48px 8px;
 }
 
-.input-block {
-    margin: 32px 0;
-    box-sizing: border-box;
-}
-
-input:invalid {
-    border: 2px solid red;
-}
-
-input:invalid:required {
-    border: 2px solid red;
-}
-
-.validation-error-block {
-    color: red;
-}
-.js-validation-message {
-    display: none
-}
-
-.label-block {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 8px;
-}
-
-.label-block p {
-    margin: 0 0;
-}
-
-.forgot-password-block {
-    margin: 32px 0;
-}
-
-.two-inputs-in-one-row-block{
-    display: flex;
-    justify-content: space-between;
-    gap: 32px;
-}
-
-
-.empty-block {
-    height: 200px; !important;
-}
-
+/* Form Styles */
 form {
-    box-sizing: border-box;
     margin-bottom: 32px;
-}
-
-.confirm-button {
-    margin-top: 32px;
-    padding: 8px 64px;
-    border-radius: 16px;
-    border: solid black 2px;
-    background-color: white;
-}
-
-.confirm-button:hover {
-    border-radius: 16px;
-    background-color: black;
-    color: white;
 }
 
 label {
@@ -89,7 +27,45 @@ input {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
-    box-sizing: border-box;
+}
+
+input:invalid,
+input:invalid:required {
+    border: 2px solid red;
+}
+
+/* Input Block Styles */
+.input-block {
+    margin: 32px 0;
+}
+
+/* Validation Message Styles */
+.validation-error-block,
+.js-validation-message {
+    color: red;
+}
+
+.js-validation-message {
+    display: none;
+}
+
+/* Label Block Styles */
+.label-block {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 8px;
+}
+
+.label-block p {
+    margin: 0;
+}
+
+/* Forgot Password Block Styles */
+.forgot-password-block {
+    margin: 32px 0;
 }
 
 .forgot-password-block > a {
@@ -101,4 +77,30 @@ input {
 .forgot-password-block > a:hover {
     text-decoration: underline;
     color: #661f8b;
+}
+
+/* Button Styles */
+.confirm-button {
+    margin-top: 32px;
+    padding: 8px 64px;
+    border-radius: 16px;
+    border: 2px solid black;
+    background-color: white;
+}
+
+.confirm-button:hover {
+    background-color: black;
+    color: white;
+}
+
+/* Utility Classes */
+.two-inputs-in-one-row-block {
+    display: flex;
+    justify-content: space-between;
+    gap: 32px;
+}
+
+.empty-block {
+    height: 200px;
+    /* !important is not recommended and should be used only if absolutely necessary */
 }
