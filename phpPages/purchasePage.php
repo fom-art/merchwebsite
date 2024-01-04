@@ -10,11 +10,12 @@ $utils = new Utils();
 $database = new DatabaseHandler();
 
 // Initialize variables
-$email = $name = $surname = $address = $country = $city = $postCode = $phoneNumber = $purchaseDescription = null;
+$email = $name = $surname = $address = $country = $city = $postCode = $phoneNumber = $password = $passwordRepeat = $purchaseDescription = null;
 $isFormValid = false;
+$isPostSet = $utils->isPostSet($_POST);
 
 // Process form submission
-if ($utils->isPostSet($_POST)) {
+if ($isPostSet) {
     $email = $_POST["email"];
     $name = $_POST["name"];
     // ... continue fetching other POST data ...
@@ -52,225 +53,46 @@ if ($utils->isPostSet($_POST)) {
     <h1>Make a purchase</h1>
     <div class="form-block">
         <form name="form" action="purchasePage.php" method="post">
-            <!-- Email -->
-            <div class="input-block" id="email-input-block">
-                <div class="label-block">
-                    <label for="email-input">Email:</label>
-                </div>
-                <input type="email" id="email-input" name="email"
-                       value="<?php
-                       if (isset($_SESSION["user"])) {
-                           echo $_SESSION["user"]["email"];
-                       } elseif ($utils->isPostSet($_POST)) {
-                           echo htmlspecialchars($email);
-                       } ?>"
-                       required>
-                <div class="validation-error-block">
-                    <p class="js-validation-message">Invalid Email</p>
-                    <?php
-                    if ($utils->isPostSet($_POST) && !$validation->isEmailValid($email)) {
-                        echo "<p>*</p>";
-                        $isFormValid = false;
-                    }
-                    ?>
-                </div>
-            </div>
+            <?php
+            //Email input
+            echo Utils::printInputBlock("email-input-block", "Email", "email", $email, "Invalid Email", $validation->isEmailValid($email), $isPostSet);
+            ?>
 
-            <!-- Name and Surname -->
             <div class="two-inputs-in-one-row-block">
-                <!-- Name -->
-                <div class="input-block" id="name-input-block">
-                    <div class="label-block">
-                        <label for="name-input">Name:</label>
-                    </div>
-                    <input type="text" id="name-input" name="name"
-                           value="<?php
-                           if (isset($_SESSION["user"])) {
-                               echo $_SESSION["user"]["name"];
-                           } elseif ($utils->isPostSet($_POST)) {
-                               echo htmlspecialchars($name);
-                           } ?>"
-                           required>
-                    <div class="validation-error-block">
-                        <p class="js-validation-message">Invalid Name</p>
-                        <?php
-                        if ($utils->isPostSet($_POST) && !$validation->isNameValid($name)) {
-                            echo "<p>*</p>";
-                            $isFormValid = false;
-                        }
-                        ?>
-                    </div>
-                </div>
-
-                <!-- Surname -->
-                <div class="input-block" id="surname-input-block">
-                    <div class="label-block">
-                        <label for="surname-input">Surname:</label>
-                    </div>
-                    <input type="text" id="surname-input" name="surname"
-                           value="<?php
-                           if (isset($_SESSION["user"])) {
-                               echo $_SESSION["user"]["surname"];
-                           } elseif ($utils->isPostSet($_POST)) {
-                               echo htmlspecialchars($surname);
-                           } ?>"
-                           required>
-                    <div class="validation-error-block">
-                        <p class="js-validation-message">Invalid Surname</p>
-                        <?php
-                        if ($utils->isPostSet($_POST) && !$validation->isNameValid($surname)) {
-                            echo "<p>*</p>";
-                            $isFormValid = false;
-                        }
-                        ?>
-                    </div>
-                </div>
+                <?php
+                //Name input
+                echo Utils::printInputBlock("name-input-block", "Name", "name", $name, "Invalid Name", $validation->isNameValid($name), $isPostSet);
+                //Surname input
+                echo Utils::printInputBlock("surname-input-block", "Surname", "surname", $surname, "Invalid Surname", $validation->isNameValid($surname), $isPostSet);
+                ?>
             </div>
 
-            <!-- Address -->
-            <div class="input-block" id="address-input-block">
-                <div class="label-block">
-                    <label for="address-input">Address:</label>
-                </div>
-                <input type="text" id="address-input" name="address"
-                       value="<?php
-                       if (isset($_SESSION["user"])) {
-                           echo $_SESSION["user"]["address"];
-                       } elseif ($utils->isPostSet($_POST)) {
-                           echo htmlspecialchars($address);
-                       } ?>"
-                       required>
-                <div class="validation-error-block">
-                    <p class="js-validation-message">Invalid Address</p>
-                    <?php
-                    if ($utils->isPostSet($_POST) && !$validation->isAddressValid($address)) {
-                        echo "<p>*</p>";
-                        $isFormValid = false;
-                    }
-                    ?>
-                </div>
-            </div>
+            <?php
+            //Password input
+            echo Utils::printInputBlock("password-input-block", "Password", "password", $password, "Invalid Password", $validation->isPasswordValid($password), $isPostSet);
+            //Repeat password input
+            echo Utils::printInputBlock("repeat-password-input-block", "Repeat the password", "password-repeat", $passwordRepeat, "Passwords don't match", $validation->isPasswordRepeatValid($password, $passwordRepeat), $isPostSet);
+            //Address input
+            echo Utils::printInputBlock("address-input-block", "Address", "address", $address, "Invalid Address", $validation->isAddressValid($address), $isPostSet);
+            //Country input
+            echo Utils::printInputBlock("country-input-block", "Country", "country", $country, "Invalid Country", $validation->isCountryOrCityValid($country), $isPostSet);
+            //City input
+            echo Utils::printInputBlock("city-input-block", "City", "city", $city, "Invalid City", $validation->isCountryOrCityValid($city), $isPostSet);
+            ?>
 
-            <!-- Country and City -->
             <div class="two-inputs-in-one-row-block">
-                <!-- Country -->
-                <div class="input-block" id="country-input-block">
-                    <div class="label-block">
-                        <label for="country-input">Country:</label>
-                    </div>
-                    <input type="text" id="country-input" name="country"
-                           value="<?php
-                           if (isset($_SESSION["user"])) {
-                               echo $_SESSION["user"]["country"];
-                           } elseif ($utils->isPostSet($_POST)) {
-                               echo htmlspecialchars($country);
-                           } ?>"
-                           required>
-                    <div class="validation-error-block">
-                        <p class="js-validation-message">Invalid Country</p>
-                        <?php
-                        if ($utils->isPostSet($_POST) && !$validation->isCountryOrCityValid($country)) {
-                            echo "<p>*</p>";
-                            $isFormValid = false;
-                        }
-                        ?>
-                    </div>
-                </div>
-
-                <!-- City -->
-                <div class="input-block" id="city-input-block">
-                    <div class="label-block">
-                        <label for="city-input">City:</label>
-                    </div>
-                    <input type="text" id="city-input" name="city"
-                           value="<?php
-                           if (isset($_SESSION["user"])) {
-                               echo $_SESSION["user"]["city"];
-                           } elseif ($utils->isPostSet($_POST)) {
-                               echo htmlspecialchars($city);
-                           } ?>"
-                           required>
-                    <div class="validation-error-block">
-                        <p class="js-validation-message">Invalid City</p>
-                        <?php
-                        if ($utils->isPostSet($_POST) && !$validation->isCountryOrCityValid($city)) {
-                            echo "<p>*</p>";
-                            $isFormValid = false;
-                        }
-                        ?>
-                    </div>
-                </div>
+                <?php
+                //Post code input
+                echo Utils::printInputBlock("post-code-input-block", "Post Code", "post-code", $postCode, "Invalid Post Code", $validation->isPostCodeValid($postCode), $isPostSet);
+                //Phone number input
+                echo Utils::printInputBlock("phone-number-input-block", "Phone Number", "phone-number", $phoneNumber, "Invalid Phone Number", $validation->isPhoneNumberValid($phoneNumber), $isPostSet);
+                ?>
             </div>
 
-            <!-- Post Code and Phone Number -->
-            <div class="two-inputs-in-one-row-block">
-                <!-- Post Code -->
-                <div class="input-block" id="post-code-input-block">
-                    <div class="label-block">
-                        <label for="post-code-input">Post Code:</label>
-                    </div>
-                    <input type="text" id="post-code-input" name="post-code"
-                           value="<?php
-                           if (isset($_SESSION["user"])) {
-                               echo $_SESSION["user"]["post-code"];
-                           } elseif ($utils->isPostSet($_POST)) {
-                               echo htmlspecialchars($postCode);
-                           } ?>"
-                           required>
-                    <div class="validation-error-block">
-                        <p class="js-validation-message">Invalid Post Code</p>
-                        <?php
-                        if ($utils->isPostSet($_POST) && !$validation->isPostCodeValid($postCode)) {
-                            echo "<p>*</p>";
-                            $isFormValid = false;
-                        }
-                        ?>
-                    </div>
-                </div>
-
-                <!-- Phone Number -->
-                <div class="input-block" id="phone-number-input-block">
-                    <div class="label-block">
-                        <label for="phone-number-input">Phone Number:</label>
-                    </div>
-                    <input type="text" id="phone-number-input" name="phone-number"
-                           value="<?php
-                           if (isset($_SESSION["user"])) {
-                               echo $_SESSION["user"]["phone-number"];
-                           } elseif ($utils->isPostSet($_POST)) {
-                               echo htmlspecialchars($phoneNumber);
-                           } ?>"
-                           required>
-                    <div class="validation-error-block">
-                        <p class="js-validation-message">Invalid Phone Number</p>
-                        <?php
-                        if ($utils->isPostSet($_POST) && !$validation->isPhoneNumberValid($phoneNumber)) {
-                            echo "<p>*</p>";
-                            $isFormValid = false;
-                        }
-                        ?>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Purchase Description -->
-            <div class="input-block" id="purchase-description-input-block">
-                <div class="label-block">
-                    <label for="purchase-describe-input">Describe your purchase:</label>
-                </div>
-                <input type="text" id="purchase-describe-input" name="purchase-description"
-                       value="<?php echo $utils->isPostSet($_POST) ? htmlspecialchars($purchaseDescription) : ''; ?>"
-                       required>
-                <div class="validation-error-block">
-                    <p class="js-validation-message">Invalid Description</p>
-                    <?php
-                    if ($utils->isPostSet($_POST) && !$validation->isPurchaseDescriptionValid($purchaseDescription)) {
-                        echo "<p>*</p>";
-                        $isFormValid = false;
-                    }
-                    ?>
-                </div>
-            </div>
+            <?php
+            // Purchase Description
+            echo Utils::printInputBlock("purchase-description-input-block", "Describe your purchase", "purchase-description", $purchaseDescription, "Invalid Purchase Description", $validation->isPurchaseDescriptionValid($city), $isPostSet);
+            ?>
 
             <!-- Validation Error Message -->
             <div class="validation-error-block">

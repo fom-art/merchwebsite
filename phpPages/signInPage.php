@@ -49,7 +49,8 @@ if ($utils->isPostSet($_POST)) {
     <link rel="stylesheet" href="../styles/formStyles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500;700&family=Roboto:wght@500&display=swap"
-          rel="stylesheet"></head>
+          rel="stylesheet">
+</head>
 <body>
 
 <!-- Navigation Link -->
@@ -75,7 +76,8 @@ if ($utils->isPostSet($_POST)) {
                         <span><a href="signUpPage.php">Create</a></span>
                     </p>
                 </div>
-                <input type="email" id="email-input" name="email" value="<?php echo $utils->isPostSet($_POST) ? htmlspecialchars($email) : ''; ?>" required>
+                <input type="email" id="email-input" name="email"
+                       value="<?php echo $utils->isPostSet($_POST) ? htmlspecialchars($email) : ''; ?>" required>
                 <div class="validation-error-block">
                     <p class="js-validation-message">Invalid Email</p>
                     <?php
@@ -87,22 +89,10 @@ if ($utils->isPostSet($_POST)) {
                 </div>
             </div>
 
-            <!-- Password Input -->
-            <div class="input-block" id="password-input-block">
-                <div class="label-block">
-                    <label for="password-input">Password:</label>
-                </div>
-                <input type="password" id="password-input" name="password" minlength="8" value="<?php echo $utils->isPostSet($_POST) ? htmlspecialchars($password) : ''; ?>" required>
-                <div class="validation-error-block">
-                    <p class="js-validation-message">Invalid Password</p>
-                    <?php
-                    if ($utils->isPostSet($_POST) && !$validation->isPasswordValid($password)) {
-                        echo "<p>*</p>";
-                        $isFormValid = false;
-                    }
-                    ?>
-                </div>
-            </div>
+            <?php
+            // Password input
+            echo Utils::printInputBlock("password-input-block", "Password", "password", $password, "Invalid Password", $validation->isPasswordValid($password), $utils->isPostSet($_POST));
+            ?>
 
             <!-- Forgot Password Link -->
             <div class="forgot-password-block">
@@ -112,10 +102,8 @@ if ($utils->isPostSet($_POST)) {
             <!-- Validation Error Message -->
             <div class="validation-error-block">
                 <?php
-                if ($utils->isPostSet($_POST)) {
-                    if (!$isFormValid || !$database->checkUserForLogIn($email, $password)) {
-                        echo "<p>Invalid Email or Password!</p>";
-                    }
+                if ($utils->isPostSet($_POST) && (!$isFormValid || !$database->checkUserForLogIn($email, $password))) {
+                    echo "<p>Invalid Email or Password!</p>";
                 }
                 ?>
             </div>
