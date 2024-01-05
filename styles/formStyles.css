@@ -1,116 +1,119 @@
+:root {
+    --font-family-main: 'Raleway', sans-serif;
+    --color-black: black;
+    --color-white: white;
+    --color-red: red;
+    --color-red-light: #661f8b;
+    --color-border: #ccc;
+    --spacing-s: 8px;
+    --spacing-m: 12px;
+    --spacing-l: 32px;
+    --spacing-xl: 48px;
+    --border-radius: 16px;
+    --box-shadow-main: 0 0 16px rgba(38, 38, 38, 0.16);
+}
+
 * {
-    font-family: 'Raleway', sans-serif;
+    font-family: var(--font-family-main);
+}
+
+/* Layout Blocks */
+.content-block,
+form {
+    box-sizing: border-box;
+    margin-bottom: var(--spacing-xl);
 }
 
 .content-block {
-    display: block;
-    width: 500px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 70px;
-    box-shadow: 0 0 16px rgba(38, 38, 38, 0.16);
-    align-self: center;
-    padding: 48px 48px 8px;
+    width: 600px;
+    margin: var(--spacing-xl) auto var(--spacing-l);
+    box-shadow: var(--box-shadow-main);
+    padding: var(--spacing-xl) var(--spacing-xl) var(--spacing-s); /* Check this line */
 }
 
-.block-hidden {
-    display: none;
-}
-
-.input-block {
-    margin: 32px 0;
-    box-sizing: border-box;
-}
-
-.hidden-input-block {
-    display: none;
-}
-
-input:invalid {
-    border: 2px solid red;
-}
-
-input:invalid:required {
-    border: 2px solid red;
-}
-
-.validation-error-block {
-    color: red;
-}
-.js-validation-message {
-    display: none
-}
-
-.label-block {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 8px;
-}
-
-.label-block p {
-    margin: 0 0;
-}
-
-.forgot-password-block {
-    margin: 32px 0;
-}
-
-.two-inputs-in-one-row-block{
-    display: flex;
-    justify-content: space-between;
-    gap: 32px;
-}
-
-
-.empty-block {
-    height: 200px; !important;
-}
-
-form {
-    box-sizing: border-box;
-    margin-bottom: 32px;
-}
-
+/* Hidden Elements */
+.block-hidden,
+.hidden-input-block,
+.js-validation-message,
 .product-type {
     display: none;
 }
 
-.confirm-button {
-    margin-top: 32px;
-    padding: 8px 64px;
-    border-radius: 16px;
-    border: solid black 2px;
-    background-color: white;
-}
-
-.confirm-button:hover {
-    border-radius: 16px;
-    background-color: black;
-    color: white;
-}
-
-label {
-    display: inline-block;
-    text-align: right;
+/* Form Inputs and Validation */
+.input-block,
+.two-inputs-in-one-row-block,
+.forgot-password-block {
+    margin: var(--spacing-l) 0;
 }
 
 input {
     width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
+    padding: var(--spacing-m) var(--spacing-l);
+    margin: var(--spacing-l) 0;
+    border: 1px solid var(--color-border);
     box-sizing: border-box;
 }
 
+.two-inputs-in-one-row-block {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--spacing-l);
+}
+
+input:invalid,
+input:invalid:required {
+    border: 2px solid var(--color-red);
+}
+
+.validation-error-block {
+    color: var(--color-red);
+}
+
+/* Buttons and Links */
+.confirm-button,
+input[type="submit"] {
+    margin-top: var(--spacing-l);
+    padding: var(--spacing-s) var(--spacing-xl);
+    border-radius: var(--border-radius);
+    border: 2px solid var(--color-black);
+    background-color: var(--color-white);
+}
+
+.confirm-button:hover,
+input[type="submit"]:hover {
+    background-color: var(--color-black);
+    color: var(--color-white);
+}
+
+/* Label and Text Styling */
+.label-block {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: var(--spacing-s);
+}
+
+.label-block p,
+label {
+    margin: 0;
+    display: inline-block;
+    text-align: right;
+}
+
+/* Link Styling */
 .forgot-password-block > a {
-    color: black;
+    color: var(--color-black);
     background-color: transparent;
     text-decoration: none;
 }
 
 .forgot-password-block > a:hover {
     text-decoration: underline;
-    color: #661f8b;
+    color: var(--color-red-light);
+}
+
+/* Misc Classes */
+.empty-block {
+    height: 200px; /* Removed !important flag for cleaner code */
 }
