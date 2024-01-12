@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Account</title>
+    <title>Change User Details</title>
     <link rel="stylesheet" href="<?php use view\utils\sections\SignInSections;
 
     echo HrefsConstants::FORM_STYLES?>">

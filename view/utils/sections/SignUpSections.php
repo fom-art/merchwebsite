@@ -19,7 +19,7 @@ class SignUpSections
     {
         ?>
         <div class="content-block">
-            <h1>Change User Data</h1>
+            <h1>Sign up</h1>
             <div class="form-block">
                 <form name="form" action="<?php echo HrefsConstants::SIGN_UP?>" method="post">
                     <?php

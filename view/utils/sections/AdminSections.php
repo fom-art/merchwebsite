@@ -28,7 +28,7 @@ class AdminSections
                         echo Inputs::printInputBlock("product-name-input-block", "Product Name", "product-name", $productName, "Invalid Name!", Validation::isProductNameValid($productName), Utils::isPostSet($_POST));
 
                         // Price input
-                        echo Inputs::printInputBlock("product-price-input-block", "Price", "product-price", $productPrice, "Invalid Price", Validation::isPriceValid($productPrice), Utils::isPostSet($_POST));
+                        echo Inputs::printInputBlock("product-price-input-block", "Price", "product-price", $productPrice, "Invalid Price", Validation::isProductPriceValid($productPrice), Utils::isPostSet($_POST));
                         ?>
                     </div>
 

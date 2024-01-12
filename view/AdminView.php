@@ -2,7 +2,7 @@
 
 namespace view;
 
-require_once "utils/sections/HomeSections.php";
+require_once "utils/sections/AdminSections.php";
 require_once 'utils/HrefsConstants.php';
 
 class AdminView
