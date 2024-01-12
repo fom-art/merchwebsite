@@ -7,13 +7,24 @@ require_once 'utils/HrefsConstants.php';
 
 class AdminView
 {
-    public String $isRegistered;
-    public String $isAdmin;
+    public String $productName;
+    public String $productPrice;
+    public String $productType;
+    public String $productDescription;
+    public String $productPhoto;
 
-    public function __construct($isRegistered, $isAdmin)
+    public function __construct(
+        $productName,
+        $productPrice,
+        $productType,
+        $productDescription,
+        $productPhoto)
     {
-        $this->isRegistered = $isRegistered;
-        $this->isAdmin = $isAdmin;
+        $this->$productName = $productName;
+        $this->$productPrice = $productPrice;
+        $this->$productType = $productType;
+        $this->$productDescription = $productDescription;
+        $this->$productPhoto = $productPhoto;
     }
     public function render() {
         include __DIR__ . '/templates/admin.php';

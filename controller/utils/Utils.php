@@ -6,19 +6,14 @@ use database\DatabaseHandler;
 
 class Utils
 {
-    static function isPostSet($POST): bool
-    {
-        return $POST && $POST["confirm"] = "confirm";
-    }
-
     function isSignInSuccessful($POST): bool
     {
         require_once("../database/DatabaseHandler.php");
-        require_once("Validation.php");
+        require_once("FormValidation.php");
         $email = $POST["email"];
         $password = $POST["password"];
         $database = new DatabaseHandler();
-        $validation = new Validation();
+        $validation = new FormValidation();
         return $this->isPostSet($POST) && $validation->validateSignInForm($email, $password) * $database->checkUserForLogIn($email, $password);
     }
 

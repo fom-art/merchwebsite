@@ -11,21 +11,24 @@
 </head>
 <body>
 <?php
-Icons::printBackArrowIcon(HrefsConstants::INDEX, "back-button");
+Icons::printBackArrowIcon(HrefsConstants::SIGN_IN, "back-button");
 if ($this->isRegistered ?? false) {
     SignUpSections::renderSuccessMessage();
 } else {
-    SignUpSections::renderForm(isPostSet: false, isFormValid: false, isAlreadyRegistered: false,
-        email: "",
-        password: "",
-        passwordRepeat: "",
-        name: "",
-        surname: "",
-        address: "",
-        country: "",
-        city: "",
-        postCode: "",
-        phoneNumber: "");
+    SignUpSections::renderForm(
+        isFormValid: $this->isFormValid,
+        isAlreadyRegistered: $this->isAlreadyRegistered,
+        email: $this->email,
+        password: $this->password,
+        passwordRepeat: $this->passwordRepeat,
+        name: $this->name,
+        surname: $this->surname,
+        address: $this->address,
+        country: $this->country,
+        city: $this->city,
+        postCode: $this->postCode,
+        phoneNumber: $this->phoneNumber,
+    );
 }
 SignUpSections::renderScripts();
 ?>

@@ -4,7 +4,7 @@ namespace controller\utlis;
 
 use controller\constants\RegexConstants;
 require_once(__DIR__ . "/../constants/RegexConstants.php");
-class Validation
+class FormValidation
 {
     static function isEmailValid($input): bool
     {
@@ -83,6 +83,19 @@ class Validation
             self::isNameValid($surname) *
             self::isPasswordValid($password) *
             self::isPasswordRepeatValid($password, $passwordRepeat) *
+            self::isAddressValid($address) *
+            self::isCountryOrCityValid($country) *
+            self::isCountryOrCityValid($city) *
+            self::isPostCodeValid($postCode) *
+            self::isPhoneNumberValid($phoneNumber);
+    }
+
+    static function validateUserDetailsForm($email, $name, $surname, $password, $address, $country, $city, $postCode, $phoneNumber): bool
+    {
+        return self::isEmailValid($email) *
+            self::isNameValid($name) *
+            self::isNameValid($surname) *
+            self::isPasswordValid($password) *
             self::isAddressValid($address) *
             self::isCountryOrCityValid($country) *
             self::isCountryOrCityValid($city) *

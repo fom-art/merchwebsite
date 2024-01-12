@@ -51,7 +51,7 @@ label {
     margin: 0;
 }
 
-/* Validation Message Styles */
+/* FormValidation Message Styles */
 .validation-error-block,
 .js-validation-message {
     color: red;

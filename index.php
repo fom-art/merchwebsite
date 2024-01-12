@@ -12,12 +12,12 @@ use controller\SignInController;
 use controller\SignUpController;
 use controller\UserDetailsController;
 use controller\utlis\Utils;
-use controller\utlis\Validation;
+use controller\utlis\FormValidation;
 use model\database\DatabaseHandler;
 
 // Include necessary files
 require_once 'controller/utils/Utils.php';
-require_once 'controller/utils/Validation.php';
+require_once 'controller/utils/FormValidation.php';
 require_once 'model/database/DatabaseHandler.php';
 require_once __DIR__ . '/controller/HomeController.php';
 require_once __DIR__ . '/controller/AdminController.php';
@@ -33,7 +33,7 @@ global $utils;
 global $validation;
 global $database;
 $utils = new Utils();
-$validation = new Validation();
+$validation = new FormValidation();
 $database = new DatabaseHandler();
 
 // Error reporting settings (Adjust as needed)
@@ -61,15 +61,15 @@ $uriSegments = explode('/', $requestUri);
 switch (end($uriSegments)) {
     case '/':
     case '':
-        $homeController = new HomeController(false, false);
+        $homeController = new HomeController();
         $homeController->index();
         break;
     case 'admin':
-        $adminController = new AdminController(false, false);
+        $adminController = new AdminController();
         $adminController->index();
         break;
     case 'forgot-password':
-        $forgotPasswordController = new ForgotPasswordController(false, false);
+        $forgotPasswordController = new ForgotPasswordController();
         $forgotPasswordController->index();
         break;
     case 'purchase':
@@ -77,15 +77,15 @@ switch (end($uriSegments)) {
         $purchaseController->index();
         break;
     case 'sign-in':
-        $signInController = new SignInController(false, false);
+        $signInController = new SignInController();
         $signInController->index();
         break;
     case 'sign-up':
-        $signUpController = new SignUpController(false, false);
+        $signUpController = new SignUpController();
         $signUpController->index();
         break;
     case 'user':
-        $userDetailsController = new UserDetailsController(false, false);
+        $userDetailsController = new UserDetailsController();
         $userDetailsController->index();
         break;
     default:

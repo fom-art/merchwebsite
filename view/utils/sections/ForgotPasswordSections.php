@@ -3,7 +3,7 @@
 namespace view\utils\sections;
 
 use controller\utlis\Utils;
-use controller\utlis\Validation;
+use controller\utlis\FormValidation;
 use HrefsConstants;
 use Inputs;
 use model;
@@ -28,12 +28,12 @@ class ForgotPasswordSections
                             <label for="email-input">Email:</label>
                         </div>
                         <input type="email" id="email-input" name="email"
-                               value="<?php echo Utils::isPostSet($_POST) ? htmlspecialchars($email) : ''; ?>" required>
+                               value="<?php echo isset($_POST['confirm']) ? htmlspecialchars($email) : ''; ?>" required>
                         <div class="validation-error-block">
                             <!-- Validation Messages -->
                             <p class="js-validation-message">Invalid Email :(</p>
                             <?php
-                            if (Utils::isPostSet($_POST) && !$isFormValid) {
+                            if (isset($_POST['confirm']) && !$isFormValid) {
                                 echo "<p>User with the entered email wasn't found :(</p>";
                             }
                             ?>
@@ -68,7 +68,8 @@ class ForgotPasswordSections
     static function renderScripts(): void
     {
         ?>
-        <script src="<?php echo HrefsConstants::FORM_HANDLING_SCRIPT?>"></script>
+        <script src="<?php echo HrefsConstants::FORM_VALIDATION_SCRIPT ?>"></script>
+        <script src="<?php echo HrefsConstants::FORM_HANDLING_SCRIPT ?>"></script>
         <?php
     }
 }

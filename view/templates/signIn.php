@@ -15,7 +15,9 @@ Icons::printBackArrowIcon(HrefsConstants::INDEX, "back-button");
 if ($this->isRegistered ?? false) {
     SignInSections::renderSuccessMessage();
 } else {
-    SignInSections::renderForm("", "");
+    SignInSections::renderForm(
+            email: $this->email,
+            password: $this->password);
 }
 SignInSections::renderScripts();
 ?>

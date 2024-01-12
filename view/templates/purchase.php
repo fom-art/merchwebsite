@@ -16,18 +16,16 @@ if ($this->isRegistered ?? false) {
     PurchaseSections::renderSuccessMessage();
 } else {
     PurchaseSections::renderForm(
-        isPostSet: false,
-        isFormValid: false,
-        isAlreadyRegistered: false,
-        email: "",
-        name: "",
-        surname: "",
-        address: "",
-        country: "",
-        city: "",
-        postCode: "",
-        phoneNumber: "",
-        purchaseDescription: ""
+        isFormValid: $this->isFormValid,
+        email: $this->email,
+        name: $this->name,
+        surname: $this->surname,
+        address: $this->address,
+        country: $this->country,
+        city: $this->city,
+        postCode: $this->postCode,
+        phoneNumber: $this->phoneNumber,
+        purchaseDescription: $this->purchaseDescription
     );
 }
 PurchaseSections::renderScripts();

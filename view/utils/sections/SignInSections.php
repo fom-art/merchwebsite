@@ -3,7 +3,7 @@
 namespace view\utils\sections;
 
 use controller\utlis\Utils;
-use controller\utlis\Validation;
+use controller\utlis\FormValidation;
 use HrefsConstants;
 use Inputs;
 use model;
@@ -31,11 +31,11 @@ class SignInSections
                             </p>
                         </div>
                         <input type="email" id="email-input" name="email"
-                               value="<?php echo Utils::isPostSet($_POST) ? htmlspecialchars($email) : ''; ?>" required>
+                               value="<?php echo isset($_POST['confirm']) ? htmlspecialchars($email) : ''; ?>" required>
                         <div class="validation-error-block">
                             <p class="js-validation-message">Invalid Email</p>
                             <?php
-                            if (Utils::isPostSet($_POST) && !Validation::isEmailValid($email)) {
+                            if (isset($_POST['confirm']) && !FormValidation::isEmailValid($email)) {
                                 echo "<p>*</p>";
                                 $isFormValid = false;
                             }
@@ -45,7 +45,7 @@ class SignInSections
 
                     <?php
                     // Password input
-                    echo Inputs::printInputBlock("password-input-block", "Password", "password", $password, "Invalid Password", Validation::isPasswordValid($password), Utils::isPostSet($_POST));
+                    echo Inputs::printInputBlock("password-input-block", "Password", "password", $password, "Invalid Password", FormValidation::isPasswordValid($password));
                     ?>
 
                     <!-- Forgot Password Link -->
@@ -56,7 +56,7 @@ class SignInSections
                     <!-- Validation Error Message -->
                     <div class="validation-error-block">
                         <?php
-                        if (Utils::isPostSet($_POST) && (!$isFormValid || (new model\database\DatabaseHandler)->checkUserForLogIn($email, $password))) {
+                        if (isset($_POST['confirm']) && (!$isFormValid || (new model\database\DatabaseHandler)->checkUserForLogIn($email, $password))) {
                             echo "<p>Invalid Email or Password!</p>";
                         }
                         ?>
@@ -92,7 +92,8 @@ class SignInSections
     static function renderScripts(): void
     {
         ?>
-        <script src="<?php echo HrefsConstants::FORM_HANDLING_SCRIPT?>"></script>
+        <script src="<?php echo HrefsConstants::FORM_VALIDATION_SCRIPT ?>"></script>
+        <script src="<?php echo HrefsConstants::FORM_HANDLING_SCRIPT ?>"></script>
         <?php
     }
 }

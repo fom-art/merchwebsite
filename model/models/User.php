@@ -15,6 +15,18 @@ class User
     private $postCode;
     private $phoneNumber;
 
+    private $isAdmin;
+
+    public function getIsAdmin()
+    {
+        return $this->isAdmin;
+    }
+
+    public function setIsAdmin($isAdmin): void
+    {
+        $this->isAdmin = $isAdmin;
+    }
+
     public function getId()
     {
         return $this->id;
@@ -165,7 +177,7 @@ class User
         }
     }
 
-    public function setUser($id, $email, $password, $name, $surname, $address, $country, $city, $postCode, $phoneNumber)
+    public function setUser($id, $email, $password, $name, $surname, $address, $country, $city, $postCode, $phoneNumber, $isAdmin)
     {
         $this->setId($id);
         $this->setEmail($email);
@@ -177,5 +189,6 @@ class User
         $this->setCity($city);
         $this->setPostCode($postCode);
         $this->setPhoneNumber($phoneNumber);
+        $this->setIsAdmin($isAdmin);
     }
 }

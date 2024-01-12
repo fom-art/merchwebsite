@@ -10,9 +10,12 @@ class SignInController
 {
     private SignInView $view;
 
-    public function __construct($isRegistered, $isAdmin)
+    public function __construct()
     {
-        $this->view = new SignInView($isRegistered ?: false, $isAdmin ?: false);
+        $this->view = new SignInView(
+            email: $_POST['email'] ?? "",
+            password: $_POST['password'] ?? ""
+        );
     }
 
     public function index(): void

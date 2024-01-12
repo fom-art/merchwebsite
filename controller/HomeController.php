@@ -10,9 +10,12 @@ class HomeController
 {
     private HomeView $view;
 
-    public function __construct($isRegistered, $isAdmin)
+    public function __construct()
     {
-        $this->view = new HomeView($isRegistered ?: false, $isAdmin ?: false);
+        $this->view = new HomeView(
+            isRegistered: isset($_SESSION["user"]),
+            isAdmin: isset($_SESSION['user']['isAdmin']) && $_SESSION['user']['isAdmin']
+        );
     }
 
     public function index(): void

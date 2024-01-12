@@ -7,13 +7,13 @@ require_once 'utils/HrefsConstants.php';
 
 class ForgotPasswordView
 {
-    private $isRegistered;
-    private $isAdmin;
+    private $isFormValid;
+    private $email;
 
-    public function __construct($isRegistered, $isAdmin)
+    public function __construct($isFormValid, $email)
     {
-        $this->isRegistered = $isRegistered;
-        $this->isAdmin = $isAdmin;
+        $this->$isFormValid = $isFormValid;
+        $this->$email = $email;
     }
 
     public function render()

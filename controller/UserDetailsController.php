@@ -10,9 +10,19 @@ class UserDetailsController
 {
     private UserDetailsView $view;
 
-    public function __construct($isRegistered, $isAdmin)
+    public function __construct()
     {
-        $this->view = new UserDetailsView($isRegistered ?: false, $isAdmin ?: false);
+        $this->view = new UserDetailsView(
+            email: $_POST['email'] ?? "",
+            name: $_POST['name'] ?? "",
+            surname: $_POST['surname'] ?? "",
+            password: $_POST['password'] ?? "",
+            address: $_POST['address'] ?? "",
+            country: $_POST['country'] ?? "",
+            city: $_POST['city'] ?? "",
+            postCode: $_POST['post-code'] ?? "",
+            phoneNumber: $_POST['phone-number'] ?? "",
+        );
     }
 
     public function index(): void

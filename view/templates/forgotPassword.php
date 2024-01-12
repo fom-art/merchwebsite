@@ -11,11 +11,11 @@
 </head>
 <body>
 <?php
-Icons::printBackArrowIcon(HrefsConstants::INDEX, "back-button");
-if ($this->isRegistered ?? false) {
+Icons::printBackArrowIcon(HrefsConstants::SIGN_IN, "back-button");
+if ($this->isFormValid ?? false) {
     ForgotPasswordSections::renderConfirmationMessage();
 } else {
-    ForgotPasswordSections::renderForm(false, "");
+    ForgotPasswordSections::renderForm($this->isFormValid, $this->email);
 }
 ForgotPasswordSections::renderScripts();
 ?>

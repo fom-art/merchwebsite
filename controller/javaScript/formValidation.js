@@ -1,5 +1,5 @@
 class Validation {
-    INPUT_CODES = {
+    static INPUT_CODES = {
         EMAIL: 1,
         PASSWORD: 2,
         REPEAT_PASSWORD: 3,
@@ -16,12 +16,12 @@ class Validation {
         PURCHASE_DESCRIPTION: 14,
     };
 
-    validateSignInForm() {
-        this.validateInputs([this.INPUT_CODES.EMAIL, this.INPUT_CODES.PASSWORD]);
+    static validateSignInForm() {
+        return this.validateInputs([this.INPUT_CODES.EMAIL, this.INPUT_CODES.PASSWORD]);
     }
 
-    validateSignUpForm() {
-        this.validateInputs([
+    static validateSignUpForm() {
+        return this.validateInputs([
             this.INPUT_CODES.EMAIL, this.INPUT_CODES.NAME, this.INPUT_CODES.SURNAME,
             this.INPUT_CODES.PASSWORD, this.INPUT_CODES.REPEAT_PASSWORD, this.INPUT_CODES.ADDRESS,
             this.INPUT_CODES.COUNTRY, this.INPUT_CODES.CITY, this.INPUT_CODES.POST_CODE,
@@ -29,8 +29,8 @@ class Validation {
         ]);
     }
 
-    validatePurchaseForm() {
-        this.validateInputs([
+    static validatePurchaseForm() {
+        return this.validateInputs([
             this.INPUT_CODES.EMAIL, this.INPUT_CODES.NAME, this.INPUT_CODES.SURNAME,
             this.INPUT_CODES.ADDRESS, this.INPUT_CODES.COUNTRY, this.INPUT_CODES.CITY,
             this.INPUT_CODES.POST_CODE, this.INPUT_CODES.PHONE_NUMBER,
@@ -38,18 +38,18 @@ class Validation {
         ]);
     }
 
-    validateAdminForm() {
-        this.validateInputs([
+    static validateAdminForm() {
+        return this.validateInputs([
             this.INPUT_CODES.PRODUCT_NAME, this.INPUT_CODES.PRICE, this.INPUT_CODES.PHOTO
         ]);
     }
 
-    validateForgotPasswordForm() {
-        this.validateInputs([this.INPUT_CODES.EMAIL]);
+    static validateForgotPasswordForm() {
+        return this.validateInputs([this.INPUT_CODES.EMAIL]);
     }
 
-    validateUserDetailsForm() {
-        this.validateInputs([
+    static validateUserDetailsForm() {
+        return this.validateInputs([
             this.INPUT_CODES.EMAIL, this.INPUT_CODES.NAME, this.INPUT_CODES.SURNAME,
             this.INPUT_CODES.PASSWORD, this.INPUT_CODES.ADDRESS,
             this.INPUT_CODES.COUNTRY, this.INPUT_CODES.CITY, this.INPUT_CODES.POST_CODE,
@@ -57,22 +57,29 @@ class Validation {
         ])
     }
 
-    validateInputs(inputCodes) {
+    static validateInputs(inputCodes) {
+        let allValid = true;
         inputCodes.forEach(code => {
             const inputBlock = this.getInputBlockFromCode(code);
-            this.validateInput(inputBlock, code);
+            if (!this.validateInput(inputBlock, code)) {
+                allValid = false;
+            }
         });
+        return allValid;
     }
 
-    validateInput(inputBlock, inputCode) {
+    static validateInput(inputBlock, inputCode) {
+        console.log("Input: " + inputCode);
         if (this.isInputValid(inputBlock, inputCode)) {
             this.setInputAsValid(inputBlock);
+            return true;
         } else {
             this.setInputAsInvalid(inputBlock);
+            return false;
         }
     }
 
-    getInputBlockFromCode(inputCode) {
+    static getInputBlockFromCode(inputCode) {
         const inputIdMap = {
             [this.INPUT_CODES.EMAIL]: "email-input-block",
             [this.INPUT_CODES.PASSWORD]: "password-input-block",
@@ -92,7 +99,7 @@ class Validation {
         return document.getElementById(inputIdMap[inputCode]);
     }
 
-    isInputValid(inputBlock, inputCode) {
+    static isInputValid(inputBlock, inputCode) {
         const input = inputBlock.querySelector("input");
         const validationFunctions = {
             [this.INPUT_CODES.EMAIL]: this.isEmailValid,
@@ -113,66 +120,66 @@ class Validation {
         return validationFunctions[inputCode].call(this, input.value);
     }
 
-    setInputAsValid(inputBlock) {
-        inputBlock.classList.remove('invalid');
-        inputBlock.classList.add('valid');
+    static setInputAsValid(inputBlock) {
+        let validationErrorBlock = inputBlock.getElementsByClassName("js-validation-message")[0]
+        validationErrorBlock.style.display = "none"
     }
 
-    setInputAsInvalid(inputBlock) {
-        inputBlock.classList.remove('valid');
-        inputBlock.classList.add('invalid');
+    static setInputAsInvalid(inputBlock) {
+        let validationErrorBlock = inputBlock.getElementsByClassName("js-validation-message")[0]
+        validationErrorBlock.style.display = "block"
     }
 
-    isNameValid(input_value) {
+    static isNameValid(input_value) {
         let validRegex = /^[a-zA-Z ]+$/;
         return validRegex.test(input_value)
     }
 
-    isAddressValid(input_value) {
+    static isAddressValid(input_value) {
         let validRegex = /^[#.0-9a-zA-Z\s,-/]+$/;
         return validRegex.test(input_value)
     }
 
-    isEmailValid(input_value) {
+    static isEmailValid(input_value) {
         let validRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return validRegex.test(input_value)
     }
 
-    isPasswordValid(input_value) {
+    static isPasswordValid(input_value) {
         return input_value.length >= 8
     }
 
-    isRepeatPasswordValid(input_value) {
-        let password = this.getPasswordInputValue();
+    static isRepeatPasswordValid(input_value) {
+        let password = this.getInputBlockFromCode(this.INPUT_CODES.PASSWORD).querySelector("input").value;
         return password === input_value;
     }
 
-    isCountryValid(input_value) {
+    static isCountryValid(input_value) {
         let nameRegex = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/;
         return nameRegex.test(input_value)
     }
 
-    isPostCodeValid(input_value) {
+    static isPostCodeValid(input_value) {
         let postCodeRegex = /^\d{5}(-\d{4})?$/
         return postCodeRegex.test(input_value);
     }
 
-    isPhoneValid(input_value) {
+    static isPhoneValid(input_value) {
         let phoneNumberRegex = /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/;
         return phoneNumberRegex.test(input_value)
     }
 
-    isProductNameValid(input_value) {
+    static isProductNameValid(input_value) {
         let productNameRegex = /[a-zA-Z0-9\s]+?$/;
         return productNameRegex.test(input_value)
     }
 
-    isPriceValid(input_value) {
+    static isPriceValid(input_value) {
         let priceRegex = /^-?\d+\.?\d*$/;
         return priceRegex.test(input_value)
     }
 
-    isPhotoValid(inputElement) {
+    static isPhotoValid(inputElement) {
         if (!inputElement.files || inputElement.files.length === 0) {
             return false; // No file is selected
         }
@@ -183,12 +190,8 @@ class Validation {
         return validImageTypes.includes(file.type);
     }
 
-    isPurchaseDescriptionValid(input_value) {
+    static isPurchaseDescriptionValid(input_value) {
         let purchaseDescriptionRegex = /[a-zA-Z0-9,.;:'"#$%()/@\s]+$/;
         return purchaseDescriptionRegex.test(input_value)
-    }
-
-    getPasswordInputValue() {
-        return document.getElementById("password-input").value;
     }
 }

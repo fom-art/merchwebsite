@@ -2,11 +2,14 @@
 
 namespace model\database;
 
-use controller\constants\RegexConstants;
 use model\constants\DatabaseConstants;
 use model\models\Product;
 use model\models\Purchase;
 use model\models\User;
+require_once __DIR__ . "/../constants/DatabaseConstants.php";
+require_once __DIR__ . "/../models/User.php";
+require_once __DIR__ . "/../models/Purchase.php";
+require_once __DIR__ . "/../models/Product.php";
 
 class DatabaseHandler{
     private \mysqli $database;
@@ -17,10 +20,7 @@ class DatabaseHandler{
 
     function __construct()
     {
-        require_once __DIR__ . "/../constants/DatabaseConstants.php";
-        require_once("models/User.php");
-        require_once("models/Product.php");
-        require_once("models/Purchase.php");
+
         $this->setOriginalDatabase();
         $this->setDatabaseNames();
     }
@@ -81,6 +81,7 @@ class DatabaseHandler{
                     $user->setCity($row["city"]);
                     $user->setPostCode($row["postCode"]);
                     $user->setPhoneNumber($row["phoneNumber"]);
+                    $user->setIsAdmin($row["isAdmin"]);
                     return $user;
                 }
             }
@@ -132,11 +133,12 @@ class DatabaseHandler{
         return new Purchase();
     }
 
-    function createUser($email, $password, $name, $surname, $address, $country, $city, $postCode, $phoneNumber): void
+    function createUser($email, $password, $name, $surname, $address, $country, $city, $postCode, $phoneNumber, $isAdmin): void
     {
         $hashedPassword = $this->hashThePassword($password);
-        $sqlQuery = "INSERT INTO `$this->userDatabaseName` (`email`, `password`, `name`, `surname`, `address`, `country`, `city`, `postCode`, `phoneNumber`)
-        VALUES ('$email', '$hashedPassword', '$name', '$surname', '$address', '$country', '$city', '$postCode', '$phoneNumber')";
+        $sqlQuery = "INSERT INTO `$this->userDatabaseName` (`email`, `password`, `name`, `surname`, `address`, `country`, `city`, `postCode`, `phoneNumber`, 
+                    `isAdmin`)
+        VALUES ('$email', '$hashedPassword', '$name', '$surname', '$address', '$country', '$city', '$postCode', '$phoneNumber', '$isAdmin')";
         $this->database->query($sqlQuery);
     }
 

@@ -3,7 +3,7 @@
 namespace view\utils\sections;
 
 use controller\utlis\Utils;
-use controller\utlis\Validation;
+use controller\utlis\FormValidation;
 use HrefsConstants;
 use Inputs;
 use model;
@@ -15,7 +15,7 @@ require_once __DIR__ . '/../HrefsConstants.php';
 
 class UserDetailsSections
 {
-    public static function renderForm($isPostSet, $isFormValid, $email, $password, $name, $surname, $address, $country, $city, $postCode, $phoneNumber)
+    public static function renderForm($isFormValid, $email, $password, $name, $surname, $address, $country, $city, $postCode, $phoneNumber)
     {
         ?>
         <div class="<?php echo $isFormValid ? 'block-hidden' : 'content-block'; ?>">
@@ -24,41 +24,41 @@ class UserDetailsSections
                 <form name="form" action="<?php echo HrefsConstants::USER ?>" method="post">
                     <?php
                     //Email input
-                    echo Inputs::printInputBlock("email-input-block", "Email", "email", $email, "Invalid Email", Validation::isEmailValid($email), $isPostSet);
+                    echo Inputs::printInputBlock("email-input-block", "Email", "email", $email, "Invalid Email", FormValidation::isEmailValid($email));
                     ?>
 
                     <div class="two-inputs-in-one-row-block">
                         <?php
                         //Name input
-                        echo Inputs::printInputBlock("name-input-block", "Name", "name", $name, "Invalid Name", Validation::isNameValid($name), $isPostSet);
+                        echo Inputs::printInputBlock("name-input-block", "Name", "name", $name, "Invalid Name", FormValidation::isNameValid($name));
                         //Surname input
-                        echo Inputs::printInputBlock("surname-input-block", "Surname", "surname", $surname, "Invalid Surname", Validation::isNameValid($surname), $isPostSet);
+                        echo Inputs::printInputBlock("surname-input-block", "Surname", "surname", $surname, "Invalid Surname", FormValidation::isNameValid($surname));
                         ?>
                     </div>
 
                     <?php
                     //Password input
-                    echo Inputs::printInputBlock("password-input-block", "Password", "password", $password, "Invalid Password", Validation::isPasswordValid($password), $isPostSet);
+                    echo Inputs::printInputBlock("password-input-block", "Password", "password", $password, "Invalid Password", FormValidation::isPasswordValid($password));
                     //Address input
-                    echo Inputs::printInputBlock("address-input-block", "Address", "address", $address, "Invalid Address", Validation::isAddressValid($address), $isPostSet);
+                    echo Inputs::printInputBlock("address-input-block", "Address", "address", $address, "Invalid Address", FormValidation::isAddressValid($address));
                     //Country input
-                    echo Inputs::printInputBlock("country-input-block", "Country", "country", $country, "Invalid Country", Validation::isCountryOrCityValid($country), $isPostSet);
+                    echo Inputs::printInputBlock("country-input-block", "Country", "country", $country, "Invalid Country", FormValidation::isCountryOrCityValid($country));
                     //City input
-                    echo Inputs::printInputBlock("city-input-block", "City", "city", $city, "Invalid City", Validation::isCountryOrCityValid($city), $isPostSet);
+                    echo Inputs::printInputBlock("city-input-block", "City", "city", $city, "Invalid City", FormValidation::isCountryOrCityValid($city));
                     ?>
 
                     <div class="two-inputs-in-one-row-block">
                         <?php
                         //Post code input
-                        echo Inputs::printInputBlock("post-code-input-block", "Post Code", "post-code", $postCode, "Invalid Post Code", Validation::isPostCodeValid($postCode), $isPostSet);
+                        echo Inputs::printInputBlock("post-code-input-block", "Post Code", "post-code", $postCode, "Invalid Post Code", FormValidation::isPostCodeValid($postCode));
                         //Phone number input
-                        echo Inputs::printInputBlock("phone-number-input-block", "Phone Number", "phone-number", $phoneNumber, "Invalid Phone Number", Validation::isPhoneNumberValid($phoneNumber), $isPostSet);
+                        echo Inputs::printInputBlock("phone-number-input-block", "Phone Number", "phone-number", $phoneNumber, "Invalid Phone Number", FormValidation::isPhoneNumberValid($phoneNumber));
                         ?>
                     </div>
 
                     <!-- Validation Error Display -->
                     <div class="validation-error-block">
-                        <?php if (Utils::isPostSet($_POST) && !$isFormValid) {
+                        <?php if (isset($_POST['confirm']) && !$isFormValid) {
                             echo "<p>Invalid inputs. Check the inputs marked by *</p>";
                         } ?>
                     </div>
@@ -74,16 +74,16 @@ class UserDetailsSections
                            onClick="<?php unset($_SESSION["user"]) ?>"/>
                 </form>
             </div>
-        </div>    }
+        </div>  <?php }
 
-        static function renderSuccessMessage()
-        {
+    static function renderSuccessMessage()
+    {
         ?>
         <!-- Success Message Block -->
         <div class="content-block">
             <h1>User data was changed successfully!</h1>
             <div class="form-block">
-                <form id="registration-success-form" action="homePage.php" method="post">
+                <form id="registration-success-form" action="<?php echo HrefsConstants::INDEX ?>" method="post">
                     <button class="confirm-button" id="confirm-registration-success-button" type="button">Confirm
                     </button>
                 </form>
@@ -95,7 +95,8 @@ class UserDetailsSections
     static function renderScripts(): void
     {
         ?>
-        <script src="http://zwa.toad.cz/~fomenart/controller/javaScript/formHandling.js"></script>
+        <script src="<?php echo HrefsConstants::FORM_VALIDATION_SCRIPT ?>"></script>
+        <script src="<?php echo HrefsConstants::FORM_HANDLING_SCRIPT ?>"></script>
         <?php
     }
 }

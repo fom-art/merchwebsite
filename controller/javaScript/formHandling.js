@@ -30,25 +30,27 @@ function sendPostRequest(formId) {
 
     switch (formId) {
         case FORM_IDS.SIGN_IN:
-            validationResult = new Validation().validateSignInForm;
+            validationResult = Validation.validateSignInForm();
             break;
         case FORM_IDS.SIGN_UP:
-            validationResult = new Validation().validateSignUpForm;
+            console.log("start")
+            validationResult = Validation.validateSignUpForm();
             break;
         case FORM_IDS.FORGOT_PASSWORD:
-            validationResult = new Validation().validateForgotPasswordForm;
+            validationResult = Validation.validateForgotPasswordForm();
             break;
         case FORM_IDS.PURCHASE:
-            validationResult = new Validation().validatePurchaseForm;
+            validationResult = Validation.validatePurchaseForm();
             break;
         case FORM_IDS.ADMIN:
-            validationResult = new Validation().validateAdminForm;
+            validationResult = Validation.validateAdminForm();
             break;
         case FORM_IDS.USER_DETAILS:
-            validationResult = new Validation().validateUserDetailsForm;
+            validationResult = Validation.validateUserDetailsForm();
     }
 
     if (validationResult) {
+        console.log("Success!")
         submitForm();
     }
 }

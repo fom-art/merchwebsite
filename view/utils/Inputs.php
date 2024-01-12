@@ -2,7 +2,7 @@
 
 class Inputs
 {
-    public static function printInputBlock($id, $label, $name, $value, $validationMessage, $isValid, $isPostSet)
+    public static function printInputBlock($id, $label, $name, $value, $validationMessage, $isValid)
     {
         ob_start();
         ?>
@@ -15,7 +15,7 @@ class Inputs
                    required>
             <div class="validation-error-block">
                 <p class="js-validation-message"><?php echo $validationMessage; ?></p>
-                <?php if (!$isValid && $isPostSet) {
+                <?php if (!$isValid && isset($_POST['confirm'])) {
                     echo "<p>*</p>";
                 } ?>
             </div>

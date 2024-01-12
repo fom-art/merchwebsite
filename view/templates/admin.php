@@ -18,7 +18,12 @@ use view\utils\sections\AdminSections;
 <?php
 Icons::printBackArrowIcon(HrefsConstants::INDEX, "back-button");
 if ($this->isRegistered ?? false) {
-    (new DatabaseHandler)->createProduct("", "", "", "", "",);
+    (new DatabaseHandler)->createProduct(
+            productName: $this->productName,
+            productPrice: $this->productPrice,
+            productType: $this->productType,
+            productDescription: $this->productDescription,
+            productPhoto: $this->productPhoto);
     AdminSections::renderSuccessMessage();
 } else {
     AdminSections::renderForm(false, "", "", "", "", "",);
