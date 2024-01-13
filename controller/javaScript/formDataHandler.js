@@ -10,12 +10,14 @@ class Input {
 
     // Setter method
     set value(newValue) {
-        this._value = newValue;
-        const inputElement = document.querySelector("#" + this.id);
-        if (inputElement) {
-            inputElement.value = newValue;
-        } else {
-            console.error("Input element not found for ID: " + this.id);
+        if (newValue != null){
+            this._value = newValue;
+            const inputElement = document.querySelector("#" + this.id);
+            if (inputElement) {
+                inputElement.value = newValue;
+            } else {
+                console.error("Input element not found for ID: " + this.id);
+            }
         }
     }
 }
@@ -29,12 +31,11 @@ class Form {
         this.inputs.forEach(input => {
             // Retrieve the input value from localStorage based on its ID
             const savedValue = localStorage.getItem(input.id);
-            const newValue = savedValue !== null ? savedValue : input.value;
+            const newValue = savedValue !== null && input.value === "" ? savedValue : input.value;
 
             // Update the input value in both the Form object and localStorage
             input.value = newValue;
             localStorage.setItem(input.id, newValue);
-            console.log("input set to " + localStorage.getItem(input.id));
         });
     }
 
@@ -46,7 +47,6 @@ class Form {
                 inputElement.addEventListener('input', () => {
                     input.value = inputElement.value;
                     localStorage.setItem(input.id, inputElement.value);
-                    console.log("input changed to " + localStorage.getItem(input.id));
                 });
             }
         });
@@ -54,44 +54,44 @@ class Form {
 }
 
 const signUpForm = new Form([
-    new Input('email', ''),
-    new Input('password', ''),
-    new Input('repeat-password', ''),
-    new Input('name', ''),
-    new Input('surname', ''),
-    new Input('address', ''),
-    new Input('country', ''),
-    new Input('city', ''),
-    new Input('post-code', ''),
-    new Input('phone-number', ''),
+    new Input('email', null),
+    new Input('password', null),
+    new Input('repeat-password', null),
+    new Input('name', null),
+    new Input('surname', null),
+    new Input('address', null),
+    new Input('country', null),
+    new Input('city', null),
+    new Input('post-code', null),
+    new Input('phone-number', null),
 ]);
 
 const signInForm = new Form([
-    new Input('email', ''),
-    new Input('password', ''),
+    new Input('email', null),
+    new Input('password', null),
 ]);
 
 const forgotPasswordForm = new Form([
-    new Input('email', ''),
+    new Input('email', null),
 ]);
 
 const userDetailsForm = new Form([
-    new Input('email', ''),
-    new Input('name', ''),
-    new Input('surname', ''),
-    new Input('address', ''),
-    new Input('country', ''),
-    new Input('city', ''),
-    new Input('post-code', ''),
-    new Input('phone-number', ''),
-    new Input('purchase-description', '')
+    new Input('email', null),
+    new Input('name', null),
+    new Input('surname', null),
+    new Input('address', null),
+    new Input('country', null),
+    new Input('city', null),
+    new Input('post-code', null),
+    new Input('phone-number', null),
+    new Input('purchase-description', null)
 ]);
 
 const addProductForm = new Form([
-    new Input('product-name', ''),
-    new Input('product-price', ''),
-    new Input('photo', ''),
-    new Input('product-description', ''),
+    new Input('product-name', null),
+    new Input('product-price', null),
+    new Input('photo', null),
+    new Input('product-description', null),
 ]);
 
 const formsMap = new Map([

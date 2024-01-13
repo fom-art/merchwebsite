@@ -17,7 +17,6 @@ if (($this->isRegistrationSuccess ?? false)
     SignUpSections::renderSuccessMessage();
 } else {
     SignUpSections::renderForm(
-        isFormValid: $this->isFormValid,
         isAlreadyRegistered: $this->isRegisteredAlready,
         email: $this->email,
         password: $this->password,
@@ -29,6 +28,7 @@ if (($this->isRegistrationSuccess ?? false)
         city: $this->city,
         postCode: $this->postCode,
         phoneNumber: $this->phoneNumber,
+        csrfToken: $this->csrfToken
     );
 }
 SignUpSections::renderScripts();

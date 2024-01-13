@@ -15,23 +15,24 @@ require_once __DIR__ . '/../HrefsConstants.php';
 
 class SignInSections
 {
-    public static function renderForm($email, $password)
+    public static function renderForm($email, $password, $csrfToken)
     {
         ?>
         <div class="content-block">
             <h1>Log in</h1>
             <div class="form-block">
-                <form id="sign-in"  action="signInPage.php" method="post">
+                <form id="sign-in"  action="<?php echo HrefsConstants::SIGN_IN?>" method="post">
                     <!-- Email Input -->
                     <div class="input-block" id="email-input-block">
                         <div class="label-block">
-                            <label for="email-input">Email:</label>
+                            <label for="email">Email:</label>
                             <p class="email-label">Don't have an account yet?
                                 <span><a href="<?php echo HrefsConstants::SIGN_UP ?>">Create</a></span>
                             </p>
                         </div>
-                        <input type="email" id="email-input" name="email"
-                               value="<?php echo isset($_POST['confirm']) ? htmlspecialchars($email) : ''; ?>" required>
+                        <?php ?>
+                        <input type="email" id="email" name="email"
+                               value="<?php echo htmlspecialchars($email); ?>" required>
                         <div class="validation-error-block">
                             <p class="js-validation-message">Invalid Email</p>
                             <?php
@@ -45,13 +46,19 @@ class SignInSections
 
                     <?php
                     // Password input
-                    echo Inputs::printInputBlock("password-input-block", "Password", "password", $password, "Invalid Password", FormValidation::isPasswordValid($password));
+                    echo Inputs::printInputBlock("password-input-block", "Password", "password", htmlspecialchars($password), "Invalid Password", FormValidation::isPasswordValid($password));
+                    ?>
+
+                    <?php
+                    echo Inputs::printCsrfTokenInput($csrfToken);
                     ?>
 
                     <!-- Forgot Password Link -->
                     <div class="forgot-password-block">
                         <a href="<?php echo HrefsConstants::FORGOT_PASSWORD ?>">Forgot password?</a>
                     </div>
+
+
 
                     <!-- Validation Error Message -->
                     <div class="validation-error-block">
@@ -61,6 +68,7 @@ class SignInSections
                         }
                         ?>
                     </div>
+
 
                     <!-- Confirm Button -->
                     <button class="confirm-button" id="confirm-button-sign-in" name="confirm" value="confirm"
@@ -73,14 +81,14 @@ class SignInSections
         <?php
     }
 
-    static function renderSuccessMessage()
+    static function renderSuccessMessage(): void
     {
         ?>
         <!-- Success Message Block -->
         <div class="content-block">
             <h1>Registration Successful!</h1>
             <div class="form-block">
-                <form id="registration-success-form" action="index.php" method="post">
+                <form id="registration-success-form" action="<?php echo HrefsConstants::INDEX?>" method="post">
                     <button class="confirm-button" id="confirm-registration-success-button" type="button">Confirm
                     </button>
                 </form>
@@ -94,6 +102,7 @@ class SignInSections
         ?>
         <script src="<?php echo HrefsConstants::FORM_VALIDATION_SCRIPT ?>"></script>
         <script src="<?php echo HrefsConstants::FORM_HANDLING_SCRIPT ?>"></script>
+        <script src="<?php echo HrefsConstants::FORM_DATA_HANDLER_SCRIPT ?>"></script>
         <?php
     }
 }

@@ -97,6 +97,7 @@ class UserDetailsSections
         ?>
         <script src="<?php echo HrefsConstants::FORM_VALIDATION_SCRIPT ?>"></script>
         <script src="<?php echo HrefsConstants::FORM_HANDLING_SCRIPT ?>"></script>
+        <script src="<?php echo HrefsConstants::FORM_DATA_HANDLER_SCRIPT ?>"></script>
         <?php
     }
 }

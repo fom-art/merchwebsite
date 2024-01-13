@@ -23,4 +23,13 @@ class Inputs
         <?php
         return ob_get_clean();
     }
+
+    public static function printCsrfTokenInput($token)
+    {
+        ob_start();
+        ?>
+        <input type="hidden" name="csrf-token" value="<?php echo htmlspecialchars($token); ?>">
+        <?php
+        return ob_get_clean();
+    }
 }

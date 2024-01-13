@@ -8,13 +8,17 @@ require_once 'utils/HrefsConstants.php';
 
 class SignInView
 {
-    private $email;
-    private $password;
+    public string $email;
+    public string $password;
+    public bool $logInResult;
+    public string $csrfToken;
 
-    public function __construct($email, $password)
+    public function __construct($email, $password, $logInResult, $csrfToken)
     {
         $this->email = $email;
         $this->password = $password;
+        $this->logInResult = $logInResult;
+        $this->csrfToken = $csrfToken;
     }
 
     public function render()

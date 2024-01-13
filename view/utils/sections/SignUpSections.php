@@ -15,7 +15,7 @@ require_once __DIR__ . '/../HrefsConstants.php';
 
 class SignUpSections
 {
-    public static function renderForm($isFormValid, $isAlreadyRegistered, $email, $password, $passwordRepeat, $name, $surname, $address, $country, $city, $postCode, $phoneNumber)
+    public static function renderForm($isAlreadyRegistered, $email, $password, $passwordRepeat, $name, $surname, $address, $country, $city, $postCode, $phoneNumber, $csrfToken): void
     {
         ?>
         <div class="content-block">
@@ -58,6 +58,10 @@ class SignUpSections
                         ?>
                     </div>
 
+                    <?php
+                    echo Inputs::printCsrfTokenInput($csrfToken);
+                    ?>
+
                     <div class="validation-error-block" id="validation-result-closure">
                         <p class="js-validation-message">Invalid inputs. Check the inputs marked by *</p>
                         <?php
@@ -81,7 +85,7 @@ class SignUpSections
         ?>
         <!-- Success Message Block -->
         <div class="content-block">
-            <h1>User data was changed successfully!</h1>
+            <h1>Registered Successfully!</h1>
             <div class="form-block">
                 <form id="registration-success-form" action="<?php echo HrefsConstants::SIGN_IN ?>" method="post">
                     <button class="confirm-button" id="confirm-registration-success-button" type="button">Confirm

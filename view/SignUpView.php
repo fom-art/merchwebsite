@@ -24,12 +24,13 @@ class SignUpView
     public string $postCode;
     public string $phoneNumber;
     public $isRegisteredAlready;
+    public string $csrfToken;
 
-    public function __construct($isFormValid, $isRegisteredAlready, $isRegistrationSuccess, $email, $password, $passwordRepeat, $name, $surname, $address, $country, $city, $postCode, $phoneNumber)
+    public function __construct($isFormValid, $isRegisteredAlready, $isRegistrationSuccess, $email, $password, $passwordRepeat, $name, $surname, $address, $country, $city, $postCode, $phoneNumber, $csrfToken)
     {
         $this->isFormValid = $isFormValid;
         $this->isRegisteredAlready = $isRegisteredAlready;
-        $this->isRegistrationSuccess = FormValidation::validateSignUpForm($email, $name, $surname, $password, $passwordRepeat, $address, $country, $city, $postCode, $phoneNumber);
+        $this->isRegistrationSuccess = $isRegistrationSuccess;
         $this->isRegistered = $isRegistrationSuccess;
         $this->email = $email;
         $this->password = $password;
@@ -41,6 +42,7 @@ class SignUpView
         $this->city = $city;
         $this->postCode = $postCode;
         $this->phoneNumber = $phoneNumber;
+        $this->csrfToken = $csrfToken;
     }
 
     public function render(): void

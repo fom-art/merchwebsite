@@ -54,6 +54,7 @@ function sendPostRequest(formId) {
 
 function submitForm() {
     document.querySelector("form").submit();
+    localStorage.clear();
 }
 
 function submitRegistrationSuccessForm() {
