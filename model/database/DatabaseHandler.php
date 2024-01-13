@@ -133,13 +133,13 @@ class DatabaseHandler{
         return new Purchase();
     }
 
-    function createUser($email, $password, $name, $surname, $address, $country, $city, $postCode, $phoneNumber, $isAdmin): void
+    function createUser($email, $password, $name, $surname, $address, $country, $city, $postCode, $phoneNumber, $isAdmin): bool|\mysqli_result
     {
         $hashedPassword = $this->hashThePassword($password);
         $sqlQuery = "INSERT INTO `$this->userDatabaseName` (`email`, `password`, `name`, `surname`, `address`, `country`, `city`, `postCode`, `phoneNumber`, 
                     `isAdmin`)
         VALUES ('$email', '$hashedPassword', '$name', '$surname', '$address', '$country', '$city', '$postCode', '$phoneNumber', '$isAdmin')";
-        $this->database->query($sqlQuery);
+        return $this->database->query($sqlQuery);
     }
 
     function createProduct($productName, $productPrice, $productType, $productDescription, $productPhoto): void

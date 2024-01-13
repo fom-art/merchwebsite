@@ -69,7 +69,6 @@ class Validation {
     }
 
     static validateInput(inputBlock, inputCode) {
-        console.log("Input: " + inputCode);
         if (this.isInputValid(inputBlock, inputCode)) {
             this.setInputAsValid(inputBlock);
             return true;

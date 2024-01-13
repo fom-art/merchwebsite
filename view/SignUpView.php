@@ -10,9 +10,9 @@ require_once 'utils/HrefsConstants.php';
 
 class SignUpView
 {
-    public string $isPostSet;
     public string $isFormValid;
-    public string $isAlreadyRegistered;
+    public string $isRegistrationSuccess;
+    public string $isRegistered;
     public string $email;
     public string $password;
     public string $passwordRepeat;
@@ -23,12 +23,14 @@ class SignUpView
     public string $city;
     public string $postCode;
     public string $phoneNumber;
+    public $isRegisteredAlready;
 
-    public function __construct($isPostSet, $isAlreadyRegistered, $email, $password, $passwordRepeat, $name, $surname, $address, $country, $city, $postCode, $phoneNumber)
+    public function __construct($isFormValid, $isRegisteredAlready, $isRegistrationSuccess, $email, $password, $passwordRepeat, $name, $surname, $address, $country, $city, $postCode, $phoneNumber)
     {
-        $this->isPostSet = $isPostSet;
-        $this->isFormValid = FormValidation::validateSignUpForm($email, $name, $surname, $password, $passwordRepeat, $address, $country, $city, $postCode, $phoneNumber);
-        $this->isAlreadyRegistered = $isAlreadyRegistered;
+        $this->isFormValid = $isFormValid;
+        $this->isRegisteredAlready = $isRegisteredAlready;
+        $this->isRegistrationSuccess = FormValidation::validateSignUpForm($email, $name, $surname, $password, $passwordRepeat, $address, $country, $city, $postCode, $phoneNumber);
+        $this->isRegistered = $isRegistrationSuccess;
         $this->email = $email;
         $this->password = $password;
         $this->passwordRepeat = $passwordRepeat;

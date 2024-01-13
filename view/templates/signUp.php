@@ -12,12 +12,13 @@
 <body>
 <?php
 Icons::printBackArrowIcon(HrefsConstants::SIGN_IN, "back-button");
-if ($this->isRegistered ?? false) {
+if (($this->isRegistrationSuccess ?? false)
+    && (!$this->isRegisteredAlready ?? true)) {
     SignUpSections::renderSuccessMessage();
 } else {
     SignUpSections::renderForm(
         isFormValid: $this->isFormValid,
-        isAlreadyRegistered: $this->isAlreadyRegistered,
+        isAlreadyRegistered: $this->isRegisteredAlready,
         email: $this->email,
         password: $this->password,
         passwordRepeat: $this->passwordRepeat,

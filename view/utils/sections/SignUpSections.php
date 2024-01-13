@@ -21,7 +21,7 @@ class SignUpSections
         <div class="content-block">
             <h1>Sign up</h1>
             <div class="form-block">
-                <form id="sign-up" name="form" action="<?php echo HrefsConstants::SIGN_UP?>" method="post">
+                <form id="sign-up" name="form" action="<?php echo HrefsConstants::SIGN_UP ?>" method="post">
                     <?php
                     //Email input
                     echo Inputs::printInputBlock("email-input-block", "Email", "email", $email, "Invalid Email", FormValidation::isEmailValid($email));
@@ -58,20 +58,17 @@ class SignUpSections
                         ?>
                     </div>
 
-                    <div class="validation-error-block">
+                    <div class="validation-error-block" id="validation-result-closure">
+                        <p class="js-validation-message">Invalid inputs. Check the inputs marked by *</p>
                         <?php
-                        if (isset($_POST['confirm'])) {
-                            if (!$isFormValid) {
-                                echo "<p>Invalid inputs. Check the inputs marked by *</p>";
-                            }
-                            if ($isAlreadyRegistered) {
-                                echo "<p>User with such email address is already registered!</p>";
-                            }
+                        if ($isAlreadyRegistered) {
+                            echo "<p>User with such email address is already registered!</p>";
                         }
                         ?>
                     </div>
 
-                    <button class="confirm-button" id="confirm-button-sign-up" name="confirm" value="confirm" type="button">
+                    <button class="confirm-button" id="confirm-button-sign-up" name="confirm" value="confirm"
+                            type="button">
                         Confirm
                     </button>
                 </form>
@@ -86,8 +83,9 @@ class SignUpSections
         <div class="content-block">
             <h1>User data was changed successfully!</h1>
             <div class="form-block">
-                <form id="registration-success-form" action="homePage.php" method="post">
-                    <button class="confirm-button" id="confirm-registration-success-button" type="button">Confirm</button>
+                <form id="registration-success-form" action="<?php echo HrefsConstants::SIGN_IN ?>" method="post">
+                    <button class="confirm-button" id="confirm-registration-success-button" type="button">Confirm
+                    </button>
                 </form>
             </div>
         </div>
@@ -97,9 +95,9 @@ class SignUpSections
     static function renderScripts(): void
     {
         ?>
-        <script src="<?php echo HrefsConstants::FORM_VALIDATION_SCRIPT?>"></script>
-        <script src="<?php echo HrefsConstants::FORM_HANDLING_SCRIPT?>"></script>
-        <script src="<?php echo HrefsConstants::FORM_DATA_HANDLER_SCRIPT?>"></script>
+        <script src="<?php echo HrefsConstants::FORM_VALIDATION_SCRIPT ?>"></script>
+        <script src="<?php echo HrefsConstants::FORM_HANDLING_SCRIPT ?>"></script>
+        <script src="<?php echo HrefsConstants::FORM_DATA_HANDLER_SCRIPT ?>"></script>
         <?php
     }
 }

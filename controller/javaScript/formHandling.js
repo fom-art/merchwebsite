@@ -24,15 +24,11 @@ function addClickListener(elementId, callback) {
 
 function sendPostRequest(formId) {
     let validationResult = false;
-
-    console.log("Click")
-
     switch (formId) {
         case FORM_IDS.SIGN_IN:
             validationResult = Validation.validateSignInForm();
             break;
         case FORM_IDS.SIGN_UP:
-            console.log("start")
             validationResult = Validation.validateSignUpForm();
             break;
         case FORM_IDS.FORGOT_PASSWORD:
@@ -49,8 +45,10 @@ function sendPostRequest(formId) {
     }
 
     if (validationResult) {
-        console.log("Success!")
         submitForm();
+    } else {
+        let validationErrorBlock = document.querySelector("#validation-result-closure").getElementsByClassName("js-validation-message")[0]
+        validationErrorBlock.style.display = "block"
     }
 }
 
