@@ -21,7 +21,7 @@ class SignUpSections
         <div class="content-block">
             <h1>Sign up</h1>
             <div class="form-block">
-                <form name="form" action="<?php echo HrefsConstants::SIGN_UP?>" method="post">
+                <form id="sign-up" name="form" action="<?php echo HrefsConstants::SIGN_UP?>" method="post">
                     <?php
                     //Email input
                     echo Inputs::printInputBlock("email-input-block", "Email", "email", $email, "Invalid Email", FormValidation::isEmailValid($email));
@@ -40,7 +40,7 @@ class SignUpSections
                     //Password input
                     echo Inputs::printInputBlock("password-input-block", "Password", "password", $password, "Invalid Password", FormValidation::isPasswordValid($password));
                     //Repeat password input
-                    echo Inputs::printInputBlock("repeat-password-input-block", "Repeat the password", "password-repeat", $passwordRepeat, "Passwords don't match", FormValidation::isPasswordRepeatValid($password, $passwordRepeat));
+                    echo Inputs::printInputBlock("repeat-password-input-block", "Repeat the password", "repeat-password", $passwordRepeat, "Passwords don't match", FormValidation::isPasswordRepeatValid($password, $passwordRepeat));
                     //Address input
                     echo Inputs::printInputBlock("address-input-block", "Address", "address", $address, "Invalid Address", FormValidation::isAddressValid($address));
                     //Country input
@@ -99,6 +99,7 @@ class SignUpSections
         ?>
         <script src="<?php echo HrefsConstants::FORM_VALIDATION_SCRIPT?>"></script>
         <script src="<?php echo HrefsConstants::FORM_HANDLING_SCRIPT?>"></script>
+        <script src="<?php echo HrefsConstants::FORM_DATA_HANDLER_SCRIPT?>"></script>
         <?php
     }
 }

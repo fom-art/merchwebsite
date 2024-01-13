@@ -21,7 +21,7 @@ class ForgotPasswordSections
         <div class="content-block">
             <h1>Forgot password</h1>
             <div class="form-block">
-                <form id="form" action="<?php echo HrefsConstants::FORGOT_PASSWORD?>" method="post">
+                <form id="forgot-password" action="<?php echo HrefsConstants::FORGOT_PASSWORD?>" method="post">
                     <!-- Email Input -->
                     <div class="input-block" id="email-input-block">
                         <div class="label-block">

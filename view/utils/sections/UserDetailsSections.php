@@ -21,7 +21,7 @@ class UserDetailsSections
         <div class="<?php echo $isFormValid ? 'block-hidden' : 'content-block'; ?>">
             <h1>Change User Data</h1>
             <div class="form-block">
-                <form name="form" action="<?php echo HrefsConstants::USER ?>" method="post">
+                <form id="user-details" name="form" action="<?php echo HrefsConstants::USER ?>" method="post">
                     <?php
                     //Email input
                     echo Inputs::printInputBlock("email-input-block", "Email", "email", $email, "Invalid Email", FormValidation::isEmailValid($email));

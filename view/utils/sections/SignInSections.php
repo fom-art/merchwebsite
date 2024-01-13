@@ -21,7 +21,7 @@ class SignInSections
         <div class="content-block">
             <h1>Log in</h1>
             <div class="form-block">
-                <form action="signInPage.php" method="post">
+                <form id="sign-in"  action="signInPage.php" method="post">
                     <!-- Email Input -->
                     <div class="input-block" id="email-input-block">
                         <div class="label-block">

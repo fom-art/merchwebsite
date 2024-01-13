@@ -1,11 +1,10 @@
 // RegexConstants for Form IDs
 const FORM_IDS = {
-    SIGN_IN: 101,
-    SIGN_UP: 102,
-    FORGOT_PASSWORD: 103,
-    PURCHASE: 104,
-    ADMIN: 105,
-    USER_DETAILS: 106
+    SIGN_UP: "sign-up",
+    SIGN_IN: "sign-in",
+    FORGOT_PASSWORD: "forgot-password",
+    USER_DETAILS: "user-details",
+    ADD_PRODUCT: "add-product",
 };
 
 // Adding Event Listeners

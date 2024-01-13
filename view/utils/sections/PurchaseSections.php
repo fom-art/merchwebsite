@@ -21,7 +21,7 @@ class PurchaseSections
         <div class="content-block">
             <h1>Change User Data</h1>
             <div class="form-block">
-                <form name="form" action="<?php echo HrefsConstants::SIGN_UP ?>" method="post">
+                <form id="purchase" name="form" action="<?php echo HrefsConstants::SIGN_UP ?>" method="post">
                     <?php
                     //Email input
                     echo Inputs::printInputBlock("email-input-block", "Email", "email", $email, "Invalid Email", FormValidation::isEmailValid($email));

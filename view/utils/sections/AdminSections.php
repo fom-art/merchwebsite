@@ -21,7 +21,7 @@ class AdminSections
                 </div>
             </div>
             <div class="form-block">
-                <form action="<?php echo HrefsConstants::ADMIN ?>" method="post" enctype="multipart/form-data">
+                <form id="add-product" action="<?php echo HrefsConstants::ADMIN ?>" method="post" enctype="multipart/form-data">
                     <div class="two-inputs-in-one-row-block">
                         <?php
                         // Product Name input

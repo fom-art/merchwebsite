@@ -15,5 +15,6 @@ class HrefsConstants
     const ADMIN_STYLES="http://zwa.toad.cz/~fomenart/view/styles/adminPageStyles.css";
     const FORM_HANDLING_SCRIPT="http://zwa.toad.cz/~fomenart/controller/javaScript/formHandling.js";
     const FORM_VALIDATION_SCRIPT="http://zwa.toad.cz/~fomenart/controller/javaScript/formValidation.js";
+    const FORM_DATA_HANDLER_SCRIPT="http://zwa.toad.cz/~fomenart/controller/javaScript/formDataHandler.js";
     const PAGINATION_SCRIPT="http://zwa.toad.cz/~fomenart/controller/javaScript/pagination.js";
 }
