@@ -59,16 +59,13 @@ class SignInSections
                     </div>
 
 
-
-                    <!-- Validation Error Message -->
-                    <div class="validation-error-block">
+                    <div class="validation-error-block" id="validation-result-closure">
                         <?php
-                        if (isset($_POST['email']) && !$isLogInSuccess ) {
+                        if (isset($_POST['email']) && !$isLogInSuccess) {
                             echo "<p>Invalid Email or Password!</p>";
                         }
                         ?>
                     </div>
-
 
                     <!-- Confirm Button -->
                     <button class="confirm-button" id="confirm-button-sign-in" name="confirm" value="confirm"

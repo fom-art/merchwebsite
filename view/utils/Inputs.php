@@ -24,6 +24,28 @@ class Inputs
         return ob_get_clean();
     }
 
+    public static function printFileInputBlock($id, $label, $name, $value, $validationMessage, $isValid)
+    {
+        ob_start();
+        ?>
+        <div class="input-block" id="<?php echo $id; ?>">
+            <div class="label-block">
+                <label for="<?php echo $name; ?>"><?php echo $label; ?>:</label>
+            </div>
+            <input type="file"
+                   id="<?php echo $name; ?>" name="<?php echo $name; ?>" value="<?php echo htmlspecialchars($value); ?>"
+                   required>
+            <div class="validation-error-block">
+                <p class="js-validation-message"><?php echo $validationMessage; ?></p>
+                <?php if (!$isValid && isset($_POST['confirm'])) {
+                    echo "<p>*</p>";
+                } ?>
+            </div>
+        </div>
+        <?php
+        return ob_get_clean();
+    }
+
     public static function printCsrfTokenInput($token)
     {
         ob_start();

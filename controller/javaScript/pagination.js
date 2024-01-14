@@ -3,8 +3,8 @@ const images = generateSampleImages();
 function generateSampleImages() {
     const sampleImages = [];
     for (let i = 0; i < 27; i++) {
-        sampleImages.push({ name: "Stickerpack Mobile Legends", source: "images/stickerpack1.png", price: "3$" });
-        sampleImages.push({ name: "Genshin Key Chain", source: "images/randomMerch.jpg", price: "3$" });
+        sampleImages.push({ name: "Stickerpack Mobile Legends", source: "view/images/stickerpack1.png", price: "3$" });
+        sampleImages.push({ name: "Genshin Key Chain", source: "view/images/randomMerch.jpg", price: "3$" });
     }
     return sampleImages;
 }

@@ -1,4 +1,16 @@
-<?php use view\utils\sections\HomeSections;?>
+<?php use view\utils\sections\HomeSections;
+
+
+$targetDir = "/home/fomenart/www/view/images";
+
+if (!is_dir($targetDir)) {
+    echo "Error: Target directory does not exist ";
+}
+
+if (!is_writable($targetDir)) {
+    echo "Error: Target directory is not writable.";
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

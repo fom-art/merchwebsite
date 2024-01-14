@@ -14,12 +14,11 @@ addClickListener("confirm-button-forgot-password", () => sendPostRequest(FORM_ID
 addClickListener("confirm-button-purchase", () => sendPostRequest(FORM_IDS.PURCHASE));
 addClickListener("confirm-button-user-details", () => sendPostRequest(FORM_IDS.USER_DETAILS));
 addClickListener("confirm-button-log-out", () => logOut());
-addClickListener("confirm-button-admin", () => sendPostRequest(FORM_IDS.ADMIN));
+addClickListener("confirm-button-admin", () => sendPostRequest(FORM_IDS.ADD_PRODUCT));
 addClickListener("confirm-registration-success-button", submitRegistrationSuccessForm);
 
 function addClickListener(elementId, callback) {
     const element = document.getElementById(elementId);
-    console.log("please")
     if (element) {
         element.addEventListener("click", callback);
     }
@@ -27,7 +26,6 @@ function addClickListener(elementId, callback) {
 
 function sendPostRequest(formId) {
     let validationResult = false;
-    console.log("Hi")
     switch (formId) {
         case FORM_IDS.SIGN_IN:
             validationResult = Validation.validateSignInForm();
@@ -50,30 +48,26 @@ function sendPostRequest(formId) {
 
     if (validationResult) {
         submitForm();
-    } else {
-        let validationErrorBlock = document.querySelector("#validation-result-closure").getElementsByClassName("js-validation-message")[0]
-        validationErrorBlock.style.display = "block"
     }
 }
+    function submitForm() {
+        document.querySelector("form").submit();
+        localStorage.clear();
+    }
 
-function submitForm() {
-    document.querySelector("form").submit();
-    localStorage.clear();
-}
+    function submitRegistrationSuccessForm() {
+        document.getElementById("registration-success-form").submit();
+    }
 
-function submitRegistrationSuccessForm() {
-    document.getElementById("registration-success-form").submit();
-}
-
-function logOut() {
-    console.log('Click')
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://zwa.toad.cz/~fomenart/index.php/user", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.send("action=unset");
-    xhr.onreadystatechange = function() {
-        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-            window.location.href = "http://zwa.toad.cz/~fomenart/index.php/sign-in";
-        }
-    };
-}
+    function logOut() {
+        console.log('Click')
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://zwa.toad.cz/~fomenart/index.php/user", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send("action=unset");
+        xhr.onreadystatechange = function () {
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                window.location.href = "http://zwa.toad.cz/~fomenart/index.php/sign-in";
+            }
+        };
+    }

@@ -59,11 +59,12 @@ class UserDetailsSections
                     <?php echo Inputs::printCsrfTokenInput($csrfToken)?>
 
                     <!-- Validation Error Display -->
-                    <div class="validation-error-block">
+                    <div class="validation-error-block" id="validation-result-closure">
                         <?php if (isset($_POST['email']) && $isCsrfSuccess) {
                             echo "<p>Invalid inputs. Check the inputs marked by *</p>";
                         } ?>
                     </div>
+
                     <div class="two-inputs-in-one-row-block">
 
                         <!-- Confirm Button -->

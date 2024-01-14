@@ -61,15 +61,14 @@ class PurchaseSections
                     echo Inputs::printCsrfTokenInput($csrfToken)
                     ?>
 
-                    <div class="validation-error-block">
+                    <div class="validation-error-block" id="validation-result-closure">
                         <?php
-                        if (isset($_POST['confirm'])) {
-                            if (!$isFormValid) {
-                                echo "<p>Invalid inputs. Check the inputs marked by *</p>";
-                            }
+                        if (isset($_POST['email']) && $isFormValid) {
+                            echo "<p>Invalid inputs. Check the inputs marked by *</p>";
                         }
                         ?>
                     </div>
+
 
                     <button class="confirm-button" id="confirm-button-purchase" name="confirm" value="confirm"
                             type="button">

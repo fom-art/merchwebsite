@@ -144,17 +144,13 @@ class DatabaseHandler{
 
     function createProduct($productName, $productPrice, $productType, $productDescription, $productPhoto): bool
     {
-        $target_dir = "../images";
-        $temp_name = $productPhoto['tmp_name'];
-        $file = $productPhoto['name'];
-        $path = pathinfo($file);
-        $ext = $path['extension'];
-        $filename = $path['filename'];
-        $productPhotoPath = $productPhoto['name'];
-        $path_filename_ext = $target_dir . $filename . "." . $ext;
-        move_uploaded_file($temp_name, $path_filename_ext);
+        $productPhotoPath = $productPhoto;
+
+
+
         $sqlQuery = "INSERT INTO `$this->productDatabaseName` (`productName`, `productPrice`, `productType`, `productDescription`, `productPhotoPath`)
         VALUES ('$productName', '$productPrice', '$productType', '$productDescription',  '$productPhotoPath')";
+
         return $this->database->query($sqlQuery);
     }
 
@@ -240,4 +236,23 @@ class DatabaseHandler{
 {
     return password_hash($passwordToHash, PASSWORD_BCRYPT);
 }
+
+    public function productPhotoExists($photoPath): bool
+    {
+        $sqlRequestToGetProduct = "SELECT COUNT(*) FROM " . $this->productDatabaseName . " WHERE productPhotoPath = ?";
+        $stmt = $this->database->prepare($sqlRequestToGetProduct);
+        if ($stmt) {
+            $stmt->bind_param("s", $photoPath);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $row = $result->fetch_row();
+            $stmt->close();
+            return $row[0] > 0; // If count is greater than 0, the photo exists
+        } else {
+            // Handle error, possibly log it and/or notify someone
+            error_log('Prepare failed: ' . $this->database->error);
+            return false;
+        }
+    }
+
 }

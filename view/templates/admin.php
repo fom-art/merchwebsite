@@ -17,16 +17,19 @@ use view\utils\sections\AdminSections;
 <body>
 <?php
 Icons::printBackArrowIcon(HrefsConstants::INDEX, "back-button");
-if ($this->isRegistered ?? false) {
-    (new DatabaseHandler)->createProduct(
-            productName: $this->productName,
-            productPrice: $this->productPrice,
-            productType: $this->productType,
-            productDescription: $this->productDescription,
-            productPhoto: $this->productPhoto);
+if ($this->addProductResult ?? false) {
     AdminSections::renderSuccessMessage();
 } else {
-    AdminSections::renderForm(false, "", "", "", "", "",);
+    AdminSections::renderForm(
+        productName: $this->productName,
+        productPrice: $this->productPrice,
+        productType: $this->productType,
+        productDescription: $this->productDescription,
+        photo: $this->productPhoto,
+        addProductResult: $this->addProductResult,
+        csrfToken: $this->csrfToken,
+        isCsrfSuccess: $this->isCsrfSuccess
+    );
 }
 AdminSections::renderScripts();
 ?>

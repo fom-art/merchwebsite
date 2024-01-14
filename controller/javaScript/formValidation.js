@@ -10,10 +10,12 @@ class Validation {
         CITY: 8,
         POST_CODE: 9,
         PHONE_NUMBER: 10,
-        PRODUCT_NAME: 11,
-        PRICE: 12,
-        PHOTO: 13,
-        PURCHASE_DESCRIPTION: 14,
+        PURCHASE_DESCRIPTION: 11,
+        PRODUCT_NAME: 12,
+        PRICE: 13,
+        PRODUCT_TYPE: 13,
+        PRODUCT_DESCRIPTION: 14,
+        PHOTO: 15
     };
 
     static validateSignInForm() {
@@ -40,7 +42,8 @@ class Validation {
 
     static validateAdminForm() {
         return this.validateInputs([
-            this.INPUT_CODES.PRODUCT_NAME, this.INPUT_CODES.PRICE, this.INPUT_CODES.PHOTO
+            this.INPUT_CODES.PRODUCT_NAME, this.INPUT_CODES.PRICE, this.INPUT_CODES.PRODUCT_TYPE,
+            this.INPUT_CODES.PRODUCT_DESCRIPTION, this.INPUT_CODES.PHOTO
         ]);
     }
 
@@ -60,7 +63,6 @@ class Validation {
     static validateInputs(inputCodes) {
         let allValid = true;
         inputCodes.forEach(code => {
-            console.log(code)
             const inputBlock = this.getInputBlockFromCode(code);
             if (!this.validateInput(inputBlock, code)) {
                 allValid = false;
@@ -80,6 +82,7 @@ class Validation {
     }
 
     static getInputBlockFromCode(inputCode) {
+        console.log("input code: " + inputCode)
         const inputIdMap = {
             [this.INPUT_CODES.EMAIL]: "email-input-block",
             [this.INPUT_CODES.PASSWORD]: "password-input-block",
@@ -93,6 +96,8 @@ class Validation {
             [this.INPUT_CODES.PHONE_NUMBER]: "phone-number-input-block",
             [this.INPUT_CODES.PRODUCT_NAME]: "product-name-input-block",
             [this.INPUT_CODES.PRICE]: "product-price-input-block",
+            [this.INPUT_CODES.PRODUCT_TYPE]: "product-type-input-block",
+            [this.INPUT_CODES.PRODUCT_DESCRIPTION]: "product-description-input-block",
             [this.INPUT_CODES.PHOTO]: "photo-input-block",
             [this.INPUT_CODES.PURCHASE_DESCRIPTION]: "purchase-description-input-block"
         };
@@ -114,6 +119,8 @@ class Validation {
             [this.INPUT_CODES.PHONE_NUMBER]: this.isPhoneValid,
             [this.INPUT_CODES.PRODUCT_NAME]: this.isProductNameValid,
             [this.INPUT_CODES.PRICE]: this.isPriceValid,
+            [this.INPUT_CODES.PRODUCT_TYPE]: this.isProductTypeValid,
+            [this.INPUT_CODES.PRODUCT_DESCRIPTION]: this.isProductDescriptionValid,
             [this.INPUT_CODES.PHOTO]: this.isPhotoValid,
             [this.INPUT_CODES.PURCHASE_DESCRIPTION]: this.isPurchaseDescriptionValid
         };
@@ -178,13 +185,23 @@ class Validation {
         let priceRegex = /^-?\d+\.?\d*$/;
         return priceRegex.test(input_value)
     }
+    static isProductTypeValid(input_value) {
+        let purchaseDescriptionRegex = /[a-zA-Z0-9,.;:'"#$%()/@\s]+$/;
+        return purchaseDescriptionRegex.test(input_value)
+    }
+    static isProductDescriptionValid(input_value) {
+        let purchaseDescriptionRegex = /[a-zA-Z0-9,.;:'"#$%()/@\s]+$/;
+        return purchaseDescriptionRegex.test(input_value)
+    }
 
     static isPhotoValid(inputElement) {
+        console.log(inputElement.files)
         if (!inputElement.files || inputElement.files.length === 0) {
             return false; // No file is selected
         }
 
         const file = inputElement.files[0];
+        console.log(file.type)
         const validImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
 
         return validImageTypes.includes(file.type);

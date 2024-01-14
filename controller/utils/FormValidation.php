@@ -3,7 +3,9 @@
 namespace controller\utlis;
 
 use controller\constants\RegexConstants;
+
 require_once(__DIR__ . "/../constants/RegexConstants.php");
+
 class FormValidation
 {
     static function isEmailValid($input): bool
@@ -56,9 +58,29 @@ class FormValidation
         return preg_match(RegexConstants::PRODUCT_PRICE_REGEX, $input);
     }
 
-    static function isProductPhotoExtensionValid($input): bool
+    static function isProductPhotoValid($image): bool
     {
-        return in_array($input, RegexConstants::ALLOWED_PHOTO_EXTENSIONS);
+        if (is_array($image) && isset($image['tmp_name']) && $image['error'] === UPLOAD_ERR_OK) {
+            $allowedExtensions = ['jpg', 'jpeg', 'png'];
+
+            // Check for upload errors
+            if ($image['error'] !== UPLOAD_ERR_OK) {
+                return false;
+            }
+
+            $fileExtension = strtolower(pathinfo($image['name'], PATHINFO_EXTENSION));
+
+            if (!in_array($fileExtension, $allowedExtensions)) {
+                return false;
+            }
+
+            // Use getimagesize() to validate if the file is an image
+            if (!getimagesize($image['tmp_name'])) {
+                return false;
+            }
+            return true;
+        }
+        return false;
     }
 
     static function isPurchaseDescriptionValid($input): bool
@@ -122,12 +144,12 @@ class FormValidation
             self::isPurchaseDescriptionValid($purchaseDescription);
     }
 
-    static function validateProductForm($productName, $productPrice, $productType, $productDescription, $productPhotoExtension): bool
+    static function validateProductForm($productName, $productPrice, $productType, $productDescription, $productPhoto): bool
     {
         return self::isProductNameValid($productName) *
             self::isProductPriceValid($productPrice) *
             self::isProductTypeValid($productType) *
             self::isProductDescriptionValid($productDescription) *
-            self::isProductPhotoExtensionValid($productPhotoExtension);
+            self::isProductPhotoValid($productPhoto);
     }
 }

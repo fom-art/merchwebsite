@@ -12,7 +12,7 @@ require_once __DIR__ . '/../HrefsConstants.php';
 
 class AdminSections
 {
-    static function renderForm($isFormValid, $productName, $productPrice, $productType, $productDescription, $photo): void
+    static function renderForm($productName, $productPrice, $productType, $productDescription, $photo, $addProductResult, $csrfToken, $isCsrfSuccess): void
     { ?>
         <div class="content-block">
             <div class="header-block">
@@ -44,7 +44,9 @@ class AdminSections
 
                     <?php
                     // Photo input
-                    echo Inputs::printInputBlock("photo-input-block", "Photo", "photo-file", $photo, "Invalid Photo!", FormValidation::isProductPhotoExtensionValid($photo));
+                    echo Inputs::printFileInputBlock("photo-input-block", "Photo", "photo", $photo, "Invalid Photo!", FormValidation::isProductPhotoValid($photo));
+                    // Csrf input
+                    echo Inputs::printCsrfTokenInput($csrfToken)
                     ?>
 
                     <button class="confirm-button" id="confirm-button-admin" type="submit" name="confirm"
@@ -53,7 +55,7 @@ class AdminSections
                     </button>
 
                     <?php
-                    if (isset($_POST['confirm']) && $isFormValid) {
+                    if (isset($_POST['product-name']) && $isCsrfSuccess && $addProductResult) {
                         echo "<div class='validation-error-block'><p>Invalid inputs. Check the inputs marked by *</p></div>";
                     }
                     ?>

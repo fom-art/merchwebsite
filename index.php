@@ -73,7 +73,7 @@ switch (end($uriSegments)) {
         $forgotPasswordController->index();
         break;
     case 'purchase':
-        $purchaseController = new PurchaseController(false, false);
+        $purchaseController = new PurchaseController();
         $purchaseController->index();
         break;
     case 'sign-in':
