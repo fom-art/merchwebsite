@@ -56,7 +56,7 @@ class DatabaseHandler{
     function checkIfUserWithEmailExists($email): bool
     {
         $user = $this->getUserByEmail($email);
-        if ($user->getId() == null) {
+        if (!($user instanceof User)) {
             return false;
         } else {
             return true;

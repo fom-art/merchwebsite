@@ -24,7 +24,7 @@ class SignUpController
         $isRegisteredAlready = isset($_POST['email']) && $this->checkIfUserWithEmailRegistered($_POST['email']);
 
         if ($isFormValid && !$isRegisteredAlready
-            && isset($_POST['csrf-token']) && $_POST['csrf-token'] == $_SESSION['csrf-token']) {
+            && isset($_POST['csrf-token']) && isset($_SESSION['csrf-token']) && $_POST['csrf-token'] == $_SESSION['csrf-token']) {
             $registrationResult = $this->registerUser();
         }
 

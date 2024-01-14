@@ -62,12 +62,12 @@ function sendPostRequest(formId) {
     function logOut() {
         console.log('Click')
         const xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://zwa.toad.cz/~fomenart/index.php/user", true);
+        xhr.open("POST", "https://zwa.toad.cz/~fomenart/index.php/user", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.send("action=unset");
         xhr.onreadystatechange = function () {
             if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                window.location.href = "http://zwa.toad.cz/~fomenart/index.php/sign-in";
+                window.location.href = "https://zwa.toad.cz/~fomenart/index.php/sign-in";
             }
         };
     }
