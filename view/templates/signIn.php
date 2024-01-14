@@ -18,7 +18,8 @@ if ($this->logInResult ?? false) {
     SignInSections::renderForm(
         email: $this->email,
         password: $this->password,
-        csrfToken: $this->csrfToken
+        csrfToken: $this->csrfToken,
+        isLogInSuccess: $this->logInResult
     );
 }
 SignInSections::renderScripts();

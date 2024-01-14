@@ -20,10 +20,14 @@ class PurchaseView
     public String $postCode;
     public String $phoneNumber;
     public String $purchaseDescription;
+    public String $csrfToken;
+    public bool $purchaseResult;
+    public bool $isCsrfSuccess;
 
-    public function __construct($isPostSet, $email, $name, $surname, $address, $country, $city, $postCode, $phoneNumber, $purchaseDescription)
+    public function __construct($purchaseResult, $isPostSet, $email, $name, $surname, $address, $country, $city, $postCode, $phoneNumber, $purchaseDescription, $csrfToken, $isCsrfSuccess)
     {
         $this->isFormValid = FormValidation::validatePurchaseForm($email, $name, $surname, $address, $country, $city, $postCode, $phoneNumber, $purchaseDescription);
+        $this->purchaseResult = $purchaseResult;
         $this->isPostSet = $isPostSet;
         $this->email = $email;
         $this->name = $name;
@@ -34,6 +38,8 @@ class PurchaseView
         $this->postCode = $postCode;
         $this->phoneNumber = $phoneNumber;
         $this->purchaseDescription = $purchaseDescription;
+        $this->csrfToken = $csrfToken;
+        $this->isCsrdSuccess = $isCsrfSuccess;
     }    public function render() {
         include __DIR__ . '/templates/purchase.php';
     }

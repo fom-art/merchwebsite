@@ -18,7 +18,7 @@ class SignInController
 
         $logInResult = false;
 
-        if ($isFormValid && isset($_POST['csrf-token']) && $_POST['csrf-token'] == $_SESSION['csrf-token']) {
+        if ($isFormValid && isset($_POST['csrf-token']) && isset($_SESSION['csrf-token']) && $_POST['csrf-token'] == $_SESSION['csrf-token']) {
             $logInResult = $this->logInUser();
         }
 
@@ -64,8 +64,9 @@ class SignInController
             $_SESSION['address'] = $user->getAddress();
             $_SESSION['country'] = $user->getCountry();
             $_SESSION['city'] = $user->getCity();
-            $_SESSION['postCode'] = $user->getPostCode();
-            $_SESSION['phoneNumber'] = $user->getPhoneNumber();
+            $_SESSION['post-code'] = $user->getPostCode();
+            $_SESSION['phone-number'] = $user->getPhoneNumber();
+            $_SESSION['is-admin'] = $user->getIsAdmin();
             unset($_SESSION['csrf-token']);
         }
 

@@ -15,7 +15,7 @@ require_once __DIR__ . '/../HrefsConstants.php';
 
 class SignInSections
 {
-    public static function renderForm($email, $password, $csrfToken)
+    public static function renderForm($email, $password, $csrfToken, $isLogInSuccess)
     {
         ?>
         <div class="content-block">
@@ -63,7 +63,7 @@ class SignInSections
                     <!-- Validation Error Message -->
                     <div class="validation-error-block">
                         <?php
-                        if (isset($_POST['confirm']) && (!$isFormValid || (new model\database\DatabaseHandler)->checkUserForLogIn($email, $password))) {
+                        if (isset($_POST['email']) && !$isLogInSuccess ) {
                             echo "<p>Invalid Email or Password!</p>";
                         }
                         ?>

@@ -60,6 +60,7 @@ class Validation {
     static validateInputs(inputCodes) {
         let allValid = true;
         inputCodes.forEach(code => {
+            console.log(code)
             const inputBlock = this.getInputBlockFromCode(code);
             if (!this.validateInput(inputBlock, code)) {
                 allValid = false;

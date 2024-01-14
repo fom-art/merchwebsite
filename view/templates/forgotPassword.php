@@ -1,4 +1,4 @@
-<?php use view\utils\sections\ForgotPasswordSections;?>
+<?php use view\utils\sections\ForgotPasswordSections; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,10 +12,16 @@
 <body>
 <?php
 Icons::printBackArrowIcon(HrefsConstants::SIGN_IN, "back-button");
-if ($this->isFormValid ?? false) {
+if ($this->isUserWithEmailFound ?? false) {
     ForgotPasswordSections::renderConfirmationMessage();
 } else {
-    ForgotPasswordSections::renderForm($this->isFormValid, $this->email);
+    ForgotPasswordSections::renderForm(
+        isUserWithEmailFound: $this->isUserWithEmailFound,
+        email: $this->email,
+        csrfToken: $this->csrfToken,
+        isCsrfSuccess: $this->isCsrfSuccess
+
+    );
 }
 ForgotPasswordSections::renderScripts();
 ?>

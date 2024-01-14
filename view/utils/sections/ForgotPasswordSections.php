@@ -15,30 +15,30 @@ require_once __DIR__ . '/../HrefsConstants.php';
 
 class ForgotPasswordSections
 {
-    public static function renderForm($isFormValid, $email)
+    public static function renderForm($isUserWithEmailFound, $email, $csrfToken, $isCsrfSuccess)
     {
         ?>
         <div class="content-block">
             <h1>Forgot password</h1>
             <div class="form-block">
-                <form id="forgot-password" action="<?php echo HrefsConstants::FORGOT_PASSWORD?>" method="post">
-                    <!-- Email Input -->
-                    <div class="input-block" id="email-input-block">
-                        <div class="label-block">
-                            <label for="email-input">Email:</label>
-                        </div>
-                        <input type="email" id="email-input" name="email"
-                               value="<?php echo isset($_POST['confirm']) ? htmlspecialchars($email) : ''; ?>" required>
-                        <div class="validation-error-block">
-                            <!-- Validation Messages -->
-                            <p class="js-validation-message">Invalid Email :(</p>
-                            <?php
-                            if (isset($_POST['confirm']) && !$isFormValid) {
-                                echo "<p>User with the entered email wasn't found :(</p>";
-                            }
-                            ?>
-                        </div>
+                <form id="forgot-password" action="<?php echo HrefsConstants::FORGOT_PASSWORD ?>" method="post">
+                    <?php
+                    //Email input
+                    echo Inputs::printInputBlock("email-input-block", "Email", "email", $email, "Invalid email!", FormValidation::isEmailValid($email));
+                    //Csrf token input
+                    echo Inputs::printCsrfTokenInput($csrfToken)
+                    ?>
+
+                    <!-- Validation Error Message -->
+                    <div class="validation-error-block">
+                        <?php
+                        if ($isCsrfSuccess && !$isUserWithEmailFound) {
+                            echo $_POST['email'];
+                            echo "<p>User with entered email doesn't exist :(</p>";
+                        }
+                        ?>
                     </div>
+
                     <button class="confirm-button" id="confirm-button-forgot-password" type="button" name="confirm"
                             value="confirm">Confirm
                     </button>
@@ -51,12 +51,14 @@ class ForgotPasswordSections
     static function renderConfirmationMessage()
     {
         ?>
-        <<!-- Confirmation Message -->
+        <!-- Confirmation Message -->
         <div class="content-block">
             <h1>Check your email to continue!</h1>
             <div class="form-block">
-                <form id="registration-success-form" name="form" action="<?php echo HrefsConstants::SIGN_IN?>" method="post">
-                    <button class="confirm-button" id="confirm-registration-success-button" name="confirm" value="confirm"
+                <form id="registration-success-form" name="form" action="<?php echo HrefsConstants::SIGN_IN ?>"
+                      method="post">
+                    <button class="confirm-button" id="confirm-registration-success-button" name="confirm"
+                            value="confirm"
                             type="button">Confirm
                     </button>
                 </form>

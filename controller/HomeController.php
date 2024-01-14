@@ -13,8 +13,8 @@ class HomeController
     public function __construct()
     {
         $this->view = new HomeView(
-            isRegistered: isset($_SESSION["user"]),
-            isAdmin: isset($_SESSION['user']['isAdmin']) && $_SESSION['user']['isAdmin']
+            isRegistered: isset($_SESSION["email"]),
+            isAdmin: isset($_SESSION['is-admin']) && $_SESSION['is-admin']
         );
     }
 

@@ -7,16 +7,20 @@ require_once 'utils/HrefsConstants.php';
 
 class ForgotPasswordView
 {
-    private $isFormValid;
-    private $email;
+    public $isUserWithEmailFound;
+    public $email;
+    public $csrfToken;
+    public $isCsrfSuccess;
 
-    public function __construct($isFormValid, $email)
+    public function __construct($isUserWithEmailFound, $email, $csrfToken, $isCsrfSuccess)
     {
-        $this->$isFormValid = $isFormValid;
-        $this->$email = $email;
+        $this->isUserWithEmailFound = $isUserWithEmailFound;
+        $this->email = $email;
+        $this->csrfToken = $csrfToken;
+        $this->isCsrfSuccess = $isCsrfSuccess;
     }
 
-    public function render()
+    public function render(): void
     {
         include __DIR__ . '/templates/forgotPassword.php';
     }

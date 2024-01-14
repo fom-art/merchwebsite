@@ -12,7 +12,7 @@
 <body>
 <?php
 Icons::printBackArrowIcon(HrefsConstants::INDEX, "back-button");
-if ($this->isRegistered ?? false) {
+if ($this->purchaseResult ?? false) {
     PurchaseSections::renderSuccessMessage();
 } else {
     PurchaseSections::renderForm(
@@ -25,7 +25,8 @@ if ($this->isRegistered ?? false) {
         city: $this->city,
         postCode: $this->postCode,
         phoneNumber: $this->phoneNumber,
-        purchaseDescription: $this->purchaseDescription
+        purchaseDescription: $this->purchaseDescription,
+        csrfToken: $this->csrfToken
     );
 }
 PurchaseSections::renderScripts();

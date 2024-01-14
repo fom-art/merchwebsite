@@ -15,13 +15,13 @@ require_once __DIR__ . '/../HrefsConstants.php';
 
 class PurchaseSections
 {
-    public static function renderForm($isFormValid, $email, $name, $surname, $address, $country, $city, $postCode, $phoneNumber, $purchaseDescription)
+    public static function renderForm($isFormValid, $email, $name, $surname, $address, $country, $city, $postCode, $phoneNumber, $purchaseDescription, $csrfToken)
     {
         ?>
         <div class="content-block">
-            <h1>Change User Data</h1>
+            <h1>Make a purchase</h1>
             <div class="form-block">
-                <form id="purchase" name="form" action="<?php echo HrefsConstants::SIGN_UP ?>" method="post">
+                <form id="purchase" name="form" action="<?php echo HrefsConstants::PURCHASE?>" method="post">
                     <?php
                     //Email input
                     echo Inputs::printInputBlock("email-input-block", "Email", "email", $email, "Invalid Email", FormValidation::isEmailValid($email));
@@ -57,6 +57,8 @@ class PurchaseSections
                     <?php
                     // Purchase Description
                     echo Inputs::printInputBlock("purchase-description-input-block", "Describe your purchase", "purchase-description", $purchaseDescription, "Invalid Purchase Description", FormValidation::isPurchaseDescriptionValid($city));
+                    //Csrf Input
+                    echo Inputs::printCsrfTokenInput($csrfToken)
                     ?>
 
                     <div class="validation-error-block">
@@ -69,7 +71,7 @@ class PurchaseSections
                         ?>
                     </div>
 
-                    <button class="confirm-button" id="confirm-button-sign-up" name="confirm" value="confirm"
+                    <button class="confirm-button" id="confirm-button-purchase" name="confirm" value="confirm"
                             type="button">
                         Confirm
                     </button>

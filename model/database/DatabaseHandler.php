@@ -63,7 +63,7 @@ class DatabaseHandler{
         }
     }
 
-    function getUserByEmail($email): User
+    function getUserByEmail($email): User | bool
     {
         $sqlRequestToGetUser = "SELECT * FROM $this->userDatabaseName WHERE `email` = '$email'";
         $queryResult = $this->database->query($sqlRequestToGetUser);
@@ -86,7 +86,7 @@ class DatabaseHandler{
                 }
             }
         }
-        return new User;
+        return false;
     }
 
     function getProductById($id): Product
@@ -142,7 +142,7 @@ class DatabaseHandler{
         return $this->database->query($sqlQuery);
     }
 
-    function createProduct($productName, $productPrice, $productType, $productDescription, $productPhoto): void
+    function createProduct($productName, $productPrice, $productType, $productDescription, $productPhoto): bool
     {
         $target_dir = "../images";
         $temp_name = $productPhoto['tmp_name'];
@@ -155,14 +155,14 @@ class DatabaseHandler{
         move_uploaded_file($temp_name, $path_filename_ext);
         $sqlQuery = "INSERT INTO `$this->productDatabaseName` (`productName`, `productPrice`, `productType`, `productDescription`, `productPhotoPath`)
         VALUES ('$productName', '$productPrice', '$productType', '$productDescription',  '$productPhotoPath')";
-        $this->database->query($sqlQuery);
+        return $this->database->query($sqlQuery);
     }
 
-    function createPurchase($email, $name, $surname, $address, $country, $city, $postCode, $phoneNumber, $purchaseDescription): void
+    function createPurchase($email, $name, $surname, $address, $country, $city, $postCode, $phoneNumber, $purchaseDescription): bool
     {
         $sqlQuery = "INSERT INTO `$this->purchaseDatabaseName` (`email`, `name`, `surname`, `address`, `country`, `city`, `postCode`, `phoneNumber`, `purchaseDescription`)
         VALUES ('$email', '$name', '$surname', '$address', '$country', '$city', '$postCode', '$phoneNumber', '$purchaseDescription')";
-        $this->database->query($sqlQuery);
+        return $this->database->query($sqlQuery);
     }
 
     function changeUserDatabaseData($user): void
