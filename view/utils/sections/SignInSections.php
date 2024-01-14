@@ -46,7 +46,7 @@ class SignInSections
 
                     <?php
                     // Password input
-                    echo Inputs::printInputBlock("password-input-block", "Password", "password", htmlspecialchars($password), "Invalid Password", FormValidation::isPasswordValid($password));
+                    echo Inputs::printInputBlock("password-input-block", "Password", "password", $password, "Invalid Password", FormValidation::isPasswordValid($password));
                     ?>
 
                     <?php

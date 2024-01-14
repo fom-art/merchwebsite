@@ -18,150 +18,178 @@ class DatabaseHandler{
     private string $purchaseDatabaseName;
 
 
-    function __construct()
+    public function __construct()
     {
-
-        $this->setOriginalDatabase();
+        $this->connectToDatabase();
         $this->setDatabaseNames();
     }
 
-    private function setOriginalDatabase(): void
-{
-    $this->database = mysqli_connect(DatabaseConstants::DATABASE_HOST_NAME, DatabaseConstants::DATABASE_USERNAME, DatabaseConstants::DATABASE_PASSWORD, DatabaseConstants::DATABASE_USERNAME);
-}
+    private function connectToDatabase(): void
+    {
+        $this->database = mysqli_connect(
+            DatabaseConstants::DATABASE_HOST_NAME,
+            DatabaseConstants::DATABASE_USERNAME,
+            DatabaseConstants::DATABASE_PASSWORD,
+            DatabaseConstants::DATABASE_USERNAME
+        );
+    }
 
     private function setDatabaseNames(): void
-{
-    $this->userDatabaseName = DatabaseConstants::USER_DATABASE_NAME;
-    $this->productDatabaseName = DatabaseConstants::PRODUCT_DATABASE_NAME;
-    $this->purchaseDatabaseName = DatabaseConstants::PURCHASE_DATABASE_NAME;
-
-}
+    {
+        $this->userDatabaseName = DatabaseConstants::USER_DATABASE_NAME;
+        $this->productDatabaseName = DatabaseConstants::PRODUCT_DATABASE_NAME;
+        $this->purchaseDatabaseName = DatabaseConstants::PURCHASE_DATABASE_NAME;
+    }
 
     function getOriginalDatabase(): \mysqli
     {
         return $this->database;
     }
 
-    function checkUserForLogIn($email, $password): bool
+    public function checkUserForLogIn($email, $password): bool
     {
         $user = $this->getUserByEmail($email);
-        if ($user->getId() == null) {
-            return false;
-        } else {
-            return password_verify($password, $user->getPassword());
-        }
+        return $user && password_verify($password, $user->getPassword());
     }
 
-    function checkIfUserWithEmailExists($email): bool
+    public function checkIfUserWithEmailExists($email): bool
     {
         $user = $this->getUserByEmail($email);
-        if (!($user instanceof User)) {
-            return false;
-        } else {
-            return true;
-        }
+        return $user instanceof User;
     }
 
-    function getUserByEmail($email): User | bool
+    public function getUserByEmail($email): User | bool
     {
-        $sqlRequestToGetUser = "SELECT * FROM $this->userDatabaseName WHERE `email` = '$email'";
-        $queryResult = $this->database->query($sqlRequestToGetUser);
-        if ($queryResult->num_rows > 0) {
-            while ($row = $queryResult->fetch_assoc()) {
-                if ($row["email"] = $email) {
-                    $user = new User();
-                    $user->setId($row["id"]);
-                    $user->setEmail($row["email"]);
-                    $user->setPassword($row["password"]);
-                    $user->setName($row["name"]);
-                    $user->setSurname($row["surname"]);
-                    $user->setAddress($row["address"]);
-                    $user->setCountry($row["country"]);
-                    $user->setCity($row["city"]);
-                    $user->setPostCode($row["postCode"]);
-                    $user->setPhoneNumber($row["phoneNumber"]);
-                    $user->setIsAdmin($row["isAdmin"]);
-                    return $user;
-                }
+        $sqlRequestToGetUser = "SELECT * FROM $this->userDatabaseName WHERE `email` = ?";
+        $stmt = $this->database->prepare($sqlRequestToGetUser);
+
+        if ($stmt) {
+            $stmt->bind_param("s", $email);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $stmt->close();
+
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $user = new User();
+                $user->setId($row["id"]);
+                $user->setEmail($row["email"]);
+                $user->setPassword($row["password"]);
+                $user->setName($row["name"]);
+                $user->setSurname($row["surname"]);
+                $user->setAddress($row["address"]);
+                $user->setCountry($row["country"]);
+                $user->setCity($row["city"]);
+                $user->setPostCode($row["postCode"]);
+                $user->setPhoneNumber($row["phoneNumber"]);
+                $user->setIsAdmin($row["isAdmin"]);
+                return $user;
             }
         }
+
         return false;
     }
 
-    function getProductById($id): Product
+    public function getPurchaseById($id): Purchase
     {
-        $sqlRequestToGetProduct = "SELECT * FROM " . $this->productDatabaseName . " WHERE id = " . $id;
-        $queryResult = $this->database->query($sqlRequestToGetProduct);
-        if ($queryResult->num_rows > 0) {
-            while ($row = $queryResult->fetch_assoc()) {
-                if ($row["id"] = $id) {
-                    $product = new Product();
-                    $product->setId($row["id"]);
-                    $product->setProductName($row["productName"]);
-                    $product->setProductPrice($row["productPrice"]);
-                    $product->setPhotoPath($row["productPhotoPath"]);
-                    return $product;
-                }
-            }
-        }
-        return new Product();
-    }
+        $sqlRequestToGetPurchase = "SELECT * FROM $this->purchaseDatabaseName WHERE id = ?";
+        $stmt = $this->database->prepare($sqlRequestToGetPurchase);
 
-    function getPurchaseById($id): Purchase
-    {
-        $sqlRequestToGetPurchase = "SELECT * FROM " . $this->purchaseDatabaseName . " WHERE id = " . $id;
-        $queryResult = $this->database->query($sqlRequestToGetPurchase);
-        if ($queryResult->num_rows > 0) {
-            while ($row = $queryResult->fetch_assoc()) {
-                if ($row["id"] = $id) {
-                    $purchase = new Purchase();
-                    $purchase->setId($row["id"]);
-                    $purchase->setEmail($row["email"]);
-                    $purchase->setName($row["name"]);
-                    $purchase->setSurname($row["surname"]);
-                    $purchase->setAddress($row["address"]);
-                    $purchase->setCountry($row["country"]);
-                    $purchase->setCity($row["city"]);
-                    $purchase->setPostCode($row["postCode"]);
-                    $purchase->setPhoneNumber($row["phoneNumber"]);
-                    $purchase->setPurchaseDescription($row["purchaseDescription"]);
-                    return $purchase;
-                }
+        if ($stmt) {
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $stmt->close();
+
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $purchase = new Purchase();
+                $purchase->setId($row["id"]);
+                $purchase->setEmail($row["email"]);
+                $purchase->setName($row["name"]);
+                $purchase->setSurname($row["surname"]);
+                $purchase->setAddress($row["address"]);
+                $purchase->setCountry($row["country"]);
+                $purchase->setCity($row["city"]);
+                $purchase->setPostCode($row["postCode"]);
+                $purchase->setPhoneNumber($row["phoneNumber"]);
+                $purchase->setPurchaseDescription($row["purchaseDescription"]);
+                return $purchase;
             }
         }
+
         return new Purchase();
     }
 
-    function createUser($email, $password, $name, $surname, $address, $country, $city, $postCode, $phoneNumber, $isAdmin): bool|\mysqli_result
+    public function getProductById($id): Product
+    {
+        $sqlRequestToGetProduct = "SELECT * FROM $this->productDatabaseName WHERE id = ?";
+        $stmt = $this->database->prepare($sqlRequestToGetProduct);
+
+        if ($stmt) {
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $stmt->close();
+
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $product = new Product();
+                $product->setId($row["id"]);
+                $product->setProductName($row["productName"]);
+                $product->setProductPrice($row["productPrice"]);
+                $product->setPhotoPath($row["productPhotoPath"]);
+                return $product;
+            }
+        }
+
+        return new Product();
+    }
+
+    public function createUser($email, $password, $name, $surname, $address, $country, $city, $postCode, $phoneNumber, $isAdmin): bool | \mysqli_result
     {
         $hashedPassword = $this->hashThePassword($password);
-        $sqlQuery = "INSERT INTO `$this->userDatabaseName` (`email`, `password`, `name`, `surname`, `address`, `country`, `city`, `postCode`, `phoneNumber`, 
-                    `isAdmin`)
-        VALUES ('$email', '$hashedPassword', '$name', '$surname', '$address', '$country', '$city', '$postCode', '$phoneNumber', '$isAdmin')";
-        return $this->database->query($sqlQuery);
+        $sqlQuery = "INSERT INTO `$this->userDatabaseName` (`email`, `password`, `name`, `surname`, `address`, `country`, `city`, `postCode`, `phoneNumber`, `isAdmin`)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $this->database->prepare($sqlQuery);
+
+        if ($stmt) {
+            $stmt->bind_param("ssssssssss", $email, $hashedPassword, $name, $surname, $address, $country, $city, $postCode, $phoneNumber, $isAdmin);
+            return $stmt->execute();
+        }
+
+        return false;
     }
 
-    function createProduct($productName, $productPrice, $productType, $productDescription, $productPhoto): bool
+    public function createProduct($productName, $productPrice, $productType, $productDescription, $productPhoto): bool
     {
         $productPhotoPath = $productPhoto;
-
-
-
         $sqlQuery = "INSERT INTO `$this->productDatabaseName` (`productName`, `productPrice`, `productType`, `productDescription`, `productPhotoPath`)
-        VALUES ('$productName', '$productPrice', '$productType', '$productDescription',  '$productPhotoPath')";
+        VALUES (?, ?, ?, ?, ?)";
+        $stmt = $this->database->prepare($sqlQuery);
 
-        return $this->database->query($sqlQuery);
+        if ($stmt) {
+            $stmt->bind_param("sssss", $productName, $productPrice, $productType, $productDescription, $productPhotoPath);
+            return $stmt->execute();
+        }
+
+        return false;
     }
 
-    function createPurchase($email, $name, $surname, $address, $country, $city, $postCode, $phoneNumber, $purchaseDescription): bool
+    public function createPurchase($email, $name, $surname, $address, $country, $city, $postCode, $phoneNumber, $purchaseDescription): bool
     {
         $sqlQuery = "INSERT INTO `$this->purchaseDatabaseName` (`email`, `name`, `surname`, `address`, `country`, `city`, `postCode`, `phoneNumber`, `purchaseDescription`)
-        VALUES ('$email', '$name', '$surname', '$address', '$country', '$city', '$postCode', '$phoneNumber', '$purchaseDescription')";
-        return $this->database->query($sqlQuery);
-    }
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $this->database->prepare($sqlQuery);
 
-    function changeUserDatabaseData($user): bool
+        if ($stmt) {
+            $stmt->bind_param("sssssssss", $email, $name, $surname, $address, $country, $city, $postCode, $phoneNumber, $purchaseDescription);
+            return $stmt->execute();
+        }
+
+        return false;
+    }
+    public function changeUserDatabaseData($user): bool
     {
         $id = $user->getId();
         $email = $user->getEmail();
@@ -172,21 +200,27 @@ class DatabaseHandler{
         $city = $user->getCity();
         $postCode = $user->getPostCode();
         $phoneNumber = $user->getPhoneNumber();
-        $sqlQuery = "UPDATE `users` SET
-            `id` = '$id',
-            `email` = '$email',
-            `name` = '$name',
-            `surname` = '$surname',
-            `address` = '$address',
-            `country` = '$country',
-            `city` = '$city',
-            `postCode` = '$postCode',
-            `phoneNumber` = '$phoneNumber'
-            WHERE `id` = '$id'";
-        return $this->database->query($sqlQuery);
+        $sqlQuery = "UPDATE `$this->userDatabaseName` SET
+            `email` = ?,
+            `name` = ?,
+            `surname` = ?,
+            `address` = ?,
+            `country` = ?,
+            `city` = ?,
+            `postCode` = ?,
+            `phoneNumber` = ?
+            WHERE `id` = ?";
+        $stmt = $this->database->prepare($sqlQuery);
+
+        if ($stmt) {
+            $stmt->bind_param("ssssssssi", $email, $name, $surname, $address, $country, $city, $postCode, $phoneNumber, $id);
+            return $stmt->execute();
+        }
+
+        return false;
     }
 
-    function changeProductDatabaseData($product): void
+    public function changeProductDatabaseData($product): void
     {
         $id = $product->getId();
         $productName = $product->getProductName();
@@ -194,18 +228,22 @@ class DatabaseHandler{
         $productPhotoPath = $product->getProductPhotoPath();
         $productType = $product->getProductType();
         $productDescription = $product->getProductDescription();
-        $sqlQuery = $sqlQuery = "UPDATE `users` SET
-            `id` = '$id',
-            `productName` = '$productName',
-            `productPrice` = '$productPrice',
-            `productPhotoPath` = '$productPhotoPath',
-            `productType` = '$productType',
-            `productDescription` = '$productDescription'
-            WHERE `id` = '$id'";
-        $this->database->query($sqlQuery);
+        $sqlQuery = "UPDATE `$this->productDatabaseName` SET
+            `productName` = ?,
+            `productPrice` = ?,
+            `productPhotoPath` = ?,
+            `productType` = ?,
+            `productDescription` = ?
+            WHERE `id` = ?";
+        $stmt = $this->database->prepare($sqlQuery);
+
+        if ($stmt) {
+            $stmt->bind_param("sssssi", $productName, $productPrice, $productPhotoPath, $productType, $productDescription, $id);
+            $stmt->execute();
+        }
     }
 
-    function changePurchaseData($purchase): void
+    public function changePurchaseData($purchase): void
     {
         $id = $purchase->getId();
         $email = $purchase->getEmail();
@@ -217,36 +255,42 @@ class DatabaseHandler{
         $postCode = $purchase->getPostCode();
         $phoneNumber = $purchase->getPhoneNumber();
         $purchaseDescription = $purchase->getPurchaseDescription();
-        $sqlQuery = "UPDATE `userDatabase` SET
-            `id` = '$id',
-            `email` = '$email',
-            `name` = '$name',
-            `surname` = '$surname',
-            `address` = '$address',
-            `country` = '$country',
-            `city` = '$city',
-            `postCode` = '$postCode',
-            `phoneNumber` = '$phoneNumber',
-            `purchaseDescription` = '$purchaseDescription'
-            WHERE `id` = '$id'";
-        $this->database->query($sqlQuery);
+        $sqlQuery = "UPDATE `$this->purchaseDatabaseName` SET
+            `email` = ?,
+            `name` = ?,
+            `surname` = ?,
+            `address` = ?,
+            `country` = ?,
+            `city` = ?,
+            `postCode` = ?,
+            `phoneNumber` = ?,
+            `purchaseDescription` = ?
+            WHERE `id` = ?";
+        $stmt = $this->database->prepare($sqlQuery);
+
+        if ($stmt) {
+            $stmt->bind_param("sssssssssi", $email, $name, $surname, $address, $country, $city, $postCode, $phoneNumber, $purchaseDescription, $id);
+            $stmt->execute();
+        }
     }
 
     private function hashThePassword($passwordToHash): string
-{
-    return password_hash($passwordToHash, PASSWORD_BCRYPT);
-}
+    {
+        return password_hash($passwordToHash, PASSWORD_BCRYPT);
+    }
 
     public function productPhotoExists($photoPath): bool
     {
-        $sqlRequestToGetProduct = "SELECT COUNT(*) FROM " . $this->productDatabaseName . " WHERE productPhotoPath = ?";
+        $sqlRequestToGetProduct = "SELECT COUNT(*) FROM $this->productDatabaseName WHERE productPhotoPath = ?";
         $stmt = $this->database->prepare($sqlRequestToGetProduct);
+
         if ($stmt) {
             $stmt->bind_param("s", $photoPath);
             $stmt->execute();
             $result = $stmt->get_result();
             $row = $result->fetch_row();
             $stmt->close();
+
             return $row[0] > 0; // If count is greater than 0, the photo exists
         } else {
             // Handle error, possibly log it and/or notify someone
@@ -254,5 +298,4 @@ class DatabaseHandler{
             return false;
         }
     }
-
 }
