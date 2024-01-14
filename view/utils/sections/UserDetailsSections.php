@@ -15,10 +15,10 @@ require_once __DIR__ . '/../HrefsConstants.php';
 
 class UserDetailsSections
 {
-    public static function renderForm($isFormValid, $email, $password, $name, $surname, $address, $country, $city, $postCode, $phoneNumber)
+    public static function renderForm($email, $password, $name, $surname, $address, $country, $city, $postCode, $phoneNumber, $userDetailsEditResult, $csrfToken, $isCsrfSuccess)
     {
         ?>
-        <div class="<?php echo $isFormValid ? 'block-hidden' : 'content-block'; ?>">
+        <div class="content-block">
             <h1>Change User Data</h1>
             <div class="form-block">
                 <form id="user-details" name="form" action="<?php echo HrefsConstants::USER ?>" method="post">
@@ -56,22 +56,28 @@ class UserDetailsSections
                         ?>
                     </div>
 
+                    <?php echo Inputs::printCsrfTokenInput($csrfToken)?>
+
                     <!-- Validation Error Display -->
                     <div class="validation-error-block">
-                        <?php if (isset($_POST['confirm']) && !$isFormValid) {
+                        <?php if (isset($_POST['email']) && $isCsrfSuccess) {
                             echo "<p>Invalid inputs. Check the inputs marked by *</p>";
                         } ?>
                     </div>
+                    <div class="two-inputs-in-one-row-block">
 
-                    <!-- Confirm Button -->
-                    <button class="confirm-button" id="confirm-button-purchase" name="confirm" value="confirm"
-                            type="submit">
-                        Confirm
-                    </button>
+                        <!-- Confirm Button -->
+                        <button class="confirm-button" id="confirm-button-user-details" name="confirm" value="confirm"
+                                type="button">
+                            Confirm
+                        </button>
 
-                    <!-- Log Out Button -->
-                    <input type="submit" value="Log Out" name="log-out" class="confirm-button" id="log-out-button"
-                           onClick="<?php unset($_SESSION["user"]) ?>"/>
+                        <!-- Log Out Button -->
+                        <button class="confirm-button" id="confirm-button-log-out" name="confirm"
+                                type="button">
+                            Log out
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>  <?php }

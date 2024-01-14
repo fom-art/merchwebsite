@@ -17,6 +17,21 @@ class User
 
     private $isAdmin;
 
+    public function __construct($id = null, $email = null, $password = null, $name = null, $surname = null, $address = null, $country = null, $city = null, $postCode = null, $phoneNumber = null)
+    {
+        $this->setId($id);
+        $this->setEmail($email);
+        $this->setPassword($password);
+        $this->setName($name);
+        $this->setSurname($surname);
+        $this->setAddress($address);
+        $this->setCountry($country);
+        $this->setCity($city);
+        $this->setPostCode($postCode);
+        $this->setPhoneNumber($phoneNumber);
+        $this->setIsAdmin(false);
+    }
+
     public function getIsAdmin()
     {
         return $this->isAdmin;

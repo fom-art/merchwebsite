@@ -165,7 +165,7 @@ class DatabaseHandler{
         return $this->database->query($sqlQuery);
     }
 
-    function changeUserDatabaseData($user): void
+    function changeUserDatabaseData($user): bool
     {
         $id = $user->getId();
         $email = $user->getEmail();
@@ -176,7 +176,7 @@ class DatabaseHandler{
         $city = $user->getCity();
         $postCode = $user->getPostCode();
         $phoneNumber = $user->getPhoneNumber();
-        $sqlQuery = "UPDATE `userDatabase` SET
+        $sqlQuery = "UPDATE `users` SET
             `id` = '$id',
             `email` = '$email',
             `name` = '$name',
@@ -187,7 +187,7 @@ class DatabaseHandler{
             `postCode` = '$postCode',
             `phoneNumber` = '$phoneNumber'
             WHERE `id` = '$id'";
-        $this->database->query($sqlQuery);
+        return $this->database->query($sqlQuery);
     }
 
     function changeProductDatabaseData($product): void
@@ -198,7 +198,7 @@ class DatabaseHandler{
         $productPhotoPath = $product->getProductPhotoPath();
         $productType = $product->getProductType();
         $productDescription = $product->getProductDescription();
-        $sqlQuery = $sqlQuery = "UPDATE `userDatabase` SET
+        $sqlQuery = $sqlQuery = "UPDATE `users` SET
             `id` = '$id',
             `productName` = '$productName',
             `productPrice` = '$productPrice',

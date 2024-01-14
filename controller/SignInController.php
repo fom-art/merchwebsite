@@ -56,9 +56,10 @@ class SignInController
 
         if ($isSuccess) {
             $user = $dbHandler->getUserByEmail($_POST['email']);
-            $_SESSION['logged_in'] = true;
-            $_SESSION['user_id'] = $user->getId();
+            $_SESSION['logged-in'] = true;
+            $_SESSION['user-id'] = $user->getId();
             $_SESSION['email'] = $user->getEmail();
+            $_SESSION['password'] = $_POST['password'];
             $_SESSION['name'] = $user->getName();
             $_SESSION['surname'] = $user->getSurname();
             $_SESSION['address'] = $user->getAddress();

@@ -18,10 +18,12 @@ class UserDetailsView
     public string $address;
     public string $country;
     public string $city;
-    public string $isAdmin;
     public string $postCode;
     public string $phoneNumber;
-    public function __construct($email, $name, $surname, $password, $address, $country, $city, $postCode, $phoneNumber)
+    public string $csrfToken;
+    public bool $userDetailsEditResult;
+    public bool $isCsrfSuccess;
+    public function __construct($email, $name, $surname, $password, $address, $country, $city, $postCode, $phoneNumber, $userDetailsEditResult, $csrfToken, $isCsrfSuccess)
     {
         $this->isFormValid = FormValidation::validateUserDetailsForm($email, $name, $surname, $password, $address, $country, $city, $postCode, $phoneNumber);
         $this->email = $email;
@@ -33,6 +35,9 @@ class UserDetailsView
         $this->city = $city;
         $this->postCode = $postCode;
         $this->phoneNumber = $phoneNumber;
+        $this->userDetailsEditResult = $userDetailsEditResult;
+        $this->csrfToken = $csrfToken;
+        $this->isCsrfSuccess = $isCsrfSuccess;
     }
 
     public function render()
