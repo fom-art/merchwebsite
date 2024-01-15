@@ -60,28 +60,53 @@ switch (end($uriSegments)) {
         $homeController->index();
         break;
     case 'admin':
-        $adminController = new AdminController();
-        $adminController->index();
+        if (isset($_SESSION['isAdmin']) && $_SESSION['isAdmin']) {
+            $adminController = new AdminController();
+            $adminController->index();
+        } else {
+            header('Location: '. HrefsConstants::INDEX); // Replace '/path/to/homepage' with the actual path
+            exit;
+        }
         break;
     case 'forgot-password':
-        $forgotPasswordController = new ForgotPasswordController();
-        $forgotPasswordController->index();
+        if (isset($_SESSION['email'])) {
+            header('Location: '. HrefsConstants::INDEX); // Replace '/path/to/homepage' with the actual path
+            exit;
+        } else {
+            $forgotPasswordController = new ForgotPasswordController();
+            $forgotPasswordController->index();
+        }
         break;
     case 'purchase':
         $purchaseController = new PurchaseController();
         $purchaseController->index();
         break;
     case 'sign-in':
-        $signInController = new SignInController();
-        $signInController->index();
+        if (isset($_SESSION['email'])) {
+            header('Location: '. HrefsConstants::INDEX); // Replace '/path/to/homepage' with the actual path
+            exit;
+        } else {
+            $signInController = new SignInController();
+            $signInController->index();
+        }
         break;
     case 'sign-up':
-        $signUpController = new SignUpController();
-        $signUpController->index();
+        if (isset($_SESSION['email'])) {
+            header('Location: '. HrefsConstants::INDEX); // Replace '/path/to/homepage' with the actual path
+            exit;
+        } else {
+            $signUpController = new SignUpController();
+            $signUpController->index();
+        }
         break;
     case 'user':
-        $userDetailsController = new UserDetailsController();
-        $userDetailsController->index();
+        if (isset($_SESSION['email'])) {
+            $userDetailsController = new UserDetailsController();
+            $userDetailsController->index();
+        } else {
+            header('Location: '. HrefsConstants::INDEX); // Replace '/path/to/homepage' with the actual path
+            exit;
+        }
         break;
     default:
         http_response_code(404);
