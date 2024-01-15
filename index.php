@@ -60,7 +60,7 @@ switch (end($uriSegments)) {
         $homeController->index();
         break;
     case 'admin':
-        if (isset($_SESSION['isAdmin']) && $_SESSION['isAdmin']) {
+        if (isset($_SESSION['is-admin']) && $_SESSION['is-admin']) {
             $adminController = new AdminController();
             $adminController->index();
         } else {
