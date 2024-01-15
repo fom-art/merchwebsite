@@ -133,7 +133,7 @@ function fetchData(page, perPage) {
 // Event Handlers
 function handleResize() {
     perPage = calculatePerPage();
-    // Update any responsive elements
+    fetchData(1, perPage)
 }
 
 function goToPreviousPage() {
