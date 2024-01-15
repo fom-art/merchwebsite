@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['getaddress_0',['getAddress',['../classmodel_1_1models_1_1_purchase.html#a59bc5cde6d5044bb76ee8464738a87a2',1,'model\models\Purchase\getAddress()'],['../classmodel_1_1models_1_1_user.html#a59bc5cde6d5044bb76ee8464738a87a2',1,'model\models\User\getAddress()']]],
+  ['getcity_1',['getCity',['../classmodel_1_1models_1_1_purchase.html#ae9ca906fce6e9fe5fab3a6b42209d6a1',1,'model\models\Purchase\getCity()'],['../classmodel_1_1models_1_1_user.html#ae9ca906fce6e9fe5fab3a6b42209d6a1',1,'model\models\User\getCity()']]],
+  ['getcountry_2',['getCountry',['../classmodel_1_1models_1_1_purchase.html#ad92da151b159c2bdbb64cbe7a4790d1a',1,'model\models\Purchase\getCountry()'],['../classmodel_1_1models_1_1_user.html#ad92da151b159c2bdbb64cbe7a4790d1a',1,'model\models\User\getCountry()']]],
+  ['getemail_3',['getEmail',['../classmodel_1_1models_1_1_purchase.html#a02a01849f28e2535e888ae4ec87b20f2',1,'model\models\Purchase\getEmail()'],['../classmodel_1_1models_1_1_user.html#a02a01849f28e2535e888ae4ec87b20f2',1,'model\models\User\getEmail()']]],
+  ['getid_4',['getId',['../classmodel_1_1models_1_1_product.html#a12251d0c022e9e21c137a105ff683f13',1,'model\models\Product\getId()'],['../classmodel_1_1models_1_1_purchase.html#a12251d0c022e9e21c137a105ff683f13',1,'model\models\Purchase\getId()'],['../classmodel_1_1models_1_1_user.html#a12251d0c022e9e21c137a105ff683f13',1,'model\models\User\getId()']]],
+  ['getisadmin_5',['getIsAdmin',['../classmodel_1_1models_1_1_user.html#afd0274ba7938059cad299fe4fe0edfea',1,'model::models::User']]],
+  ['getname_6',['getName',['../classmodel_1_1models_1_1_purchase.html#a3d0963e68bb313b163a73f2803c64600',1,'model\models\Purchase\getName()'],['../classmodel_1_1models_1_1_user.html#a3d0963e68bb313b163a73f2803c64600',1,'model\models\User\getName()']]],
+  ['getoriginaldatabase_7',['getOriginalDatabase',['../classmodel_1_1database_1_1_database_handler.html#a53f1c9b31ee7871bd5357a1651b9552e',1,'model::database::DatabaseHandler']]],
+  ['getpassword_8',['getPassword',['../classmodel_1_1models_1_1_user.html#a04e0957baeb7acde9c0c86556da2d43f',1,'model::models::User']]],
+  ['getphonenumber_9',['getPhoneNumber',['../classmodel_1_1models_1_1_purchase.html#a5c40ee29f4c006831232b20302ea0ed0',1,'model\models\Purchase\getPhoneNumber()'],['../classmodel_1_1models_1_1_user.html#a5c40ee29f4c006831232b20302ea0ed0',1,'model\models\User\getPhoneNumber()']]],
+  ['getpostcode_10',['getPostCode',['../classmodel_1_1models_1_1_purchase.html#a02650d9c0f9a3f9d2216e680519f3eee',1,'model\models\Purchase\getPostCode()'],['../classmodel_1_1models_1_1_user.html#a02650d9c0f9a3f9d2216e680519f3eee',1,'model\models\User\getPostCode()']]],
+  ['getproductbyid_11',['getProductById',['../classmodel_1_1database_1_1_database_handler.html#a5bb36390a9d99cce19a2f93c9013d1e3',1,'model::database::DatabaseHandler']]],
+  ['getproductname_12',['getProductName',['../classmodel_1_1models_1_1_product.html#acc7c02167a97dae7bdfdf7cd41f1f08f',1,'model::models::Product']]],
+  ['getproductphotodescription_13',['getProductPhotoDescription',['../classmodel_1_1models_1_1_product.html#aae371578b9b6fc0f7327bcf8fdd887fb',1,'model::models::Product']]],
+  ['getproductphotopath_14',['getProductPhotoPath',['../classmodel_1_1models_1_1_product.html#a60cacc83845e0d5e174188924bdc34f8',1,'model::models::Product']]],
+  ['getproductprice_15',['getProductPrice',['../classmodel_1_1models_1_1_product.html#adb9524a779412f32871a60c6b64a63b0',1,'model::models::Product']]],
+  ['getproductslist_16',['getProductsList',['../classmodel_1_1database_1_1_database_handler.html#af758d479f01866b37bd6eb4652596575',1,'model::database::DatabaseHandler']]],
+  ['getproducttype_17',['getProductType',['../classmodel_1_1models_1_1_product.html#a7beb9e211540f5006eee332f9bc9395f',1,'model::models::Product']]],
+  ['getpurchasebyid_18',['getPurchaseById',['../classmodel_1_1database_1_1_database_handler.html#ad5732d92ef6bfd0f8015a0a57920b7aa',1,'model::database::DatabaseHandler']]],
+  ['getpurchasedescription_19',['getPurchaseDescription',['../classmodel_1_1models_1_1_purchase.html#a9e23a3012a96974245a92e90d4a3ad0a',1,'model::models::Purchase']]],
+  ['getsurname_20',['getSurname',['../classmodel_1_1models_1_1_purchase.html#a8e1a01c7b21ec79c38e7d8e6b939ce27',1,'model\models\Purchase\getSurname()'],['../classmodel_1_1models_1_1_user.html#a8e1a01c7b21ec79c38e7d8e6b939ce27',1,'model\models\User\getSurname()']]],
+  ['gettotalproductscount_21',['getTotalProductsCount',['../classmodel_1_1database_1_1_database_handler.html#ae0902462e61122449fe4dcc7579d5c0b',1,'model::database::DatabaseHandler']]],
+  ['getuserbyemail_22',['getUserByEmail',['../classmodel_1_1database_1_1_database_handler.html#a4e25c35f7741620a8309ea1c6a2117e6',1,'model::database::DatabaseHandler']]]
+];
