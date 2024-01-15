@@ -23,7 +23,7 @@ class PurchaseController
             $isCsrfSuccess = true;
         }
 
-        if ($isFormValid && isset($_POST['csrf-token']) && isset($_SESSION['csrf-token']) && $_POST['csrf-token'] == $_SESSION['csrf-token']) {
+        if ($isFormValid && $isCsrfSuccess) {
             $purchaseResult = $this->makePurchase();
         }
 
@@ -44,7 +44,7 @@ class PurchaseController
             phoneNumber: $_SESSION['phone-number'] ?? "",
             purchaseDescription: "",
             csrfToken: $_SESSION['csrf-token'],
-            isCsrfSuccess: $isCsrfSuccess
+            isCsrfSuccess: $_SESSION['csrf-token']
         );
     }
 

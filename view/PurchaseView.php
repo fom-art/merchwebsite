@@ -39,7 +39,7 @@ class PurchaseView
         $this->phoneNumber = $phoneNumber;
         $this->purchaseDescription = $purchaseDescription;
         $this->csrfToken = $csrfToken;
-        $this->isCsrdSuccess = $isCsrfSuccess;
+        $this->isCsrfSuccess = $isCsrfSuccess;
     }    public function render() {
         include __DIR__ . '/templates/purchase.php';
     }

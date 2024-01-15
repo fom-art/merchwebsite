@@ -40,9 +40,9 @@ class HomeSections
         <div class="navigation-block">
             <!-- Navigation Menu -->
             <ul class="navigation-list">
-                <li><a href="#products-gallery">Home</a></li>
-                <li><a href="#products-gallery">All Products</a></li>
-                <li><a href="#products-gallery">Stickers</a></li>
+                <li><a href="">Home</a></li>
+                <li><a href="">All Products</a></li>
+                <li><a href="">Stickers</a></li>
             </ul>
         </div>
         <?php
