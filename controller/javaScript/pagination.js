@@ -1,56 +1,16 @@
-const images = generateSampleImages();
-
-function generateSampleImages() {
-    const sampleImages = [];
-    for (let i = 0; i < 27; i++) {
-        sampleImages.push({ name: "Stickerpack Mobile Legends", source: "view/images/stickerpack1.png", price: "3$" });
-        sampleImages.push({ name: "Genshin Key Chain", source: "view/images/randomMerch.jpg", price: "3$" });
-    }
-    return sampleImages;
-}
-
 // DOM Elements
 const buttonPrevious = document.getElementById('btn-previous');
 const buttonNext = document.getElementById('btn-next');
 const pageCount = document.getElementById('pages-count');
 const gallery = document.getElementById('products-gallery');
 
-// Initialization
-let page = 1;
-let perPage = calculatePerPage();
-let pages = calculatePages();
-updatePageCount();
-setupEventListeners();
-showImages();
-
-
-// Event Listeners
-function setupEventListeners() {
-    window.addEventListener('resize', handleResize);
-    buttonPrevious.addEventListener('click', goToPreviousPage);
-    buttonNext.addEventListener('click', goToNextPage);
-}
-
-// Event Handlers
-function handleResize() {
-    perPage = calculatePerPage();
-    pages = calculatePages();
-    page = Math.min(page, pages);
-    updatePageCount();
-    showImages();
-}
-
-function goToPreviousPage() {
-    if (page > 1) {
-        page--;
-        updateGalleryDisplay();
-    }
-}
-
-function goToNextPage() {
-    if (page < pages) {
-        page++;
-        updateGalleryDisplay();
+class Product {
+    constructor(name, price, photoPath, productType, description) {
+        this.name = name;
+        this.price = price;
+        this.photoPath = photoPath;
+        this.productType = productType;
+        this.description = description;
     }
 }
 
@@ -62,69 +22,141 @@ function calculatePerPage() {
     return 21;                            // Desktop view
 }
 
-function calculatePages() {
-    return Math.ceil(images.length / perPage);
-}
-
 function updatePageCount() {
-    pageCount.innerHTML = `Page ${page} of ${pages}`;
+    pageCount.innerHTML = `Page ${page} of ${totalPages}`;
     buttonPrevious.disabled = (page === 1);
-    buttonNext.disabled = (page === pages);
+    buttonNext.disabled = (page === totalPages);
 }
 
-function updateGalleryDisplay() {
-    showImages();
-    updatePageCount();
+function clearGallery() {
+    gallery.innerHTML = '';
+}
+
+function createProductCard(product) {
+    const card = document.createElement('div');
+    card.className = 'product-card';
+
+    card.appendChild(createImageElement(product));
+    card.appendChild(createTextElement('h3', 'product-name', product.name));
+    card.appendChild(createTextElement('p', 'product-price', `$${product.price}`));
+    card.appendChild(createTextElement('p', 'product-type', product.productType));
+    card.appendChild(createTextElement('p', 'product-description', product.description));
+
+    return card;
+}
+
+function createImageElement(product) {
+    const img = document.createElement('img');
+    console.log("Product: " + product);
+    img.src = product.photoPath;
+    img.alt = product.name;
+    img.className = 'product-image';
+    return img;
+}
+
+function createTextElement(elementType, className, text) {
+    const element = document.createElement(elementType);
+    element.className = className;
+    element.textContent = text;
+    return element;
+}
+
+function appendCardToGallery(card) {
+    gallery.appendChild(card);
 }
 
 function showImages() {
     clearGallery();
-    const offset = (page - 1) * perPage;
-    displayImagesInRange(offset, offset + perPage);
+    products.forEach(product => {
+        const card = createProductCard(product);
+        appendCardToGallery(card);
+    });
 }
 
-function clearGallery() {
-    while (gallery.firstChild) {
-        gallery.removeChild(gallery.firstChild);
-    }
+
+function setupEventListeners() {
+    window.addEventListener('resize', handleResize);
+    buttonPrevious.addEventListener('click', goToPreviousPage);
+    buttonNext.addEventListener('click', goToNextPage);
 }
 
-function displayImagesInRange(start, end) {
-    for (let i = start; i < end; i++) {
-        if (images[i]) {
-            gallery.appendChild(createImageBlock(images[i]));
+function fetchData(page, perPage) {
+    const xhr = new XMLHttpRequest();
+
+    xhr.open("POST", "https://zwa.toad.cz/~fomenart/", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            try {
+                const response = JSON.parse(xhr.responseText);
+
+                if (response.totalPages) {
+                    totalPages = response.totalPages;
+                    updatePageCount();
+                }
+
+                if (response.products && Array.isArray(response.products)) {
+                    // Clear the previous products array
+                    products = [];
+
+                    // Add each product from the response to the products array
+                    response.products.forEach(productData => {
+                        const product = new Product(
+                            productData.productName,
+                            productData.productPrice,
+                            productData.productPhotoPath,
+                            productData.productType,
+                            productData.productDescription
+                        );
+                        products.push(product);
+                    });
+
+                    //Update the display with new data
+                    showImages();
+                }
+            } catch (e) {
+                console.error("Error parsing JSON:", e);
+            }
+        } else {
+            console.error("Request failed. Status:", xhr.status);
         }
+    };
+
+    xhr.onerror = function () {
+        console.error("Request failed.");
+    };
+
+    xhr.send("page=" + page.toString() + "&perPage=" + perPage.toString());
+}
+
+// Event Handlers
+function handleResize() {
+    perPage = calculatePerPage();
+    // Update any responsive elements
+}
+
+function goToPreviousPage() {
+    if (page > 1) {
+        page--;
+        fetchData(page, perPage)
     }
 }
 
-function createImageBlock(imageData) {
-    const block = document.createElement('div');
-    block.classList.add('product-card');
-
-    const img = createImageElement(imageData.source, imageData.name);
-    const name = createTextElement('h2', 'product-name', imageData.name);
-    const price = createTextElement('h2', 'product-price', imageData.price);
-
-    block.appendChild(img);
-    block.appendChild(name);
-    block.appendChild(price);
-    return block;
+function goToNextPage() {
+    if (page < totalPages) {
+        page++;
+        fetchData(page, perPage)
+    }
 }
 
-function createImageElement(src, alt) {
-    const img = document.createElement('img');
-    img.setAttribute("src", src);
-    img.setAttribute('alt', alt);
+// Initialization
+let page = 1;
+let perPage = calculatePerPage();
+let totalPages;
+let products = [];
 
-    // Add class to the image
-    img.classList.add('product-image');
-
-    return img;
-}
-
-function createTextElement(tag, className, text) {
-    const element = document.createElement(tag);
-    element.classList.add(className);
-    element.innerText = text;
-    return element;
-}
+fetchData(page, perPage);
+updatePageCount();
+setupEventListeners();
+showImages();

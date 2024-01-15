@@ -3,6 +3,7 @@
 namespace view\utils\sections;
 use HrefsConstants;
 use Icons;
+use model\models\Product;
 
 require_once __DIR__ . '/../Icons.php';
 require_once __DIR__ . '/../HrefsConstants.php';
@@ -47,13 +48,18 @@ class HomeSections
         <?php
     }
 
-    public static function renderMainContent()
+    public static function renderMainContent($products)
     {
         ?>
         <main id="image-gallery">
             <!-- Product Gallery -->
             <div id="products-gallery" class="gallery-block">
                 <!-- Gallery content goes here -->
+                <?php
+                    foreach ($products as $product) {
+                        self::renderProductCard($product);
+                    }
+                ?>
             </div>
 
             <!-- Gallery Pagination -->
@@ -103,5 +109,19 @@ class HomeSections
         ?>
         <script src="<?php echo HrefsConstants::PAGINATION_SCRIPT ?>"></script>
         <?php
+    }
+
+    private static function renderProductCard(Product $product): void
+    {
+        $productName = htmlspecialchars($product->getProductName());
+        $productPrice = htmlspecialchars($product->getProductPrice());
+        $productPhotoPath = htmlspecialchars($product->getProductPhotoPath());
+
+
+        echo "<div class='product-card'>";
+        echo "<img src='$productPhotoPath' alt='$productName' class='product-image'>";
+        echo "<h2 class='product-name'>$productName</h2>";
+        echo "<h2 class='product-price'>$productPrice</h2>";
+        echo "</div>";
     }
 }

@@ -52,11 +52,6 @@ $requestUri = $_SERVER['REQUEST_URI'];
 $requestUri = str_replace($base_path, '', $requestUri); // Remove the base path
 $uriSegments = explode('/', $requestUri);
 
-//echo "<pre>URI Segments: ";
-//print_r($uriSegments);
-//echo "</pre>";
-
-
 // Here, you can add routing logic to display different pages based on the URI
 switch (end($uriSegments)) {
     case '/':

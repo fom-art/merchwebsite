@@ -105,7 +105,7 @@ class AdminController
             return "";
         }
 
-        return $targetFile;
+        return str_replace("/home/fomenart/www/", "", $targetFile);
     }
 
     private function getProductPhotoExtension(): string

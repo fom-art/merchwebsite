@@ -33,7 +33,7 @@ class Inputs
                 <label for="<?php echo $name; ?>"><?php echo $label; ?>:</label>
             </div>
             <input type="file"
-                   id="<?php echo $name; ?>" name="<?php echo $name; ?>" value="<?php echo htmlspecialchars($value); ?>"
+                   id="<?php echo $name; ?>" name="<?php echo $name; ?>" accept="image/*"
                    required>
             <div class="validation-error-block">
                 <p class="js-validation-message"><?php echo $validationMessage; ?></p>

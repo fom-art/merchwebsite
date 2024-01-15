@@ -34,7 +34,7 @@ if (!is_writable($targetDir)) {
 <?php
 HomeSections::renderHeader($this->isRegistered ?? false, $this->isAdmin ?? false);
 HomeSections::renderNavigation();
-HomeSections::renderMainContent();
+HomeSections::renderMainContent($this->products);
 HomeSections::renderFooter();
 HomeSections::renderScripts();
 ?>

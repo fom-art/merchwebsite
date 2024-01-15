@@ -110,4 +110,33 @@ class Product
         $this->setProductDescription($productDescription);
         $this->setPhotoPath($productPhotoPath);
     }
+
+    public function setProductPhotoPath(string $productPhotoPath)
+    {
+        $this->productPhotoPath = $productPhotoPath;
+    }
+
+    public function __toString()
+    {
+        return json_encode([
+            'id' => $this->getId(),
+            'productName' => $this->getProductName(),
+            'productPrice' => $this->getProductPrice(),
+            'productPhotoPath' => $this->getProductPhotoPath(),
+            'productType' => $this->getProductType(),
+            'productDescription' => $this->getProductPhotoDescription()
+        ]);
+    }
+
+    public function toArray() {
+        return [
+            'id' => $this->getId(),
+            'productName' => $this->getProductName(),
+            'productPrice' => $this->getProductPrice(),
+            'productPhotoPath' => $this->getProductPhotoPath(),
+            'productType' => $this->getProductType(),
+            'productDescription' => $this->getProductPhotoDescription()
+        ];
+    }
+
 }

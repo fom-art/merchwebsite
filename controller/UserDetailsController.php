@@ -18,7 +18,6 @@ class UserDetailsController
     {
         if (isset($_POST['action']) && $_POST['action'] == 'unset') {
             session_destroy();
-            header("Location: " . HrefsConstants::INDEX);
         }
 
         $isFormValid = $this->validateForm();

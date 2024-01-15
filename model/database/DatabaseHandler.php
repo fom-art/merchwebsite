@@ -298,4 +298,47 @@ class DatabaseHandler{
             return false;
         }
     }
+
+    public function getProductsList($page = 1, $itemsPerPage = 10): array {
+        $products = [];
+        $offset = ($page - 1) * $itemsPerPage;
+
+        // SQL query with ORDER BY and LIMIT for pagination
+        $sqlQuery = "SELECT * FROM `$this->productDatabaseName` ORDER BY productName ASC LIMIT ? OFFSET ?";
+        $stmt = $this->database->prepare($sqlQuery);
+
+        if ($stmt) {
+            $stmt->bind_param('ii', $itemsPerPage, $offset);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+
+            while ($row = $result->fetch_assoc()) {
+                $product = new Product();
+                $product->setId($row["id"]);
+                $product->setProductName($row["productName"]);
+                $product->setProductPrice($row["productPrice"]);
+                $product->setProductType($row["productType"]);
+                $product->setProductDescription($row["productDescription"]);
+                $product->setProductPhotoPath($row["productPhotoPath"]);
+                $products[] = $product;
+            }
+            $stmt->close();
+        }
+
+        return $products;
+    }
+
+    public function getTotalProductsCount()
+    {
+        $sqlQuery = "SELECT COUNT(*) as total FROM `$this->productDatabaseName`";
+        $result = $this->database->query($sqlQuery);
+
+        if ($result) {
+            $row = $result->fetch_assoc();
+            return (int)$row['total'];
+        }
+
+        return 0;
+    }
 }
