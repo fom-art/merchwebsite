@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Merch Website: HomeView Class Reference</title>
+<title>My Project: HomeView Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -23,7 +23,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Merch Website
+   <div id="projectname">My Project
    </div>
   </td>
  </tr>
@@ -91,14 +91,20 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a2d0fd6505e590705ab4637b9b69a1be3" id="r_a2d0fd6505e590705ab4637b9b69a1be3"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2d0fd6505e590705ab4637b9b69a1be3">$isRegistered</a></td></tr>
-<tr class="separator:a2d0fd6505e590705ab4637b9b69a1be3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:accecc701aa293e8132e6ff03de1c1a4f" id="r_accecc701aa293e8132e6ff03de1c1a4f"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#accecc701aa293e8132e6ff03de1c1a4f">$isAdmin</a></td></tr>
-<tr class="separator:accecc701aa293e8132e6ff03de1c1a4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3fd9b16084106757d78ffb8bca5d71c6" id="r_a3fd9b16084106757d78ffb8bca5d71c6"><td class="memItemLeft" align="right" valign="top">array&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3fd9b16084106757d78ffb8bca5d71c6">$products</a></td></tr>
+<tr class="memitem:a52b860aa3483497c698abb51963026fd" id="r_a52b860aa3483497c698abb51963026fd"><td class="memItemLeft" align="right" valign="top"><a id="a52b860aa3483497c698abb51963026fd" name="a52b860aa3483497c698abb51963026fd"></a>
+string&#160;</td><td class="memItemRight" valign="bottom"><b>$isRegistered</b></td></tr>
+<tr class="separator:a52b860aa3483497c698abb51963026fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa91d3f6f2c56eb5f31704ff0607c7e50" id="r_aa91d3f6f2c56eb5f31704ff0607c7e50"><td class="memItemLeft" align="right" valign="top"><a id="aa91d3f6f2c56eb5f31704ff0607c7e50" name="aa91d3f6f2c56eb5f31704ff0607c7e50"></a>
+string&#160;</td><td class="memItemRight" valign="bottom"><b>$isAdmin</b></td></tr>
+<tr class="separator:aa91d3f6f2c56eb5f31704ff0607c7e50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fd9b16084106757d78ffb8bca5d71c6" id="r_a3fd9b16084106757d78ffb8bca5d71c6"><td class="memItemLeft" align="right" valign="top"><a id="a3fd9b16084106757d78ffb8bca5d71c6" name="a3fd9b16084106757d78ffb8bca5d71c6"></a>
+array&#160;</td><td class="memItemRight" valign="bottom"><b>$products</b></td></tr>
 <tr class="separator:a3fd9b16084106757d78ffb8bca5d71c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class HomeView</p>
+<p>This class represents the view for the home page of the web application. It is used to render the user interface for the home page, displaying products and user-related information. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ae50e17aa39f3a89c6cb037f577acaeda" name="ae50e17aa39f3a89c6cb037f577acaeda"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae50e17aa39f3a89c6cb037f577acaeda">&#9670;&#160;</a></span>__construct()</h2>
 
@@ -122,6 +128,15 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>HomeView constructor.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">string</td><td class="paramname">$isRegistered</td><td>Indicates whether a user is registered (e.g., "user" or "guest"). </td></tr>
+    <tr><td class="paramtype">string</td><td class="paramname">$isAdmin</td><td>Indicates whether the user has admin privileges (e.g., "admin" or "user"). </td></tr>
+    <tr><td class="paramtype">array</td><td class="paramname">$products</td><td>An array of products to be displayed on the home page. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -140,54 +155,12 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-</div>
-</div>
-<h2 class="groupheader">Field Documentation</h2>
-<a id="accecc701aa293e8132e6ff03de1c1a4f" name="accecc701aa293e8132e6ff03de1c1a4f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#accecc701aa293e8132e6ff03de1c1a4f">&#9670;&#160;</a></span>$isAdmin</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">String $isAdmin</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a2d0fd6505e590705ab4637b9b69a1be3" name="a2d0fd6505e590705ab4637b9b69a1be3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2d0fd6505e590705ab4637b9b69a1be3">&#9670;&#160;</a></span>$isRegistered</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">String $isRegistered</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a3fd9b16084106757d78ffb8bca5d71c6" name="a3fd9b16084106757d78ffb8bca5d71c6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3fd9b16084106757d78ffb8bca5d71c6">&#9670;&#160;</a></span>$products</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">array $products</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p>Render the home page template. </p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>view/<a class="el" href="_home_view_8php.html">HomeView.php</a></li>
+<li>view/<b>HomeView.php</b></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Merch Website: DatabaseHandler Class Reference</title>
+<title>My Project: DatabaseHandler Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -23,7 +23,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Merch Website
+   <div id="projectname">My Project
    </div>
   </td>
  </tr>
@@ -71,7 +71,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>model</b></li><li class="navelem"><a class="el" href="namespacemodel_1_1database.html">database</a></li><li class="navelem"><a class="el" href="classmodel_1_1database_1_1_database_handler.html">DatabaseHandler</a></li>  </ul>
+<li class="navelem"><b>model</b></li><li class="navelem"><b>database</b></li><li class="navelem"><a class="el" href="classmodel_1_1database_1_1_database_handler.html">DatabaseHandler</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -116,7 +116,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae0902462e61122449fe4dcc7579d5c0b" id="r_ae0902462e61122449fe4dcc7579d5c0b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae0902462e61122449fe4dcc7579d5c0b">getTotalProductsCount</a> ()</td></tr>
 <tr class="separator:ae0902462e61122449fe4dcc7579d5c0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The DatabaseHandler class is responsible for handling database operations. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a095c5d389db211932136b53f25f39685" name="a095c5d389db211932136b53f25f39685"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a095c5d389db211932136b53f25f39685">&#9670;&#160;</a></span>__construct()</h2>
 
@@ -131,6 +133,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>DatabaseHandler constructor. Initializes a new instance of the DatabaseHandler class. </p>
 
 </div>
 </div>
@@ -149,6 +152,14 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Updates the database data for a product.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">Product</td><td class="paramname">$product</td><td>The Product object with updated data.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
 </div>
 </div>
@@ -166,6 +177,14 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Updates the database data for a purchase.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">Purchase</td><td class="paramname">$purchase</td><td>The Purchase object with updated data.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
 </div>
 </div>
@@ -183,6 +202,14 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Updates the database data for a user.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">User</td><td class="paramname">$user</td><td>The User object with updated data.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>bool True if the user data was updated successfully; otherwise, false. </dd></dl>
 
 </div>
 </div>
@@ -200,6 +227,14 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Checks if a user with the given email exists in the database.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">string</td><td class="paramname">$email</td><td>The email to check.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>bool True if a user with the email exists; otherwise, false. </dd></dl>
 
 </div>
 </div>
@@ -221,6 +256,15 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Checks if a user with the given email and password exists in the database.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">string</td><td class="paramname">$email</td><td>The email of the user. </td></tr>
+    <tr><td class="paramtype">string</td><td class="paramname">$password</td><td>The hashed password of the user.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>bool True if the user exists and the password is correct; otherwise, false. </dd></dl>
 
 </div>
 </div>
@@ -257,6 +301,18 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Creates a new product record in the database.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">string</td><td class="paramname">$productName</td><td>The name of the product. </td></tr>
+    <tr><td class="paramtype">string</td><td class="paramname">$productPrice</td><td>The price of the product. </td></tr>
+    <tr><td class="paramtype">string</td><td class="paramname">$productType</td><td>The type of the product. </td></tr>
+    <tr><td class="paramtype">string</td><td class="paramname">$productDescription</td><td>The description of the product. </td></tr>
+    <tr><td class="paramtype">string</td><td class="paramname">$productPhoto</td><td>The path to the product photo.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>bool True if the product was created successfully; otherwise, false. </dd></dl>
 
 </div>
 </div>
@@ -313,6 +369,22 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Creates a new purchase record in the database.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">string</td><td class="paramname">$email</td><td>The email of the user making the purchase. </td></tr>
+    <tr><td class="paramtype">string</td><td class="paramname">$name</td><td>The name of the purchaser. </td></tr>
+    <tr><td class="paramtype">string</td><td class="paramname">$surname</td><td>The surname of the purchaser. </td></tr>
+    <tr><td class="paramtype">string</td><td class="paramname">$address</td><td>The address of the purchaser. </td></tr>
+    <tr><td class="paramtype">string</td><td class="paramname">$country</td><td>The country of the purchaser. </td></tr>
+    <tr><td class="paramtype">string</td><td class="paramname">$city</td><td>The city of the purchaser. </td></tr>
+    <tr><td class="paramtype">string</td><td class="paramname">$postCode</td><td>The postal code of the purchaser. </td></tr>
+    <tr><td class="paramtype">string</td><td class="paramname">$phoneNumber</td><td>The phone number of the purchaser. </td></tr>
+    <tr><td class="paramtype">string</td><td class="paramname">$purchaseDescription</td><td>The description of the purchase.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>bool True if the purchase was created successfully; otherwise, false. </dd></dl>
 
 </div>
 </div>
@@ -374,6 +446,23 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Creates a new user record in the database.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">string</td><td class="paramname">$email</td><td>The email of the user. </td></tr>
+    <tr><td class="paramtype">string</td><td class="paramname">$password</td><td>The hashed password of the user. </td></tr>
+    <tr><td class="paramtype">string</td><td class="paramname">$name</td><td>The name of the user. </td></tr>
+    <tr><td class="paramtype">string</td><td class="paramname">$surname</td><td>The surname of the user. </td></tr>
+    <tr><td class="paramtype">string</td><td class="paramname">$address</td><td>The address of the user. </td></tr>
+    <tr><td class="paramtype">string</td><td class="paramname">$country</td><td>The country of the user. </td></tr>
+    <tr><td class="paramtype">string</td><td class="paramname">$city</td><td>The city of the user. </td></tr>
+    <tr><td class="paramtype">string</td><td class="paramname">$postCode</td><td>The postal code of the user. </td></tr>
+    <tr><td class="paramtype">string</td><td class="paramname">$phoneNumber</td><td>The phone number of the user. </td></tr>
+    <tr><td class="paramtype">bool</td><td class="paramname">$isAdmin</td><td>Whether the user is an admin.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>bool|\mysqli_result True if the user was created successfully; otherwise, false. </dd></dl>
 
 </div>
 </div>
@@ -391,6 +480,8 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Gets the original database connection object.</p>
+<dl class="section return"><dt>Returns</dt><dd>\mysqli The original database connection object. </dd></dl>
 
 </div>
 </div>
@@ -408,6 +499,14 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Retrieves a product from the database by its ID.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">int</td><td class="paramname">$id</td><td>The ID of the product to retrieve.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Product The retrieved Product object. </dd></dl>
 
 </div>
 </div>
@@ -429,6 +528,15 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Retrieves a list of products with pagination.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">int</td><td class="paramname">$page</td><td>The current page number. </td></tr>
+    <tr><td class="paramtype">int</td><td class="paramname">$itemsPerPage</td><td>The number of items to display per page.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>array An array of Product objects representing the products on the current page. </dd></dl>
 
 </div>
 </div>
@@ -446,6 +554,14 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Retrieves a purchase from the database by its ID.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">int</td><td class="paramname">$id</td><td>The ID of the purchase to retrieve.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Purchase The retrieved Purchase object. </dd></dl>
 
 </div>
 </div>
@@ -463,6 +579,8 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Retrieves the total number of products in the database.</p>
+<dl class="section return"><dt>Returns</dt><dd>int The total number of products. </dd></dl>
 
 </div>
 </div>
@@ -480,6 +598,14 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Retrieves a user from the database by email.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">string</td><td class="paramname">$email</td><td>The email of the user to retrieve.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>User|bool The retrieved User object if found; otherwise, false. </dd></dl>
 
 </div>
 </div>
@@ -497,11 +623,19 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Checks if a product photo with the given path exists in the database.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">string</td><td class="paramname">$photoPath</td><td>The path of the product photo.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>bool True if the product photo exists in the database; otherwise, false. </dd></dl>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>model/database/<a class="el" href="_database_handler_8php.html">DatabaseHandler.php</a></li>
+<li>model/database/<b>DatabaseHandler.php</b></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

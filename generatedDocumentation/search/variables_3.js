@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['database_5fhost_5fname_0',['DATABASE_HOST_NAME',['../classmodel_1_1constants_1_1_database_constants.html#a45c46f3153f7ae3284f1535ea9f2d2e7',1,'model::constants::DatabaseConstants']]],
-  ['database_5fpassword_1',['DATABASE_PASSWORD',['../classmodel_1_1constants_1_1_database_constants.html#afecaa7b8563a8af3b44aa1647bbc63be',1,'model::constants::DatabaseConstants']]],
-  ['database_5fusername_2',['DATABASE_USERNAME',['../classmodel_1_1constants_1_1_database_constants.html#ae73e92f715a7d8f3db871f639e72eade',1,'model::constants::DatabaseConstants']]]
+  ['homepage_5fstyles_0',['HOMEPAGE_STYLES',['../class_hrefs_constants.html#ace408a40d4fc6d607a4b38a3bab6b3f2',1,'HrefsConstants']]],
+  ['homepage_5fstyles_5fprint_1',['HOMEPAGE_STYLES_PRINT',['../class_hrefs_constants.html#a58b5a8a1b1e1008355e1c2ef3f7869a4',1,'HrefsConstants']]]
 ];

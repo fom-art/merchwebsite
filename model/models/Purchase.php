@@ -2,6 +2,11 @@
 
 namespace model\models;
 
+/**
+ * Class Purchase
+ *
+ * Represents a purchase made by a user.
+ */
 class Purchase
 {
     /**

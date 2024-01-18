@@ -2,6 +2,11 @@
 
 namespace model\models;
 
+/**
+ * Class Product
+ *
+ * Represents a product in the application.
+ */
 class Product
 {
     /**

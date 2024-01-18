@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Merch Website: Product Class Reference</title>
+<title>My Project: Product Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -23,7 +23,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Merch Website
+   <div id="projectname">My Project
    </div>
   </td>
  </tr>
@@ -71,7 +71,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>model</b></li><li class="navelem"><a class="el" href="namespacemodel_1_1models.html">models</a></li><li class="navelem"><a class="el" href="classmodel_1_1models_1_1_product.html">Product</a></li>  </ul>
+<li class="navelem"><b>model</b></li><li class="navelem"><b>models</b></li><li class="navelem"><a class="el" href="classmodel_1_1models_1_1_product.html">Product</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -116,7 +116,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a658defb34762c8f40085aec87e16ba1a" id="r_a658defb34762c8f40085aec87e16ba1a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a658defb34762c8f40085aec87e16ba1a">toArray</a> ()</td></tr>
 <tr class="separator:a658defb34762c8f40085aec87e16ba1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class Product</p>
+<p>Represents a product in the application. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a7516ca30af0db3cdbf9a7739b48ce91d" name="a7516ca30af0db3cdbf9a7739b48ce91d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7516ca30af0db3cdbf9a7739b48ce91d">&#9670;&#160;</a></span>__toString()</h2>
 
@@ -131,6 +134,8 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Convert the Product object to a JSON string.</p>
+<dl class="section return"><dt>Returns</dt><dd>string A JSON representation of the Product object. </dd></dl>
 
 </div>
 </div>
@@ -148,6 +153,8 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Get the ID of the product.</p>
+<dl class="section return"><dt>Returns</dt><dd>int|null The ID of the product. </dd></dl>
 
 </div>
 </div>
@@ -165,6 +172,8 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Get the name of the product.</p>
+<dl class="section return"><dt>Returns</dt><dd>string The name of the product. </dd></dl>
 
 </div>
 </div>
@@ -182,6 +191,8 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Get the description of the product.</p>
+<dl class="section return"><dt>Returns</dt><dd>string The description of the product. </dd></dl>
 
 </div>
 </div>
@@ -199,6 +210,8 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Get the path to the product's photo.</p>
+<dl class="section return"><dt>Returns</dt><dd>string The path to the product's photo. </dd></dl>
 
 </div>
 </div>
@@ -216,6 +229,8 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Get the price of the product.</p>
+<dl class="section return"><dt>Returns</dt><dd>string The price of the product. </dd></dl>
 
 </div>
 </div>
@@ -233,6 +248,8 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Get the type/category of the product.</p>
+<dl class="section return"><dt>Returns</dt><dd>string The type/category of the product. </dd></dl>
 
 </div>
 </div>
@@ -250,6 +267,14 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Set the ID of the product.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">int&#160;|&#160;string</td><td class="paramname">$newValue</td><td>The new ID value.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>bool True if the ID was set successfully, false otherwise. </dd></dl>
 
 </div>
 </div>
@@ -267,6 +292,14 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Set the path to the product's photo.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">string</td><td class="paramname">$newValue</td><td>The new photo path value.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>bool True if the photo path was set successfully, false otherwise. </dd></dl>
 
 </div>
 </div>
@@ -308,6 +341,18 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Set the properties of the product.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">int&#160;|&#160;string</td><td class="paramname">$id</td><td>The new ID value. </td></tr>
+    <tr><td class="paramtype">string</td><td class="paramname">$productName</td><td>The new name value. </td></tr>
+    <tr><td class="paramtype">string</td><td class="paramname">$productPrice</td><td>The new price value. </td></tr>
+    <tr><td class="paramtype">string</td><td class="paramname">$productType</td><td>The new type/category value. </td></tr>
+    <tr><td class="paramtype">string</td><td class="paramname">$productDescription</td><td>The new description value. </td></tr>
+    <tr><td class="paramtype">string</td><td class="paramname">$productPhotoPath</td><td>The new photo path value. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -325,6 +370,14 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Set the description of the product.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">string</td><td class="paramname">$newValue</td><td>The new description value.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>bool True if the description was set successfully, false otherwise. </dd></dl>
 
 </div>
 </div>
@@ -342,6 +395,14 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Set the name of the product.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">string</td><td class="paramname">$newValue</td><td>The new name value.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>bool True if the name was set successfully, false otherwise. </dd></dl>
 
 </div>
 </div>
@@ -359,6 +420,13 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Set the path to the product's photo.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">string</td><td class="paramname">$productPhotoPath</td><td>The new photo path value. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -376,6 +444,14 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Set the price of the product.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">string</td><td class="paramname">$newValue</td><td>The new price value.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>bool True if the price was set successfully, false otherwise. </dd></dl>
 
 </div>
 </div>
@@ -393,6 +469,14 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Set the type/category of the product.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">string</td><td class="paramname">$newValue</td><td>The new type/category value.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>bool True if the type/category was set successfully, false otherwise. </dd></dl>
 
 </div>
 </div>
@@ -410,11 +494,13 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Convert the Product object to an associative array.</p>
+<dl class="section return"><dt>Returns</dt><dd>array An associative array representing the Product object. </dd></dl>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>model/models/<a class="el" href="_product_8php.html">Product.php</a></li>
+<li>model/models/<b>Product.php</b></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

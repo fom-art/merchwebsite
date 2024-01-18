@@ -2,6 +2,10 @@
 
 namespace model\models;
 
+/**
+ * Class User
+ * Represents a user in the system.
+ */
 class User
 {
     /**

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['2_20technical_20architecture_0',['2. Technical Architecture',['../md__productive_01_dokumentation_01_merch_website_01_project.html#autotoc_md2',1,'']]]
+  ['3_20code_20documentation_0',['3. Code Documentation',['../md__r_e_a_d_m_e.html#autotoc_md4',1,'']]]
 ];
