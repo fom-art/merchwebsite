@@ -9,11 +9,23 @@ use view\SignUpView;
 
 require_once __DIR__ . '/../view/SignUpView.php';
 
+/**
+ * Class SignUpController
+ *
+ * This class handles the sign-up process for users.
+ */
 class SignUpController
 {
+    /**
+     * @var SignUpView
+     */
     private SignUpView $view;
 
     /**
+     * SignUpController constructor.
+     *
+     * Initializes the sign-up controller, validates the form, and registers the user if conditions are met.
+     *
      * @throws Exception
      */
     public function __construct()
@@ -40,19 +52,33 @@ class SignUpController
         $this->setupView($isFormValid, $isRegisteredAlready, $registrationResult);
     }
 
-    public
-    function index(): void
+    /**
+     * Render the sign-up page.
+     *
+     * @return void
+     */
+    public function index(): void
     {
         $this->view->render();
     }
 
-    private
-    function checkIfUserWithEmailRegistered($email): bool
+    /**
+     * Check if a user with a given email is already registered.
+     *
+     * @param string $email The email address to check.
+     * @return bool True if the user with the email exists, otherwise false.
+     */
+    private function checkIfUserWithEmailRegistered(string $email): bool
     {
         $database = new DatabaseHandler;
         return $database->checkIfUserWithEmailExists($email);
     }
 
+    /**
+     * Register a user.
+     *
+     * @return bool True if the user registration is successful, otherwise false.
+     */
     private function registerUser(): bool
     {
         unset($_SESSION['csrf-token']);
@@ -67,9 +93,15 @@ class SignUpController
             city: $_POST['city'] ?? "",
             postCode: $_POST['post-code'] ?? "",
             phoneNumber: $_POST['phone-number'] ?? "",
-            isAdmin: false);
+            isAdmin: false
+        );
     }
 
+    /**
+     * Validate the sign-up form data.
+     *
+     * @return bool True if the form data is valid, otherwise false.
+     */
     private function validateForm(): bool
     {
         if (isset($_POST['email'])) {
@@ -89,8 +121,17 @@ class SignUpController
         return false;
     }
 
-    private function setupView($isFormValid, $isRegisteredAlready, $registrationResult) {
-         $this->view = new SignUpView(
+    /**
+     * Set up the view for the sign-up page.
+     *
+     * @param bool $isFormValid Whether the form data is valid.
+     * @param bool $isRegisteredAlready Whether the user is already registered with the provided email.
+     * @param bool $registrationResult Whether the registration was successful.
+     * @return void
+     */
+    private function setupView(bool $isFormValid, bool $isRegisteredAlready, bool $registrationResult): void
+    {
+        $this->view = new SignUpView(
             isFormValid: $isFormValid,
             isRegisteredAlready: $isRegisteredAlready,
             isRegistrationSuccess: $registrationResult,
@@ -106,5 +147,5 @@ class SignUpController
             phoneNumber: $_POST['phone-number'] ?? "",
             csrfToken: $_SESSION['csrf-token']
         );
-}
+    }
 }

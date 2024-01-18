@@ -8,10 +8,23 @@ use view\ForgotPasswordView;
 
 require_once __DIR__ . '/../view/ForgotPasswordView.php';
 
+/**
+ * Class ForgotPasswordController
+ *
+ * This class manages the process of password recovery for users.
+ */
 class ForgotPasswordController
 {
+    /**
+     * @var ForgotPasswordView
+     */
     private ForgotPasswordView $view;
 
+    /**
+     * ForgotPasswordController constructor.
+     *
+     * Initializes the password recovery controller, validates the form, and handles the recovery process.
+     */
     public function __construct()
     {
         $isFormValid = false;
@@ -48,19 +61,36 @@ class ForgotPasswordController
         );
     }
 
+    /**
+     * Render the password recovery page.
+     *
+     * @return void
+     */
     public function index(): void
     {
         $this->view->render();
     }
 
+    /**
+     * Check if a user with the provided email exists in the database.
+     *
+     * @param string $email The email address to check.
+     *
+     * @return bool True if a user with the email exists, otherwise false.
+     */
     private function getIfUserWithEmailExist($email): bool
     {
         $dbHandler = new DatabaseHandler();
         return $dbHandler->getUserByEmail(email: $email) != false;
     }
 
+    /**
+     * Send a recovery email to the user for password reset.
+     *
+     * @return void
+     */
     private function sendEmailToUser()
     {
-        //TODO: Won't be implemented within scope of this sem project
+        //TODO: This functionality will be implemented in the future.
     }
 }

@@ -6,24 +6,50 @@ use model\constants\DatabaseConstants;
 use model\models\Product;
 use model\models\Purchase;
 use model\models\User;
+
 require_once __DIR__ . "/../constants/DatabaseConstants.php";
 require_once __DIR__ . "/../models/User.php";
 require_once __DIR__ . "/../models/Purchase.php";
 require_once __DIR__ . "/../models/Product.php";
 
-class DatabaseHandler{
+/**
+ * The DatabaseHandler class is responsible for handling database operations.
+ */
+class DatabaseHandler
+{
+    /**
+     * @var \mysqli The MySQL database connection object.
+     */
     private \mysqli $database;
+
+    /**
+     * @var string The name of the user database.
+     */
     private string $userDatabaseName;
+
+    /**
+     * @var string The name of the product database.
+     */
     private string $productDatabaseName;
+
+    /**
+     * @var string The name of the purchase database.
+     */
     private string $purchaseDatabaseName;
 
-
+    /**
+     * DatabaseHandler constructor.
+     * Initializes a new instance of the DatabaseHandler class.
+     */
     public function __construct()
     {
         $this->connectToDatabase();
         $this->setDatabaseNames();
     }
 
+    /**
+     * Establishes a connection to the MySQL database.
+     */
     private function connectToDatabase(): void
     {
         $this->database = mysqli_connect(
@@ -34,6 +60,9 @@ class DatabaseHandler{
         );
     }
 
+    /**
+     * Sets the names of user, product, and purchase databases from constants.
+     */
     private function setDatabaseNames(): void
     {
         $this->userDatabaseName = DatabaseConstants::USER_DATABASE_NAME;
@@ -41,24 +70,51 @@ class DatabaseHandler{
         $this->purchaseDatabaseName = DatabaseConstants::PURCHASE_DATABASE_NAME;
     }
 
+    /**
+     * Gets the original database connection object.
+     *
+     * @return \mysqli The original database connection object.
+     */
     function getOriginalDatabase(): \mysqli
     {
         return $this->database;
     }
 
+    /**
+     * Checks if a user with the given email and password exists in the database.
+     *
+     * @param string $email The email of the user.
+     * @param string $password The hashed password of the user.
+     *
+     * @return bool True if the user exists and the password is correct; otherwise, false.
+     */
     public function checkUserForLogIn($email, $password): bool
     {
         $user = $this->getUserByEmail($email);
         return $user && password_verify($password, $user->getPassword());
     }
 
+    /**
+     * Checks if a user with the given email exists in the database.
+     *
+     * @param string $email The email to check.
+     *
+     * @return bool True if a user with the email exists; otherwise, false.
+     */
     public function checkIfUserWithEmailExists($email): bool
     {
         $user = $this->getUserByEmail($email);
         return $user instanceof User;
     }
 
-    public function getUserByEmail($email): User | bool
+    /**
+     * Retrieves a user from the database by email.
+     *
+     * @param string $email The email of the user to retrieve.
+     *
+     * @return User|bool The retrieved User object if found; otherwise, false.
+     */
+    public function getUserByEmail($email): User|bool
     {
         $sqlRequestToGetUser = "SELECT * FROM $this->userDatabaseName WHERE `email` = ?";
         $stmt = $this->database->prepare($sqlRequestToGetUser);
@@ -90,6 +146,13 @@ class DatabaseHandler{
         return false;
     }
 
+    /**
+     * Retrieves a purchase from the database by its ID.
+     *
+     * @param int $id The ID of the purchase to retrieve.
+     *
+     * @return Purchase The retrieved Purchase object.
+     */
     public function getPurchaseById($id): Purchase
     {
         $sqlRequestToGetPurchase = "SELECT * FROM $this->purchaseDatabaseName WHERE id = ?";
@@ -121,6 +184,13 @@ class DatabaseHandler{
         return new Purchase();
     }
 
+    /**
+     * Retrieves a product from the database by its ID.
+     *
+     * @param int $id The ID of the product to retrieve.
+     *
+     * @return Product The retrieved Product object.
+     */
     public function getProductById($id): Product
     {
         $sqlRequestToGetProduct = "SELECT * FROM $this->productDatabaseName WHERE id = ?";
@@ -146,7 +216,23 @@ class DatabaseHandler{
         return new Product();
     }
 
-    public function createUser($email, $password, $name, $surname, $address, $country, $city, $postCode, $phoneNumber, $isAdmin): bool | \mysqli_result
+    /**
+     * Creates a new user record in the database.
+     *
+     * @param string $email The email of the user.
+     * @param string $password The hashed password of the user.
+     * @param string $name The name of the user.
+     * @param string $surname The surname of the user.
+     * @param string $address The address of the user.
+     * @param string $country The country of the user.
+     * @param string $city The city of the user.
+     * @param string $postCode The postal code of the user.
+     * @param string $phoneNumber The phone number of the user.
+     * @param bool $isAdmin Whether the user is an admin.
+     *
+     * @return bool|\mysqli_result True if the user was created successfully; otherwise, false.
+     */
+    public function createUser($email, $password, $name, $surname, $address, $country, $city, $postCode, $phoneNumber, $isAdmin): bool|\mysqli_result
     {
         $hashedPassword = $this->hashThePassword($password);
         $sqlQuery = "INSERT INTO `$this->userDatabaseName` (`email`, `password`, `name`, `surname`, `address`, `country`, `city`, `postCode`, `phoneNumber`, `isAdmin`)
@@ -161,6 +247,17 @@ class DatabaseHandler{
         return false;
     }
 
+    /**
+     * Creates a new product record in the database.
+     *
+     * @param string $productName The name of the product.
+     * @param string $productPrice The price of the product.
+     * @param string $productType The type of the product.
+     * @param string $productDescription The description of the product.
+     * @param string $productPhoto The path to the product photo.
+     *
+     * @return bool True if the product was created successfully; otherwise, false.
+     */
     public function createProduct($productName, $productPrice, $productType, $productDescription, $productPhoto): bool
     {
         $productPhotoPath = $productPhoto;
@@ -176,6 +273,21 @@ class DatabaseHandler{
         return false;
     }
 
+    /**
+     * Creates a new purchase record in the database.
+     *
+     * @param string $email The email of the user making the purchase.
+     * @param string $name The name of the purchaser.
+     * @param string $surname The surname of the purchaser.
+     * @param string $address The address of the purchaser.
+     * @param string $country The country of the purchaser.
+     * @param string $city The city of the purchaser.
+     * @param string $postCode The postal code of the purchaser.
+     * @param string $phoneNumber The phone number of the purchaser.
+     * @param string $purchaseDescription The description of the purchase.
+     *
+     * @return bool True if the purchase was created successfully; otherwise, false.
+     */
     public function createPurchase($email, $name, $surname, $address, $country, $city, $postCode, $phoneNumber, $purchaseDescription): bool
     {
         $sqlQuery = "INSERT INTO `$this->purchaseDatabaseName` (`email`, `name`, `surname`, `address`, `country`, `city`, `postCode`, `phoneNumber`, `purchaseDescription`)
@@ -189,6 +301,14 @@ class DatabaseHandler{
 
         return false;
     }
+
+    /**
+     * Updates the database data for a user.
+     *
+     * @param User $user The User object with updated data.
+     *
+     * @return bool True if the user data was updated successfully; otherwise, false.
+     */
     public function changeUserDatabaseData($user): bool
     {
         $id = $user->getId();
@@ -220,6 +340,13 @@ class DatabaseHandler{
         return false;
     }
 
+    /**
+     * Updates the database data for a product.
+     *
+     * @param Product $product The Product object with updated data.
+     *
+     * @return void
+     */
     public function changeProductDatabaseData($product): void
     {
         $id = $product->getId();
@@ -243,6 +370,13 @@ class DatabaseHandler{
         }
     }
 
+    /**
+     * Updates the database data for a purchase.
+     *
+     * @param Purchase $purchase The Purchase object with updated data.
+     *
+     * @return void
+     */
     public function changePurchaseData($purchase): void
     {
         $id = $purchase->getId();
@@ -274,11 +408,25 @@ class DatabaseHandler{
         }
     }
 
+    /**
+     * Hashes the provided password using Bcrypt.
+     *
+     * @param string $passwordToHash The password to hash.
+     *
+     * @return string The hashed password.
+     */
     private function hashThePassword($passwordToHash): string
     {
         return password_hash($passwordToHash, PASSWORD_BCRYPT);
     }
 
+    /**
+     * Checks if a product photo with the given path exists in the database.
+     *
+     * @param string $photoPath The path of the product photo.
+     *
+     * @return bool True if the product photo exists in the database; otherwise, false.
+     */
     public function productPhotoExists($photoPath): bool
     {
         $sqlRequestToGetProduct = "SELECT COUNT(*) FROM $this->productDatabaseName WHERE productPhotoPath = ?";
@@ -299,7 +447,16 @@ class DatabaseHandler{
         }
     }
 
-    public function getProductsList($page = 1, $itemsPerPage = 10): array {
+    /**
+     * Retrieves a list of products with pagination.
+     *
+     * @param int $page The current page number.
+     * @param int $itemsPerPage The number of items to display per page.
+     *
+     * @return array An array of Product objects representing the products on the current page.
+     */
+    public function getProductsList($page = 1, $itemsPerPage = 10): array
+    {
         $products = [];
         $offset = ($page - 1) * $itemsPerPage;
 
@@ -329,6 +486,11 @@ class DatabaseHandler{
         return $products;
     }
 
+    /**
+     * Retrieves the total number of products in the database.
+     *
+     * @return int The total number of products.
+     */
     public function getTotalProductsCount()
     {
         $sqlQuery = "SELECT COUNT(*) as total FROM `$this->productDatabaseName`";

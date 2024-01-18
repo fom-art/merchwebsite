@@ -10,10 +10,30 @@ use Inputs;
 require_once __DIR__ . '/../Inputs.php';
 require_once __DIR__ . '/../HrefsConstants.php';
 
+/**
+ * Class AdminSections
+ *
+ * This class provides methods for rendering different sections of the admin page.
+ *
+ * @package view\utils\sections
+ */
 class AdminSections
 {
+    /**
+     * Render the product addition form.
+     *
+     * @param string $productName The name of the product.
+     * @param string $productPrice The price of the product.
+     * @param string $productType The type of the product.
+     * @param string $productDescription The description of the product.
+     * @param string $photo The photo of the product.
+     * @param bool $addProductResult The result of adding a product.
+     * @param string $csrfToken The CSRF token.
+     * @param bool $isCsrfSuccess Indicates if CSRF validation was successful.
+     */
     static function renderForm($productName, $productPrice, $productType, $productDescription, $photo, $addProductResult, $csrfToken, $isCsrfSuccess): void
     { ?>
+        <!-- HTML code for rendering the product addition form -->
         <div class="content-block">
             <div class="header-block">
                 <div class="title-block">
@@ -65,9 +85,13 @@ class AdminSections
         <?php
     }
 
+    /**
+     * Render a success message for product addition.
+     */
     static function renderSuccessMessage(): void
     {
         ?>
+        <!-- HTML code for rendering a success message after adding a product -->
         <div class="content-block">
             <h1>The product was added! :)</h1>
             <div class="form-block">
@@ -83,9 +107,13 @@ class AdminSections
         <?php
     }
 
+    /**
+     * Render scripts required for form validation and handling.
+     */
     static function renderScripts()
     {
         ?>
+        <!-- Include JavaScript scripts for form validation and handling -->
         <script src="<?php echo HrefsConstants::FORM_VALIDATION_SCRIPT ?>"></script>
         <script src="<?php echo HrefsConstants::FORM_HANDLING_SCRIPT ?>"></script>
         <script src="<?php echo HrefsConstants::FORM_DATA_HANDLER_SCRIPT ?>"></script>

@@ -8,13 +8,27 @@ use view\HomeView;
 
 require_once __DIR__ . '/../view/HomeView.php';
 
+/**
+ * Class HomeController
+ *
+ * This class manages the home page and product listing.
+ */
 class HomeController
 {
+    /**
+     * @var HomeView
+     */
     private HomeView $view;
 
+    /**
+     * HomeController constructor.
+     *
+     * Initializes the home controller, fetches and displays products.
+     */
     public function __construct()
     {
         $products = array();
+
         // Receive POST data
         if (isset($_POST['page']) && isset($_POST['perPage'])) {
             $products = $this->getProducts();
@@ -42,11 +56,21 @@ class HomeController
         );
     }
 
+    /**
+     * Render the home page.
+     *
+     * @return void
+     */
     public function index(): void
     {
         $this->view->render();
     }
 
+    /**
+     * Retrieve a list of products based on page and perPage parameters.
+     *
+     * @return array An array of Product objects.
+     */
     private function getProducts(): array
     {
         $page = isset($_POST['page']) ? (int)$_POST['page'] : 1;
@@ -56,6 +80,11 @@ class HomeController
         return $dbHandler->getProductsList($page, $perPage);
     }
 
+    /**
+     * Calculate the total number of pages based on product count and perPage value.
+     *
+     * @return int The total number of pages.
+     */
     private function getPagesAmount(): int {
         $dbHandler = new DatabaseHandler();
         $totalProductsCount = $dbHandler->getTotalProductsCount();

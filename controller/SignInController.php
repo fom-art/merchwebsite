@@ -8,10 +8,23 @@ use view\SignInView;
 
 require_once __DIR__ . '/../view/SignInView.php';
 
+/**
+ * Class SignInController
+ *
+ * This class handles the sign-in process for users.
+ */
 class SignInController
 {
+    /**
+     * @var SignInView
+     */
     private SignInView $view;
 
+    /**
+     * SignInController constructor.
+     *
+     * Initializes the sign-in controller, validates the form, and handles user login.
+     */
     public function __construct()
     {
         $isFormValid = $this->validateForm();
@@ -34,11 +47,21 @@ class SignInController
         );
     }
 
+    /**
+     * Render the sign-in page.
+     *
+     * @return void
+     */
     public function index(): void
     {
         $this->view->render();
     }
 
+    /**
+     * Validate the sign-in form data.
+     *
+     * @return bool True if the form data is valid, otherwise false.
+     */
     private function validateForm(): bool
     {
         return FormValidation::validateSignInForm(
@@ -46,6 +69,11 @@ class SignInController
             password: $_POST['password'] ?? "");
     }
 
+    /**
+     * Log in the user and update session variables if successful.
+     *
+     * @return bool True if the user login is successful, otherwise false.
+     */
     private function logInUser(): bool
     {
         $dbHandler = new DatabaseHandler();
@@ -70,7 +98,6 @@ class SignInController
             $_SESSION['is-admin'] = $user->getIsAdmin();
             unset($_SESSION['csrf-token']);
         }
-
 
         return $isSuccess;
     }

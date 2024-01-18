@@ -3,6 +3,7 @@
 // Start the session
 session_start();
 
+// Import necessary classes and dependencies
 use controller\AdminController;
 use controller\ErrorPageController;
 use controller\ForgotPasswordController;
@@ -48,6 +49,7 @@ if (preg_match('/\.(?:png|jpg|jpeg|gif|css|js|svg)$/', $_SERVER["REQUEST_URI"]))
     return false; // Serve the requested resource as-is.
 }
 
+// Extract the requested URI and URI segments
 $requestUri = $_SERVER['REQUEST_URI'];
 $requestUri = str_replace($base_path, '', $requestUri); // Remove the base path
 $uriSegments = explode('/', $requestUri);
@@ -56,59 +58,72 @@ $uriSegments = explode('/', $requestUri);
 switch (end($uriSegments)) {
     case '/':
     case '':
+        // Route to the home page
         $homeController = new HomeController();
         $homeController->index();
         break;
     case 'admin':
         if (isset($_SESSION['is-admin']) && $_SESSION['is-admin']) {
+            // Check if the user is an admin and route to the admin page
             $adminController = new AdminController();
             $adminController->index();
         } else {
+            // Redirect non-admin users to the homepage
             header('Location: '. HrefsConstants::INDEX); // Replace '/path/to/homepage' with the actual path
             exit;
         }
         break;
     case 'forgot-password':
         if (isset($_SESSION['email'])) {
+            // Redirect signed-in users to the homepage
             header('Location: '. HrefsConstants::INDEX); // Replace '/path/to/homepage' with the actual path
             exit;
         } else {
+            // Route to the forgot password page
             $forgotPasswordController = new ForgotPasswordController();
             $forgotPasswordController->index();
         }
         break;
     case 'purchase':
+        // Route to the purchase page
         $purchaseController = new PurchaseController();
         $purchaseController->index();
         break;
     case 'sign-in':
         if (isset($_SESSION['email'])) {
+            // Redirect signed-in users to the homepage
             header('Location: '. HrefsConstants::INDEX); // Replace '/path/to/homepage' with the actual path
             exit;
         } else {
+            // Route to the sign-in page
             $signInController = new SignInController();
             $signInController->index();
         }
         break;
     case 'sign-up':
         if (isset($_SESSION['email'])) {
+            // Redirect signed-in users to the homepage
             header('Location: '. HrefsConstants::INDEX); // Replace '/path/to/homepage' with the actual path
             exit;
         } else {
+            // Route to the sign-up page
             $signUpController = new SignUpController();
             $signUpController->index();
         }
         break;
     case 'user':
         if (isset($_SESSION['email'])) {
+            // Route to the user details page for signed-in users
             $userDetailsController = new UserDetailsController();
             $userDetailsController->index();
         } else {
+            // Redirect non-signed-in users to the homepage
             header('Location: '. HrefsConstants::INDEX); // Replace '/path/to/homepage' with the actual path
             exit;
         }
         break;
     default:
+        // Set HTTP response code to 404 and route to an error page
         http_response_code(404);
         $errorPageController = new ErrorPageController($uriSegments[0]);
         $errorPageController->index();

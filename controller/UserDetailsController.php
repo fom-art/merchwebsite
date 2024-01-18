@@ -10,10 +10,23 @@ use view\UserDetailsView;
 
 require_once __DIR__ . '/../view/UserDetailsView.php';
 
+/**
+ * Class UserDetailsController
+ *
+ * This class manages user details and user details editing.
+ */
 class UserDetailsController
 {
+    /**
+     * @var UserDetailsView
+     */
     private UserDetailsView $view;
 
+    /**
+     * UserDetailsController constructor.
+     *
+     * Initializes the user details controller, validates the form, and handles user details editing.
+     */
     public function __construct()
     {
         if (isset($_POST['action']) && $_POST['action'] == 'unset') {
@@ -53,11 +66,21 @@ class UserDetailsController
         );
     }
 
+    /**
+     * Render the user details page.
+     *
+     * @return void
+     */
     public function index(): void
     {
         $this->view->render();
     }
 
+    /**
+     * Validate the user details form data.
+     *
+     * @return bool True if the form data is valid, otherwise false.
+     */
     private function validateForm(): bool
     {
         if (isset($_POST['email'])) {
@@ -76,6 +99,11 @@ class UserDetailsController
         return false;
     }
 
+    /**
+     * Edit user details and update the session variables.
+     *
+     * @return bool True if the user details editing is successful, otherwise false.
+     */
     private function editUserDetails(): bool
     {
         $dbHandler = new DatabaseHandler();

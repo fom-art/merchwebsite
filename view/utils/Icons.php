@@ -1,7 +1,18 @@
 <?php
 
+/**
+ * Class Icons
+ *
+ * This class defines methods to print different icons with links.
+ */
 class Icons
 {
+    /**
+     * Print an admin icon.
+     *
+     * @param string $href The URL to link to.
+     * @param string $id   The ID attribute for the link.
+     */
     public static function printAdminIcon($href, $id): void
     {
         echo '<div class="icon-block">
@@ -13,6 +24,12 @@ class Icons
                         </div>';
     }
 
+    /**
+     * Print a user login icon.
+     *
+     * @param string $href The URL to link to.
+     * @param string $id   The ID attribute for the link.
+     */
     public static function printUserLoginIcon($href, $id): void
     {
         echo '<div class="icon-block">
@@ -35,6 +52,12 @@ class Icons
                         </div>';
     }
 
+    /**
+     * Print a purchase icon.
+     *
+     * @param string $href The URL to link to.
+     * @param string $id   The ID attribute for the link.
+     */
     public static function printPurchaseIcon($href, $id): void
     {
         echo '<div class="icon-block">
@@ -52,6 +75,12 @@ class Icons
                         </div>';
     }
 
+    /**
+     * Print a back arrow icon.
+     *
+     * @param string $href The URL to link to.
+     * @param string $id   The ID attribute for the link.
+     */
     public static function printBackArrowIcon($href, $id): void
     {
         echo '

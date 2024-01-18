@@ -4,18 +4,29 @@ namespace controller;
 
 use controller\utlis\FormValidation;
 use controller\utlis\Utils;
-use HrefsConstants;
 use model\database\DatabaseHandler;
 use view\AdminView;
 
 require_once __DIR__ . '/../view/AdminView.php';
 require_once __DIR__ . '/utils/Utils.php';
 
+/**
+ * Class AdminController
+ *
+ * This class manages administrative tasks such as adding products to the system.
+ */
 class AdminController
 {
+    /**
+     * @var AdminView
+     */
     private AdminView $view;
 
-
+    /**
+     * AdminController constructor.
+     *
+     * Initializes the admin controller, validates the form, and handles product addition.
+     */
     public function __construct()
     {
         $isFormValid = false;
@@ -47,12 +58,22 @@ class AdminController
         );
     }
 
+    /**
+     * Render the admin page.
+     *
+     * @return void
+     */
     public function index(): void
     {
         $this->view->render();
     }
 
-    private function validateForm()
+    /**
+     * Validate the product addition form.
+     *
+     * @return bool True if the form data is valid, otherwise false.
+     */
+    private function validateForm(): bool
     {
         if (isset($_POST['product-name'])) {
             return FormValidation::validateProductForm(
@@ -66,6 +87,11 @@ class AdminController
         return false;
     }
 
+    /**
+     * Add a new product to the system.
+     *
+     * @return bool True if the product addition is successful, otherwise false.
+     */
     private function addProduct(): bool
     {
         $productPath = $this->addProductPhoto();
@@ -83,6 +109,11 @@ class AdminController
         return false;
     }
 
+    /**
+     * Add a product photo to the system and return its path.
+     *
+     * @return string The path to the added product photo.
+     */
     private function addProductPhoto(): string
     {
         $targetDir = "/home/fomenart/www/view/images/";
@@ -91,7 +122,6 @@ class AdminController
         $fileExtension = pathinfo($targetFile, PATHINFO_EXTENSION);
 
         $dbHandler = new DatabaseHandler();
-
 
         // Check if file exists and append a unique ID if it does
         $fileBaseName = pathinfo($targetFile, PATHINFO_FILENAME);
@@ -108,6 +138,11 @@ class AdminController
         return str_replace("/home/fomenart/www/", "", $targetFile);
     }
 
+    /**
+     * Get the product photo extension.
+     *
+     * @return string The product photo extension.
+     */
     private function getProductPhotoExtension(): string
     {
         $targetDir = HrefsConstants::IMAGES_STORAGE;

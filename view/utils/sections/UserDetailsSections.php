@@ -12,9 +12,31 @@ require_once __DIR__ . '/../Icons.php';
 require_once __DIR__ . '/../Inputs.php';
 require_once __DIR__ . '/../HrefsConstants.php';
 
-
+/**
+ * Class UserDetailsSections
+ *
+ * This class provides methods for rendering different sections of the user details page.
+ *
+ * @package view\utils\sections
+ */
 class UserDetailsSections
 {
+    /**
+     * Render the user details edit form section.
+     *
+     * @param string $email The email input value.
+     * @param string $password The password input value.
+     * @param string $name The name input value.
+     * @param string $surname The surname input value.
+     * @param string $address The address input value.
+     * @param string $country The country input value.
+     * @param string $city The city input value.
+     * @param string $postCode The post code input value.
+     * @param string $phoneNumber The phone number input value.
+     * @param string $userDetailsEditResult The result message of user details edit.
+     * @param string $csrfToken The CSRF token value.
+     * @param bool $isCsrfSuccess Indicates if CSRF validation is successful.
+     */
     public static function renderForm($email, $password, $name, $surname, $address, $country, $city, $postCode, $phoneNumber, $userDetailsEditResult, $csrfToken, $isCsrfSuccess)
     {
         ?>
@@ -83,6 +105,9 @@ class UserDetailsSections
             </div>
         </div>  <?php }
 
+    /**
+     * Render the success message section after successfully changing user data.
+     */
     static function renderSuccessMessage()
     {
         ?>
@@ -99,6 +124,9 @@ class UserDetailsSections
         <?php
     }
 
+    /**
+     * Render JavaScript scripts required for form validation and handling.
+     */
     static function renderScripts(): void
     {
         ?>

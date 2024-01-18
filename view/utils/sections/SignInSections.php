@@ -13,8 +13,23 @@ require_once __DIR__ . '/../Inputs.php';
 require_once __DIR__ . '/../HrefsConstants.php';
 
 
+/**
+ * Class SignInSections
+ *
+ * This class provides methods for rendering different sections of the sign-in page.
+ *
+ * @package view\utils\sections
+ */
 class SignInSections
 {
+    /**
+     * Render the sign-in form section.
+     *
+     * @param string $email The email input value.
+     * @param string $password The password input value.
+     * @param string $csrfToken The CSRF token value.
+     * @param bool $isLogInSuccess Indicates if the login was successful.
+     */
     public static function renderForm($email, $password, $csrfToken, $isLogInSuccess)
     {
         ?>
@@ -78,6 +93,9 @@ class SignInSections
         <?php
     }
 
+    /**
+     * Render the success message section after a successful sign-in.
+     */
     static function renderSuccessMessage(): void
     {
         ?>
@@ -94,6 +112,9 @@ class SignInSections
         <?php
     }
 
+    /**
+     * Render JavaScript scripts required for form validation and handling.
+     */
     static function renderScripts(): void
     {
         ?>

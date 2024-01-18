@@ -9,8 +9,21 @@ require_once __DIR__ . '/../Icons.php';
 require_once __DIR__ . '/../HrefsConstants.php';
 
 
+/**
+ * Class HomeSections
+ *
+ * This class provides methods for rendering different sections of the home page.
+ *
+ * @package view\utils\sections
+ */
 class HomeSections
 {
+    /**
+     * Render the header section of the home page.
+     *
+     * @param bool $isRegistered Indicates if a user is registered.
+     * @param bool $isAdmin Indicates if the user is an admin.
+     */
     public static function renderHeader($isRegistered, $isAdmin): void
     {
         ?>
@@ -34,6 +47,9 @@ class HomeSections
         <?php
     }
 
+    /**
+     * Render the navigation menu.
+     */
     public static function renderNavigation()
     {
         ?>
@@ -48,6 +64,11 @@ class HomeSections
         <?php
     }
 
+    /**
+     * Render the main content section of the home page.
+     *
+     * @param Product[] $products An array of Product objects to be displayed in the main content.
+     */
     public static function renderMainContent($products)
     {
         ?>
@@ -76,6 +97,9 @@ class HomeSections
         <?php
     }
 
+    /**
+     * Render the footer section of the home page.
+     */
     public static function renderFooter()
     {
         ?>
@@ -104,6 +128,9 @@ class HomeSections
         <?php
     }
 
+    /**
+     * Render JavaScript scripts required for pagination.
+     */
     public static function renderScripts()
     {
         ?>
@@ -111,6 +138,11 @@ class HomeSections
         <?php
     }
 
+    /**
+     * Render a product card for the given Product object.
+     *
+     * @param Product $product The Product object to be displayed in the card.
+     */
     private static function renderProductCard(Product $product): void
     {
         $productName = htmlspecialchars($product->getProductName());

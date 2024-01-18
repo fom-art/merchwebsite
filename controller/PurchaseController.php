@@ -8,10 +8,23 @@ use view\PurchaseView;
 
 require_once __DIR__ . '/../view/PurchaseView.php';
 
+/**
+ * Class PurchaseController
+ *
+ * This class manages the purchase process for users.
+ */
 class PurchaseController
 {
+    /**
+     * @var PurchaseView
+     */
     private PurchaseView $view;
 
+    /**
+     * PurchaseController constructor.
+     *
+     * Initializes the purchase controller, validates the form, and handles user purchases.
+     */
     public function __construct()
     {
         $isFormValid = $this->validateForm();
@@ -48,11 +61,21 @@ class PurchaseController
         );
     }
 
+    /**
+     * Render the purchase page.
+     *
+     * @return void
+     */
     public function index(): void
     {
         $this->view->render();
     }
 
+    /**
+     * Validate the purchase form data.
+     *
+     * @return bool True if the form data is valid, otherwise false.
+     */
     private function validateForm(): bool
     {
         if (isset($_POST['email'])) {
@@ -71,6 +94,11 @@ class PurchaseController
         return false;
     }
 
+    /**
+     * Make a user purchase and update session variables.
+     *
+     * @return bool True if the purchase is successful, otherwise false.
+     */
     private function makePurchase(): bool
     {
         $dbHandler = new DatabaseHandler();

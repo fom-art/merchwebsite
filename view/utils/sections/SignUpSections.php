@@ -12,9 +12,31 @@ require_once __DIR__ . '/../Icons.php';
 require_once __DIR__ . '/../Inputs.php';
 require_once __DIR__ . '/../HrefsConstants.php';
 
-
+/**
+ * Class SignUpSections
+ *
+ * This class provides methods for rendering different sections of the sign-up page.
+ *
+ * @package view\utils\sections
+ */
 class SignUpSections
 {
+    /**
+     * Render the sign-up form section.
+     *
+     * @param bool $isAlreadyRegistered Indicates if the user is already registered.
+     * @param string $email The email input value.
+     * @param string $password The password input value.
+     * @param string $passwordRepeat The repeated password input value.
+     * @param string $name The name input value.
+     * @param string $surname The surname input value.
+     * @param string $address The address input value.
+     * @param string $country The country input value.
+     * @param string $city The city input value.
+     * @param string $postCode The post code input value.
+     * @param string $phoneNumber The phone number input value.
+     * @param string $csrfToken The CSRF token value.
+     */
     public static function renderForm($isAlreadyRegistered, $email, $password, $passwordRepeat, $name, $surname, $address, $country, $city, $postCode, $phoneNumber, $csrfToken): void
     {
         ?>
@@ -79,7 +101,9 @@ class SignUpSections
             </div>
         </div>        <?php
     }
-
+    /**
+     * Render the success message section after a successful sign-up.
+     */
     static function renderSuccessMessage()
     {
         ?>
@@ -95,7 +119,9 @@ class SignUpSections
         </div>
         <?php
     }
-
+    /**
+     * Render JavaScript scripts required for form validation and handling.
+     */
     static function renderScripts(): void
     {
         ?>
