@@ -26,12 +26,19 @@ class AdminSections
      * @param string $productPrice The price of the product.
      * @param string $productType The type of the product.
      * @param string $productDescription The description of the product.
-     * @param string $photo The photo of the product.
+     * @param array $productPhoto The photo of the product.
      * @param bool $addProductResult The result of adding a product.
      * @param string $csrfToken The CSRF token.
      * @param bool $isCsrfSuccess Indicates if CSRF validation was successful.
      */
-    static function renderForm($productName, $productPrice, $productType, $productDescription, $photo, $addProductResult, $csrfToken, $isCsrfSuccess): void
+    static function renderForm(string $productName,
+                               string $productPrice,
+                               string $productType,
+                               string $productDescription,
+                               array $productPhoto,
+                               bool   $addProductResult,
+                               string $csrfToken,
+                               bool   $isCsrfSuccess): void
     { ?>
         <!-- HTML code for rendering the product addition form -->
         <div class="content-block">
@@ -64,7 +71,7 @@ class AdminSections
 
                     <?php
                     // Photo input
-                    echo Inputs::printFileInputBlock("photo-input-block", "Photo", "photo", $photo, "Invalid Photo!", FormValidation::isProductPhotoValid($photo));
+                    echo Inputs::printFileInputBlock("photo-input-block", "Photo", "photo", "The only valid photo types are PNG and JPEG, also, the photo has to be valid!", FormValidation::isProductPhotoValid($productPhoto));
                     // Csrf input
                     echo Inputs::printCsrfTokenInput($csrfToken)
                     ?>
@@ -76,7 +83,7 @@ class AdminSections
 
                     <?php
                     if (isset($_POST['product-name']) && $isCsrfSuccess && $addProductResult) {
-                        echo "<div class='validation-error-block'><p>Invalid inputs. Check the inputs marked by *</p></div>";
+                        echo "<div class='validation-error-block'><p>Invalid inputs.</p></div>";
                     }
                     ?>
                 </form>

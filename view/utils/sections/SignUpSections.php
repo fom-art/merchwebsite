@@ -46,7 +46,7 @@ class SignUpSections
                 <form id="sign-up" name="form" action="<?php echo HrefsConstants::SIGN_UP ?>" method="post">
                     <?php
                     //Email input
-                    echo Inputs::printInputBlock("email-input-block", "Email", "email", $email, "Invalid Email", FormValidation::isEmailValid($email));
+                    echo Inputs::printInputBlock("email-input-block", "Email", "email", $email, "Invalid Email Address! Please enter a valid email address. It should follow the standard format (e.g., user@example.com) and not contain special characters like <, >, (), [], \, ',', or spaces.", FormValidation::isEmailValid($email));
                     ?>
 
                     <div class="two-inputs-in-one-row-block">
@@ -60,9 +60,9 @@ class SignUpSections
 
                     <?php
                     //Password input
-                    echo Inputs::printInputBlock("password-input-block", "Password", "password", $password, "Invalid Password", FormValidation::isPasswordValid($password));
+                    echo Inputs::printInputBlock("password-input-block", "Password", "password", $password, "Invalid Password! Password must contain at least 8 characters, including at least one uppercase letter (A-Z), at least one number (0-9), and can only contain letters (a-z, A-Z) and numbers.", FormValidation::isPasswordValid($password));
                     //Repeat password input
-                    echo Inputs::printInputBlock("repeat-password-input-block", "Repeat the password", "repeat-password", $passwordRepeat, "Passwords don't match", FormValidation::isPasswordRepeatValid($password, $passwordRepeat));
+                    echo Inputs::printInputBlock("repeat-password-input-block", "Repeat the password", "repeat-password", $passwordRepeat, "Invalid Password! Please ensure your password is at least 8 characters long, includes at least one uppercase letter (A-Z), at least one number (0-9), and matches the original password.", FormValidation::isPasswordRepeatValid($password, $passwordRepeat));
                     //Address input
                     echo Inputs::printInputBlock("address-input-block", "Address", "address", $address, "Invalid Address", FormValidation::isAddressValid($address));
                     //Country input
@@ -101,6 +101,7 @@ class SignUpSections
             </div>
         </div>        <?php
     }
+
     /**
      * Render the success message section after a successful sign-up.
      */
@@ -119,6 +120,7 @@ class SignUpSections
         </div>
         <?php
     }
+
     /**
      * Render JavaScript scripts required for form validation and handling.
      */

@@ -25,7 +25,7 @@ if ($this->addProductResult ?? false) {
         productPrice: $this->productPrice,
         productType: $this->productType,
         productDescription: $this->productDescription,
-        photo: $this->productPhoto,
+        productPhoto: $this->productPhoto,
         addProductResult: $this->addProductResult,
         csrfToken: $this->csrfToken,
         isCsrfSuccess: $this->isCsrfSuccess

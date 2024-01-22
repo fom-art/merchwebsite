@@ -33,7 +33,7 @@ class Inputs
             <div class="validation-error-block">
                 <p class="js-validation-message"><?php echo $validationMessage; ?></p>
                 <?php if (!$isValid && $value != "") {
-                    echo "<p>*</p>";
+                    echo "<p>".$validationMessage."</p>";
                 } ?>
             </div>
         </div>
@@ -47,13 +47,12 @@ class Inputs
      * @param string $id              The ID attribute for the input block.
      * @param string $label           The label text for the input.
      * @param string $name            The name attribute for the input.
-     * @param string $value           The value of the input.
      * @param string $validationMessage The validation message to display.
      * @param bool   $isValid         Indicates if the input is valid.
      *
      * @return string The HTML for the file input block.
      */
-    public static function printFileInputBlock($id, $label, $name, $value, $validationMessage, $isValid)
+    public static function printFileInputBlock($id, $label, $name, $validationMessage, $isValid)
     {
         ob_start();
         ?>
@@ -67,7 +66,7 @@ class Inputs
             <div class="validation-error-block">
                 <p class="js-validation-message"><?php echo $validationMessage; ?></p>
                 <?php if (!$isValid && isset($_POST['confirm'])) {
-                    echo "<p>*</p>";
+                    echo "<p>".$validationMessage."</p>";
                 } ?>
             </div>
         </div>

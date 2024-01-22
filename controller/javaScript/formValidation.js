@@ -82,7 +82,6 @@ class Validation {
     }
 
     static getInputBlockFromCode(inputCode) {
-        console.log("input code: " + inputCode)
         const inputIdMap = {
             [this.INPUT_CODES.EMAIL]: "email-input-block",
             [this.INPUT_CODES.PASSWORD]: "password-input-block",
@@ -153,12 +152,13 @@ class Validation {
     }
 
     static isPasswordValid(input_value) {
-        return input_value.length >= 8
+        let passwordRegex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
+        return passwordRegex.test(input_value);
     }
 
     static isRepeatPasswordValid(input_value) {
-        let password = this.getInputBlockFromCode(this.INPUT_CODES.PASSWORD).querySelector("input").value;
-        return password === input_value;
+        let originalPassword = this.getInputBlockFromCode(this.INPUT_CODES.PASSWORD).querySelector("input").value;
+        return this.isPasswordValid(input_value) && originalPassword === input_value;
     }
 
     static isCountryValid(input_value) {
@@ -190,8 +190,8 @@ class Validation {
         return purchaseDescriptionRegex.test(input_value)
     }
     static isProductDescriptionValid(input_value) {
-        let purchaseDescriptionRegex = /[a-zA-Z0-9,.;:'"#$%()/@\s]+$/;
-        return purchaseDescriptionRegex.test(input_value)
+        let productDescriptionRegex = /[a-zA-Z0-9,.;:'"<>&#$%()/@\s]+$/;
+        return productDescriptionRegex.test(input_value);
     }
 
     static isPhotoValid(inputElement) {
@@ -202,13 +202,13 @@ class Validation {
 
         const file = inputElement.files[0];
         console.log(file.type)
-        const validImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
+        const validImageTypes = ['image/jpeg', 'image/png'];
 
         return validImageTypes.includes(file.type);
     }
 
     static isPurchaseDescriptionValid(input_value) {
-        let purchaseDescriptionRegex = /[a-zA-Z0-9,.;:'"#$%()/@\s]+$/;
+        let purchaseDescriptionRegex = /[a-zA-Z0-9,.;:'"<>&#$%()/@\s]+$/;
         return purchaseDescriptionRegex.test(input_value)
     }
 }

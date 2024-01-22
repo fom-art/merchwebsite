@@ -133,7 +133,7 @@ class FormValidation
     static function isProductPhotoValid($image): bool
     {
         if (is_array($image) && isset($image['tmp_name']) && $image['error'] === UPLOAD_ERR_OK) {
-            $allowedExtensions = ['jpg', 'jpeg', 'png'];
+            $allowedExtensions = ['jpeg', 'png'];
 
             // Check for upload errors
             if ($image['error'] !== UPLOAD_ERR_OK) {

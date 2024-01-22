@@ -34,9 +34,9 @@ class AdminView
     public string $productDescription;
 
     /**
-     * @var string The product photo.
+     * @var array The product photo.
      */
-    public string $productPhoto;
+    public array $productPhoto;
 
     /**
      * @var string The CSRF token value.
@@ -60,20 +60,20 @@ class AdminView
      * @param string $productPrice       The product price.
      * @param string $productType        The product type.
      * @param string $productDescription The product description.
-     * @param string $productPhoto       The product photo.
-     * @param bool   $addProductResult   The result of adding a product.
+     * @param array $productPhoto       The product photo name.
+     * @param bool $addProductResult   The result of adding a product.
      * @param string $csrfToken          The CSRF token value.
-     * @param bool   $isCsrfSuccess      Indicates if CSRF token validation was successful.
+     * @param bool $isCsrfSuccess      Indicates if CSRF token validation was successful.
      */
     public function __construct(
-        $productName,
-        $productPrice,
-        $productType,
-        $productDescription,
-        $productPhoto,
-        $addProductResult,
-        $csrfToken,
-        $isCsrfSuccess)
+        string $productName,
+        string $productPrice,
+        string $productType,
+        string $productDescription,
+        array $productPhoto,
+        bool   $addProductResult,
+        string $csrfToken,
+        bool   $isCsrfSuccess)
     {
         $this->productName = $productName;
         $this->productPrice = $productPrice;

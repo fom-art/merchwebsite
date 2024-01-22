@@ -78,8 +78,7 @@ class RegexConstants
      *
      * @var string
      */
-    public const PURCHASE_DESCRIPTION_REGEX = "/[\sa-zA-Z0-9]+$/";
-
+    public const PURCHASE_DESCRIPTION_REGEX = "/[<>.;:'\"\sa-zA-Z0-9]+$/";
     /**
      * Regular expression pattern for validating product types.
      *
@@ -92,7 +91,12 @@ class RegexConstants
      *
      * @var string
      */
-    public const PRODUCT_DESCRIPTION_REGEX = "/[\sa-zA-Z0-9]+$/";
+    public const PRODUCT_DESCRIPTION_REGEX = "/[<>.;:'\"\sa-zA-Z0-9]+$/";
 
+    /**
+     * Regular expression pattern for validating Photo Extensions.
+     *
+     * @var string
+     */
     public const ALLOWED_PHOTO_EXTENSIONS = array('png', 'jpg', 'jpeg', 'image/jpeg', 'image/png');
 }

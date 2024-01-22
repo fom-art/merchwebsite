@@ -51,7 +51,7 @@ class AdminController
             productPrice: $_POST["product-price"] ?? "",
             productType: $_POST["product-type"] ?? "",
             productDescription: $_POST["product-description"] ?? "",
-            productPhoto: $_FILES["photo"]["name"] ?? "",
+            productPhoto: $_FILES['photo'] ?? [],
             addProductResult: $addProductResult,
             csrfToken: $_SESSION['csrf-token'],
             isCsrfSuccess: $isCsrfSuccess
