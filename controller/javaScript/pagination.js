@@ -47,7 +47,6 @@ function createProductCard(product) {
 
 function createImageElement(product) {
     const img = document.createElement('img');
-    console.log("Product: " + product);
     img.src = product.photoPath;
     img.alt = product.name;
     img.className = 'product-image';
@@ -110,6 +109,7 @@ function fetchData(page, perPage) {
                             productData.productDescription
                         );
                         products.push(product);
+
                     });
 
                     //Update the display with new data
@@ -139,6 +139,8 @@ function handleResize() {
 function goToPreviousPage() {
     if (page > 1) {
         page--;
+        localStorage.setItem("Page", page)
+
         fetchData(page, perPage)
     }
 }
@@ -146,15 +148,15 @@ function goToPreviousPage() {
 function goToNextPage() {
     if (page < totalPages) {
         page++;
-        fetchData(page, perPage)
+        localStorage.setItem("Page", page)
+        fetchData(page, perPage);
     }
 }
 
 // Initialization
-let page = 1;
 let perPage = calculatePerPage();
 let totalPages;
-let products = [];
+let page = parseInt(localStorage.getItem("Page")) || 1; // Retrieve the current page from local storage, default to 1
 
 fetchData(page, perPage);
 updatePageCount();
