@@ -83,7 +83,7 @@ class UserDetailsSections
                     <!-- Validation Error Display -->
                     <div class="validation-error-block" id="validation-result-closure">
                         <?php if (isset($_POST['email']) && $isCsrfSuccess) {
-                            echo "<p>Invalid inputs. Check the inputs marked by *</p>";
+                            echo "<p>Invalid inputs</p>";
                         } ?>
                     </div>
 

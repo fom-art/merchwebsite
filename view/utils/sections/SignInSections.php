@@ -30,7 +30,10 @@ class SignInSections
      * @param string $csrfToken The CSRF token value.
      * @param bool $isLogInSuccess Indicates if the login was successful.
      */
-    public static function renderForm($email, $password, $csrfToken, $isLogInSuccess)
+    public static function renderForm($email,
+                                      $password,
+                                      $csrfToken,
+                                      $isLogInSuccess)
     {
         ?>
         <div class="content-block">

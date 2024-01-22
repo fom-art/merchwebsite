@@ -36,6 +36,7 @@ class AdminController
         if (isset($_POST['csrf-token']) && isset($_SESSION['csrf-token']) && $_POST['csrf-token'] == $_SESSION['csrf-token']) {
             $isCsrfSuccess = true;
             $isFormValid = $this->validateForm();
+            $_POST = array();
         }
 
         if ($isFormValid && isset($_POST['csrf-token']) && isset($_SESSION['csrf-token']) && $_POST['csrf-token'] == $_SESSION['csrf-token']) {

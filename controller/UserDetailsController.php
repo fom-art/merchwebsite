@@ -44,6 +44,7 @@ class UserDetailsController
 
         if ($isFormValid && isset($_POST['csrf-token']) && isset($_SESSION['csrf-token']) && $_POST['csrf-token'] == $_SESSION['csrf-token']) {
             $userDetailsEditResult = $this->editUserDetails();
+            $_POST = array();
         }
 
         if (!isset($_SESSION['csrf-token'])) {
@@ -51,15 +52,15 @@ class UserDetailsController
         }
 
         $this->view = new UserDetailsView(
-            email: $_SESSION['email'] ?? "",
-            name: $_SESSION['name'] ?? "",
-            surname: $_SESSION['surname'] ?? "",
-            password: $_SESSION['password'] ?? "",
-            address: $_SESSION['address'] ?? "",
-            country: $_SESSION['country'] ?? "",
-            city: $_SESSION['city'] ?? "",
-            postCode: $_SESSION['post-code'] ?? "",
-            phoneNumber: $_SESSION['phone-number'] ?? "",
+            email: $_POST['email'] ?? $_SESSION['email'] ?? "",
+            name: $_POST['name'] ?? $_SESSION['name'] ?? "",
+            surname: $_POST['surname'] ?? $_SESSION['surname'] ?? "",
+            password: $_POST['password'] ?? $_SESSION['password'] ?? "",
+            address: $_POST['address'] ?? $_SESSION['address'] ?? "",
+            country: $_POST['country'] ?? $_SESSION['country'] ?? "",
+            city: $_POST['city'] ?? $_SESSION['city'] ?? "",
+            postCode: $_POST['post-code'] ?? $_SESSION['post-code'] ?? "",
+            phoneNumber: $_POST['phone-number'] ?? $_SESSION['phone-number'] ?? "",
             userDetailsEditResult: $userDetailsEditResult,
             csrfToken: $_SESSION['csrf-token'],
             isCsrfSuccess: $isCsrfSuccess

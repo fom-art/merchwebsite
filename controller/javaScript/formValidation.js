@@ -209,6 +209,7 @@ class Validation {
 
     static isPurchaseDescriptionValid(input_value) {
         let purchaseDescriptionRegex = /[a-zA-Z0-9,.;:'"<>&#$%()/@\s]+$/;
+        console.log(purchaseDescriptionRegex.test(input_value));
         return purchaseDescriptionRegex.test(input_value)
     }
 }

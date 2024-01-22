@@ -46,6 +46,7 @@ class ForgotPasswordController
                 unset($_SESSION['csrf-token']);
                 unset($_POST['email']);
                 $this->sendEmailToUser();
+                $_POST = array();
             }
         }
 

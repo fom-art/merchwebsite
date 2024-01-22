@@ -38,6 +38,7 @@ class PurchaseController
 
         if ($isFormValid && $isCsrfSuccess) {
             $purchaseResult = $this->makePurchase();
+            $_POST = array();
         }
 
         if (!isset($_SESSION['csrf-token'])) {
@@ -47,15 +48,15 @@ class PurchaseController
         $this->view = new PurchaseView(
             purchaseResult: $purchaseResult,
             isPostSet: isset($_POST),
-            email: $_SESSION['email'] ?? "",
-            name: $_SESSION['name'] ?? "",
-            surname: $_SESSION['surname'] ?? "",
-            address: $_SESSION['address'] ?? "",
-            country: $_SESSION['country'] ?? "",
-            city: $_SESSION['city'] ?? "",
-            postCode: $_SESSION['post-code'] ?? "",
-            phoneNumber: $_SESSION['phone-number'] ?? "",
-            purchaseDescription: "",
+            email: $_POST['email'] ?? $_SESSION['email'] ?? "",
+            name: $_POST['name'] ?? $_SESSION['name'] ?? "",
+            surname: $_POST['surname'] ?? $_SESSION['surname'] ?? "",
+            address: $_POST['address'] ?? $_SESSION['address'] ?? "",
+            country: $_POST['country'] ?? $_SESSION['country'] ?? "",
+            city: $_POST['city'] ?? $_SESSION['city'] ?? "",
+            postCode: $_POST['post-code'] ?? $_SESSION['post-code'] ?? "",
+            phoneNumber: $_POST['phone-number'] ?? $_SESSION['phone-number'] ?? "",
+            purchaseDescription: $_POST['purchase-description'] ?? "",
             csrfToken: $_SESSION['csrf-token'],
             isCsrfSuccess: $_SESSION['csrf-token']
         );
