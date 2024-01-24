@@ -8,6 +8,7 @@ use controller\AdminController;
 use controller\ErrorPageController;
 use controller\ForgotPasswordController;
 use controller\HomeController;
+use controller\PaginationController;
 use controller\PurchaseController;
 use controller\SignInController;
 use controller\SignUpController;
@@ -28,6 +29,7 @@ require_once __DIR__ . '/controller/SignInController.php';
 require_once __DIR__ . '/controller/SignUpController.php';
 require_once __DIR__ . '/controller/UserDetailsController.php';
 require_once __DIR__ . '/controller/ErrorPageController.php';
+require_once __DIR__ . '/controller/PaginationController.php';
 
 // Create instances of necessary classes
 global $utils;
@@ -52,7 +54,16 @@ if (preg_match('/\.(?:png|jpg|jpeg|gif|css|js|svg)$/', $_SERVER["REQUEST_URI"]))
 // Extract the requested URI and URI segments
 $requestUri = $_SERVER['REQUEST_URI'];
 $requestUri = str_replace($base_path, '', $requestUri); // Remove the base path
-$uriSegments = explode('/', $requestUri);
+$uri_parts = explode('?', $requestUri);
+$uriSegments = explode('/', $uri_parts[0]);
+
+if (sizeof($uri_parts) == 2) {
+    array_pop($uriSegments);
+}
+
+if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) ) {
+    echo "Hello";
+}
 
 // Here, you can add routing logic to display different pages based on the URI
 switch (end($uriSegments)) {
@@ -122,10 +133,20 @@ switch (end($uriSegments)) {
             exit;
         }
         break;
+    case 'pagesAmount':
+        // Route to the purchase page
+        $paginationController = new PaginationController();
+        $paginationController->sendTotalPagesAmount();
+        break;
     default:
-        // Set HTTP response code to 404 and route to an error page
-        http_response_code(404);
-        $errorPageController = new ErrorPageController($uriSegments[0]);
-        $errorPageController->index();
+//        if (isset($_GET) && isset($_GET['page']) && isset($_GET['perPage'])) {
+//            $homeController = new HomeController();
+//            $homeController->index();
+//        } else {
+            // Set HTTP response code to 404 and route to an error page
+            http_response_code(404);
+            $errorPageController = new ErrorPageController($uriSegments[0]);
+            $errorPageController->index();
+//        }
         break;
 }

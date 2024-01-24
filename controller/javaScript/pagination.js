@@ -1,17 +1,28 @@
-// DOM Elements
-const buttonPrevious = document.getElementById('btn-previous');
-const buttonNext = document.getElementById('btn-next');
-const pageCount = document.getElementById('pages-count');
-const gallery = document.getElementById('products-gallery');
+// Declare DOM elements in the global scope
+let buttonPrevious, buttonNext, pageCount;
 
-class Product {
-    constructor(name, price, photoPath, productType, description) {
-        this.name = name;
-        this.price = price;
-        this.photoPath = photoPath;
-        this.productType = productType;
-        this.description = description;
-    }
+// DOM Elements setup function
+function setupDOMElements() {
+    buttonPrevious = document.getElementById('btn-previous');
+    buttonNext = document.getElementById('btn-next');
+    pageCount = document.getElementById('pages-count');
+    setupEventListeners();
+}
+
+
+// Initialize global variables
+let page = getPage();
+let totalPages = 1;
+let perPage = getPerPage();
+
+function getPage() {
+    const urlPage = parseInt(new URLSearchParams(window.location.search).get('page'));
+    return !isNaN(urlPage) ? urlPage : 1;
+}
+
+function getPerPage() {
+    const urlPerPage = parseInt(new URLSearchParams(window.location.search).get('perPage'));
+    return !isNaN(urlPerPage) ? urlPerPage : calculatePerPage();
 }
 
 // Helper Functions
@@ -23,100 +34,66 @@ function calculatePerPage() {
 }
 
 function updatePageCount() {
-    pageCount.innerHTML = `Page ${page} of ${totalPages}`;
-    buttonPrevious.disabled = (page === 1);
-    buttonNext.disabled = (page === totalPages);
+    buttonPrevious.disabled = (page <= 1);
+    console.log(parseInt(page) === parseInt(totalPages))
+    buttonNext.disabled = (page >= parseInt(totalPages));
 }
 
-function clearGallery() {
-    gallery.innerHTML = '';
+function updateQueryStringParameter(key, value) {
+    const baseUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    urlSearchParams.set(key, value);
+    const newUrl = baseUrl + "?" + urlSearchParams.toString();
+    window.history.pushState({path: newUrl}, '', newUrl);
 }
-
-function createProductCard(product) {
-    const card = document.createElement('div');
-    card.className = 'product-card';
-
-    card.appendChild(createImageElement(product));
-    card.appendChild(createTextElement('h3', 'product-name', product.name));
-    card.appendChild(createTextElement('p', 'product-price', `$${product.price}`));
-    card.appendChild(createTextElement('p', 'product-type', product.productType));
-    card.appendChild(createTextElement('p', 'product-description', product.description));
-
-    return card;
-}
-
-function createImageElement(product) {
-    const img = document.createElement('img');
-    img.src = product.photoPath;
-    img.alt = product.name;
-    img.className = 'product-image';
-    return img;
-}
-
-function createTextElement(elementType, className, text) {
-    const element = document.createElement(elementType);
-    element.className = className;
-    element.textContent = text;
-    return element;
-}
-
-function appendCardToGallery(card) {
-    gallery.appendChild(card);
-}
-
-function showImages() {
-    clearGallery();
-    products.forEach(product => {
-        const card = createProductCard(product);
-        appendCardToGallery(card);
-    });
-}
-
 
 function setupEventListeners() {
     window.addEventListener('resize', handleResize);
     buttonPrevious.addEventListener('click', goToPreviousPage);
     buttonNext.addEventListener('click', goToNextPage);
+    console.log("Here")
 }
 
 function fetchData(page, perPage) {
     const xhr = new XMLHttpRequest();
+    const url = `https://zwa.toad.cz/~fomenart/?page=${page}&perPage=${perPage}`;
 
-    xhr.open("POST", "https://zwa.toad.cz/~fomenart/", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.open("GET", url, true);
 
     xhr.onload = function () {
         if (xhr.status === 200) {
             try {
-                const response = JSON.parse(xhr.responseText);
-
-                if (response.totalPages) {
-                    totalPages = response.totalPages;
-                    updatePageCount();
-                }
-
-                if (response.products && Array.isArray(response.products)) {
-                    // Clear the previous products array
-                    products = [];
-
-                    // Add each product from the response to the products array
-                    response.products.forEach(productData => {
-                        const product = new Product(
-                            productData.productName,
-                            productData.productPrice,
-                            productData.productPhotoPath,
-                            productData.productType,
-                            productData.productDescription
-                        );
-                        products.push(product);
-
-                    });
-
-                    //Update the display with new data
-                    showImages();
-                }
+                document.body.innerHTML = "";
+                document.body.innerHTML = xhr.responseText;
+                setupDOMElements()
+                fetchPagesAmount(page, perPage)
             } catch (e) {
-                console.error("Error parsing JSON:", e);
+                console.error("Error parsing:", e);
+            }
+        } else {
+            console.error("Request failed. Status:", xhr.status);
+        }};
+
+    xhr.onerror = function () {
+        console.error("Request failed.");
+    };
+
+    xhr.send("page=" + page.toString() + "&perPage=" + perPage.toString());
+}
+
+function fetchPagesAmount(page, perPage) {
+    const xhr = new XMLHttpRequest();
+    const url = `https://zwa.toad.cz/~fomenart/index.php/pagesAmount/?page=${page}&perPage=${perPage}`;
+
+    xhr.open("GET", url, true);
+
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            try {
+                totalPages = xhr.responseText; // Assuming the response is just the total pages count
+                updatePageCount(); // Update the page count display
+            } catch (e) {
+                console.error("Error parsing:", e);
             }
         } else {
             console.error("Request failed. Status:", xhr.status);
@@ -127,38 +104,44 @@ function fetchData(page, perPage) {
         console.error("Request failed.");
     };
 
-    xhr.send("page=" + page.toString() + "&perPage=" + perPage.toString());
+    xhr.send();
 }
+
 
 // Event Handlers
 function handleResize() {
     perPage = calculatePerPage();
+    // updateLocalStorage();
+    updateQueryStringParameter('page', page)
+    updateQueryStringParameter('perPage', perPage)
     fetchData(1, perPage)
 }
 
 function goToPreviousPage() {
-    if (page > 1) {
+    console.log(page, totalPages)
+    if (page !== 1) {
+        console.log("Click")
         page--;
-        localStorage.setItem("Page", page)
-
+        // updateLocalStorage();
+        updateQueryStringParameter('page', page)
+        updateQueryStringParameter('perPage', perPage)
         fetchData(page, perPage)
     }
 }
 
 function goToNextPage() {
-    if (page < totalPages) {
+    console.log(page, totalPages)
+    if (page !== totalPages) {
+        console.log("Click")
         page++;
-        localStorage.setItem("Page", page)
+        // updateLocalStorage();
+        updateQueryStringParameter('page', page)
+        updateQueryStringParameter('perPage', perPage)
         fetchData(page, perPage);
     }
 }
 
-// Initialization
-let perPage = calculatePerPage();
-let totalPages;
-let page = parseInt(localStorage.getItem("Page")) || 1; // Retrieve the current page from local storage, default to 1
-
+setupDOMElements()
 fetchData(page, perPage);
 updatePageCount();
 setupEventListeners();
-showImages();

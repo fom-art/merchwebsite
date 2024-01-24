@@ -10,9 +10,10 @@ require_once __DIR__ . '/../HrefsConstants.php';
 
 
 /**
- * Class HomeSections
+ * HomeSections Class
  *
- * This class provides methods for rendering different sections of the home page.
+ * Provides methods for rendering different sections of the home page, including headers, navigation menus,
+ * main content, footers, and JavaScript scripts. It helps in modularizing the home page view.
  *
  * @package view\utils\sections
  */
@@ -24,7 +25,7 @@ class HomeSections
      * @param bool $isRegistered Indicates if a user is registered.
      * @param bool $isAdmin Indicates if the user is an admin.
      */
-    public static function renderHeader($isRegistered, $isAdmin): void
+    public static function renderHeader(bool $isRegistered, bool $isAdmin): void
     {
         ?>
         <header>
@@ -65,21 +66,24 @@ class HomeSections
     }
 
     /**
-     * Render the main content section of the home page.
+     * Renders the main content section of the home page.
+     *
+     * Displays a gallery of products and pagination controls.
      *
      * @param Product[] $products An array of Product objects to be displayed in the main content.
+     * @param string $page Current page number for pagination.
+     * @param string $pages Total number of pages available for pagination.
      */
-    public static function renderMainContent($products)
+    public static function renderMainContent(array $products, $page, $pages)
     {
         ?>
-        <main id="image-gallery">
             <!-- Product Gallery -->
             <div id="products-gallery" class="gallery-block">
                 <!-- Gallery content goes here -->
                 <?php
-                    foreach ($products as $product) {
-                        self::renderProductCard($product);
-                    }
+                foreach ($products as $product) {
+                    self::renderProductCard($product);
+                }
                 ?>
             </div>
 
@@ -88,12 +92,11 @@ class HomeSections
                 <div id="button-previous" class="icon-block">
                     <button class="pagination-button" id="btn-previous" type="button">&lt;</button>
                 </div>
-                <div id="pages-count"></div>
+                <div id="pages-count"><?php echo "Page ".$page." of ".$pages?></div>
                 <div id="button-next" class="icon-block">
                     <button class="pagination-button" id="btn-next" type="button">&gt;</button>
                 </div>
             </div>
-        </main>
         <?php
     }
 
@@ -119,7 +122,7 @@ class HomeSections
                     </a>
                 </div>
                 <div class="copyright-block">
-                    <a href="homePage.php" target="_blank">
+                    <a href="<?php echo HrefsConstants::INDEX?>" target="_blank">
                         <h3>©ANFO</h3>
                     </a>
                 </div>
@@ -147,13 +150,15 @@ class HomeSections
     {
         $productName = htmlspecialchars($product->getProductName());
         $productPrice = htmlspecialchars($product->getProductPrice());
+        $productDescription = htmlspecialchars($product->getProductPhotoDescription());
         $productPhotoPath = htmlspecialchars($product->getProductPhotoPath());
 
 
         echo "<div class='product-card'>";
         echo "<img src='$productPhotoPath' alt='$productName' class='product-image'>";
         echo "<h2 class='product-name'>$productName</h2>";
-        echo "<h2 class='product-price'>$productPrice</h2>";
+        echo "<h2 class='product-price'>$productPrice$</h2>";
+        echo "<h2 class='product-name'>$productDescription</h2>";
         echo "</div>";
     }
 }

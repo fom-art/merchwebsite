@@ -5,6 +5,7 @@ namespace controller;
 use model\database\DatabaseHandler;
 use model\models\Product;
 use view\HomeView;
+use view\utils\sections\HomeSections;
 
 require_once __DIR__ . '/../view/HomeView.php';
 
@@ -27,32 +28,31 @@ class HomeController
      */
     public function __construct()
     {
-        $products = array();
+        $products = [];
+        $pagesAmount = "1";
+        $page = "1";
 
-        // Receive POST data
-        if (isset($_POST['page']) && isset($_POST['perPage'])) {
+        // Receive GET data
+        if (isset($_GET['page']) && isset($_GET['perPage'])) {
             $products = $this->getProducts();
-            $productsArray = array_map(function($product) {
-                return $product->toArray();
-            }, $products);
-
             $pagesAmount = $this->getPagesAmount();
-            $response = [
-                'products' => $productsArray,
-                'totalPages' => $pagesAmount
-            ];
+            $page = (int)$_GET['page'];
 
-            echo json_encode($response);
-            exit;
+            if ($page < 1) {
+                $page = 1;
+            }
+
+            if ($page > $pagesAmount) {
+                $page = $pagesAmount;
+            }
         }
 
-        foreach ($products as $product) {
-            echo "Name: " . $product->getName() . ", Price: " . $product->getPrice() . "<br>";
-        }
         $this->view = new HomeView(
+            products: $products,
+            page: $page,
+            pagesAmount: $pagesAmount,
             isRegistered: isset($_SESSION["email"]),
             isAdmin: isset($_SESSION['is-admin']) && $_SESSION['is-admin'],
-            products: $products
         );
     }
 
@@ -73,8 +73,17 @@ class HomeController
      */
     private function getProducts(): array
     {
-        $page = isset($_POST['page']) ? (int)$_POST['page'] : 1;
-        $perPage = isset($_POST['perPage']) ? (int)$_POST['perPage'] : 10;
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $perPage = isset($_GET['perPage']) ? (int)$_GET['perPage'] : 10;
+        $pagesAmount  = $this->getPagesAmount();
+
+        if ($page < 1) {
+            $page = 1;
+        }
+
+        if ($page > $pagesAmount) {
+            $page = $pagesAmount;
+        }
 
         $dbHandler = new DatabaseHandler();
         return $dbHandler->getProductsList($page, $perPage);
@@ -85,10 +94,11 @@ class HomeController
      *
      * @return int The total number of pages.
      */
-    private function getPagesAmount(): int {
+    private function getPagesAmount(): int
+    {
         $dbHandler = new DatabaseHandler();
         $totalProductsCount = $dbHandler->getTotalProductsCount();
-        $perPage = isset($_POST['perPage']) ? (int)$_POST['perPage'] : 10; // Default to 10 if not set
+        $perPage = isset($_GET['perPage']) ? (int)$_GET['perPage'] : 10; // Default to 10 if not set
 
         return ceil($totalProductsCount / $perPage);
     }

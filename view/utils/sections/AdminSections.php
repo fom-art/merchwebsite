@@ -71,7 +71,7 @@ class AdminSections
 
                     <?php
                     // Photo input
-                    echo Inputs::printFileInputBlock("photo-input-block", "Photo", "photo", "The only valid photo types are PNG and JPEG, also, the photo has to be valid!", FormValidation::isProductPhotoValid($productPhoto));
+                    echo Inputs::printFileInputBlock("photo-input-block", "Photo", "photo", "The only valid photo types are PNG, JPG and JPEG, also, the photo has to be valid!", FormValidation::isProductPhotoValid($productPhoto));
                     // Csrf input
                     echo Inputs::printCsrfTokenInput($csrfToken)
                     ?>

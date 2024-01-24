@@ -202,7 +202,7 @@ class Validation {
 
         const file = inputElement.files[0];
         console.log(file.type)
-        const validImageTypes = ['image/jpeg', 'image/png'];
+        const validImageTypes = ['image/jpeg', 'image/png', 'image/jpg'];
 
         return validImageTypes.includes(file.type);
     }

@@ -36,11 +36,11 @@ class AdminController
         if (isset($_POST['csrf-token']) && isset($_SESSION['csrf-token']) && $_POST['csrf-token'] == $_SESSION['csrf-token']) {
             $isCsrfSuccess = true;
             $isFormValid = $this->validateForm();
-            $_POST = array();
         }
 
         if ($isFormValid && isset($_POST['csrf-token']) && isset($_SESSION['csrf-token']) && $_POST['csrf-token'] == $_SESSION['csrf-token']) {
             $addProductResult = $this->addProduct();
+            if ($addProductResult) $_POST = array();
         }
 
         if (!isset($_SESSION['csrf-token'])) {
@@ -79,7 +79,7 @@ class AdminController
         if (isset($_POST['product-name'])) {
             return FormValidation::validateProductForm(
                 productName: $_POST['product-name'],
-                productPrice: $_POST['product-price'],
+                productPrice:$_POST['product-price'],
                 productType: $_POST['product-type'],
                 productDescription: $_POST['product-description'],
                 productPhoto: $_FILES['photo']

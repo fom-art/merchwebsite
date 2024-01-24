@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['database_5fhost_5fname_0',['DATABASE_HOST_NAME',['../classmodel_1_1constants_1_1_database_constants.html#a45c46f3153f7ae3284f1535ea9f2d2e7',1,'model::constants::DatabaseConstants']]],
-  ['database_5fpassword_1',['DATABASE_PASSWORD',['../classmodel_1_1constants_1_1_database_constants.html#afecaa7b8563a8af3b44aa1647bbc63be',1,'model::constants::DatabaseConstants']]],
-  ['database_5fusername_2',['DATABASE_USERNAME',['../classmodel_1_1constants_1_1_database_constants.html#ae73e92f715a7d8f3db871f639e72eade',1,'model::constants::DatabaseConstants']]]
+  ['address_5fregex_0',['ADDRESS_REGEX',['../classcontroller_1_1constants_1_1_regex_constants.html#a134af8d2ee278da24c2250b5b66fdb45',1,'controller::constants::RegexConstants']]],
+  ['admin_1',['ADMIN',['../class_hrefs_constants.html#ae08c5e032ab4c69ff4afed08a1f537ed',1,'HrefsConstants']]],
+  ['admin_5fstyles_2',['ADMIN_STYLES',['../class_hrefs_constants.html#a933a3dd18585d69f7edaa28572721572',1,'HrefsConstants']]],
+  ['allowed_5fphoto_5fextensions_3',['ALLOWED_PHOTO_EXTENSIONS',['../classcontroller_1_1constants_1_1_regex_constants.html#a541c000eb4e164aade844b85ce5d45a8',1,'controller::constants::RegexConstants']]]
 ];

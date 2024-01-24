@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['pagination_5fscript_0',['PAGINATION_SCRIPT',['../class_hrefs_constants.html#a6f4b057acb13d89b3a163c765f5f8de9',1,'HrefsConstants']]],
-  ['product_5fdatabase_5fname_1',['PRODUCT_DATABASE_NAME',['../classmodel_1_1constants_1_1_database_constants.html#a26ce31a1660adc9ae4524ff66d0a3180',1,'model::constants::DatabaseConstants']]],
-  ['purchase_2',['PURCHASE',['../class_hrefs_constants.html#a6ebcd1badde51fc2fa0ee1dc4c68f840',1,'HrefsConstants']]],
-  ['purchase_5fdatabase_5fname_3',['PURCHASE_DATABASE_NAME',['../classmodel_1_1constants_1_1_database_constants.html#ac46ed2687964b4a5da561de8cd18679d',1,'model::constants::DatabaseConstants']]]
+  ['forgot_5fpassword_0',['FORGOT_PASSWORD',['../class_hrefs_constants.html#af277f6fbe519e829c993e6aaa939ffa8',1,'HrefsConstants']]],
+  ['form_5fdata_5fhandler_5fscript_1',['FORM_DATA_HANDLER_SCRIPT',['../class_hrefs_constants.html#afa4d17b770433553986252ca4f8cc4e5',1,'HrefsConstants']]],
+  ['form_5fhandling_5fscript_2',['FORM_HANDLING_SCRIPT',['../class_hrefs_constants.html#a8933cfaac9cb2302aed3d3fde2b82618',1,'HrefsConstants']]],
+  ['form_5fstyles_3',['FORM_STYLES',['../class_hrefs_constants.html#a8120946275192a1868a9c9ee505f69c6',1,'HrefsConstants']]],
+  ['form_5fvalidation_5fscript_4',['FORM_VALIDATION_SCRIPT',['../class_hrefs_constants.html#aaa930fe5a148c4c67b5dce211bd10ab9',1,'HrefsConstants']]]
 ];

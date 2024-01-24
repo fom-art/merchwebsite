@@ -92,8 +92,6 @@ const addProductForm = new Form([
     new Input('product-price', null),
     new Input('product-type', null),
     new Input('product-description', null),
-    new Input('photo', null),
-    new Input('product-description', null),
 ]);
 
 const formsMap = new Map([
